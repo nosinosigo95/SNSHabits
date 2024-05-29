@@ -83,6 +83,6 @@ test:
 #
 production:
   <<: *default
-  database: docker_rails_production
-  username: docker_rails
-  password: <%= ENV['DOCKER_RAILS_DATABASE_PASSWORD'] %>
+  database: SNSHABITS_DATABASE
+  url: <%= ENV['DATABASE_URL'] %>
+
