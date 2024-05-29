@@ -1,4 +1,4 @@
-FROM ruby:3.0.4
+FROM ruby:3.1.5
 
 RUN apt-get update -qq
 RUN curl -fsSL https://deb.nodesource.com/setup_lts.x | bash - \
