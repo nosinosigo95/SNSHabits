@@ -24,7 +24,7 @@ default: &default
 
 development:
   <<: *default
-  database: docker_rails_development
+  database: postgres
   username: postgres
   password: password
   # The specified database role being used to connect to postgres.
