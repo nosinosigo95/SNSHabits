@@ -24,7 +24,20 @@ RSpec.describe User, type: :model do
       expect(FactoryBot.build(:user, email: invalid_address)).to be_invalid
     end
   end
-  
+  it "重複したメールアドレスが登録されるとき、テストが無効になること" do
+    User.create(
+      name: "sample",
+      email: "sample@sample.com",
+      password: "1" * 6
+    )
+    user = User.create(
+      name: "example",
+      email: "sample@sample.com",
+      password: "1" * 6
+    )
+    expect(user.errors.full_messages).to include("Email has already been taken")
+  end
+
   it "パスワードがなければ、テストが無効になること" do
     expect(FactoryBot.build(:user, password: nil)).to be_invalid
   end
