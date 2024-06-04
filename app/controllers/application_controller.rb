@@ -1,5 +1,7 @@
 class ApplicationController < ActionController::Base
   protected
-    devise_parameter_sanitizer.permit(:sign_up, keys: [:name, :icon])
-    devise_parameter_sanitizer.permit(:sign_up, keys: [:name, :icon])
+    def configure_permitted_parameters
+      devise_parameter_sanitizer.permit(:sign_up, keys: [:name, :icon])
+      devise_parameter_sanitizer.permit(:sign_up, keys: [:name, :icon])
+    end
 end
