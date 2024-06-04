@@ -27,6 +27,15 @@
       <ul class="navbar-nav ms-auto mb-2 mb-md-0" id="navbarToggleExternalContent">
         <% if user_signed_in? %>
           <li class="nav-item">
+            <%= link_to 'アカウント', user_show_path,
+            class: "nav-link link-dark" %>
+            </li>
+            <li class="nav-item">
+            <%= link_to 'ログアウト', destroy_user_session_path,
+            class: "nav-link link-dark" %>
+            </li>
+        <% else %>
+          <li class="nav-item">
             <%= link_to 'ユーザー登録', new_user_registration_path,
             class: "nav-link link-dark" %>
           </li>
@@ -37,15 +46,6 @@
           <li class="nav-item">
             <a class="nav-link link-dark" href="#">ゲストログイン</a>
           </li>
-        <% else %>
-            <li class="nav-item">
-            <%= link_to 'アカウント', user_show_path,
-            class: "nav-link link-dark" %>
-            </li>
-            <li class="nav-item">
-            <%= link_to 'ログアウト', destroy_user_session_path,
-            class: "nav-link link-dark" %>
-            </li>
         <% end %>
       </ul>
     </div>
