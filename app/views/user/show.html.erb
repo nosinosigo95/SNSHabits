@@ -1,2 +1,22 @@
 <h1>User#show</h1>
-<p>Find me in app/views/user/show.html.erb</p>
+<table>
+  <tr>
+    <th>ユーザー名</th>
+    <td><%= @user.name %></td>
+  </tr>
+  <tr>
+    <th>アイコン</th>
+    <td></td>
+  </tr>
+  <tr>
+    <th>メールアドレス</th>
+    <td><%= @user.email %></td>
+  </tr>
+  <tr>
+    <th>自己紹介</th>
+    <td></td>
+  </tr>
+</table>
+<p>
+  パスワードの変更は<%= link_to 'こちら', edit_user_password_path %>です。
+</p>
