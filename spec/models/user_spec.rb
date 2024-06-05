@@ -3,15 +3,30 @@ require 'rails_helper'
 RSpec.describe User, type: :model do
   let(:password_min) { 6 }
   let(:password_max) { 128 }
+  let(:intro_max) { 401 }
 
   it "名前とメールアドレス、パスワードがあれば、テストが有効になること" do
     expect(FactoryBot.build(:user)).to be_valid
   end
+
   it "名前がなければ、テストが無効になること" do
     expect(FactoryBot.build(:user, name: nil)).to be_invalid
   end
   it "名前がスペースだけならば、テストが無効になること" do
     expect(FactoryBot.build(:user, name: "   ")).to be_invalid
+  end
+  it "重複した名前が登録されるとき、テストが無効になること" do
+    User.create(
+      name: "123",
+      email: "12@example.com",
+      password: "1" * password_min
+    )
+    user = User.create(
+      name: "123",
+      email: "123@sample.com",
+      password: "1" * password_min
+    )
+    expect(user.errors.full_messages).to include("Name has already been taken")
   end
 
   it "メールアドレスがなければ、テストが無効になること" do
@@ -52,5 +67,9 @@ RSpec.describe User, type: :model do
   end
   it "パスワードが129文字以上ならば、テストが無効になること" do
     expect(FactoryBot.build(:user, password: "1" * (password_max + 1))).to be_invalid
+  end
+
+  it "自己紹介の文章が401文字以上ならば、テストが失敗すること" do
+    expect(FactoryBot.build(:user, introduction: "1" * (intro_max + 1))).to be_invalid
   end
 end
