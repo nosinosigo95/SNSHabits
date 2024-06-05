@@ -1,6 +1,9 @@
 require 'rails_helper'
 
 RSpec.describe User, type: :model do
+  let(:password_min) { 6 }
+  let(:password_max) { 128 }
+
   it "名前とメールアドレス、パスワードがあれば、テストが有効になること" do
     expect(FactoryBot.build(:user)).to be_valid
   end
@@ -28,12 +31,12 @@ RSpec.describe User, type: :model do
     User.create(
       name: "sample",
       email: "sample@sample.com",
-      password: "1" * 6
+      password: "1" * password_min
     )
     user = User.create(
       name: "example",
       email: "sample@sample.com",
-      password: "1" * 6
+      password: "1" * password_min
     )
     expect(user.errors.full_messages).to include("Email has already been taken")
   end
@@ -45,9 +48,9 @@ RSpec.describe User, type: :model do
     expect(FactoryBot.build(:user, password: "  ")).to be_invalid
   end
   it "パスワードが5文字以下ならば、テストが無効になること" do
-    expect(FactoryBot.build(:user, password: "12345")).to be_invalid
+    expect(FactoryBot.build(:user, password: "1" * (password_min - 1))).to be_invalid
   end
   it "パスワードが129文字以上ならば、テストが無効になること" do
-    expect(FactoryBot.build(:user, password: "1" * 129)).to be_invalid
+    expect(FactoryBot.build(:user, password: "1" * (password_max + 1))).to be_invalid
   end
 end
