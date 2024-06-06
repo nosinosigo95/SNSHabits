@@ -44,7 +44,8 @@
             class: "nav-link link-dark" %>
           </li>
           <li class="nav-item">
-            <a class="nav-link link-dark" href="#">ゲストログイン</a>
+            <%= link_to 'ゲストログイン', user_log_in_guest_path,
+            class: "nav-link link-dark" %>
           </li>
         <% end %>
       </ul>
