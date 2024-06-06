@@ -25,15 +25,29 @@
         </li>
       </ul>
       <ul class="navbar-nav ms-auto mb-2 mb-md-0" id="navbarToggleExternalContent">
-        <li class="nav-item">
-          <a class="nav-link link-dark" href="#">ユーザー登録</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link link-dark" href="#">ログイン</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link link-dark" href="#">ゲストログイン</a>
-        </li>
+        <% if user_signed_in? %>
+          <li class="nav-item">
+            <%= link_to 'アカウント', user_show_path,
+            class: "nav-link link-dark" %>
+            </li>
+            <li class="nav-item">
+            <%= link_to 'ログアウト', destroy_user_session_path,
+            class: "nav-link link-dark", method: :delete %>
+            </li>
+        <% else %>
+          <li class="nav-item">
+            <%= link_to 'ユーザー登録', new_user_registration_path,
+            class: "nav-link link-dark" %>
+          </li>
+          <li class="nav-item">
+            <%= link_to 'ログイン', new_user_session_path,
+            class: "nav-link link-dark" %>
+          </li>
+          <li class="nav-item">
+            <%= link_to 'ゲストログイン', user_log_in_guest_path,
+            class: "nav-link link-dark" %>
+          </li>
+        <% end %>
       </ul>
     </div>
   </div>
