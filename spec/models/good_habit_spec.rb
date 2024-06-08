@@ -6,24 +6,29 @@ RSpec.describe GoodHabit, type: :model do
   end
 
   it "習慣名とユーザーIDの組が重複していると、モデルが無効になること" do
-
+    
   end
-
   it "習慣名がなければ、モデルが無効になること" do
+    expect(FactoryBot.build(:good_habit, name: nil)).to be_invalid
   end
   it "習慣名がスペースだけならば、モデルが無効になること" do
+    expect(FactoryBot.build(:good_habit, name: " ")).to be_invalid
   end
 
   it "効果がなければ、モデルが無効になること" do
+    expect(FactoryBot.build(:good_habit, effect: nil)).to be_invalid
   end
   it "効果がスペースだけならば、モデルが無効になること" do
+    expect(FactoryBot.build(:good_habit, effect: " ")).to be_invalid
   end
   it "効果の文字数が400文字を超えると、モデルが無効になること" do
   end
 
   it "作成したユーザーIDがなければ、モデルが無効になること" do
+    expect(FactoryBot.build(:good_habit, creating_user_id: nil)).to be_invalid
   end
   it "作成したユーザーIDがスペースだけならば、モデルが無効になること" do
+    expect(FactoryBot.build(:good_habit, creating_user_id: " ")).to be_invalid
   end
 
   it "効果の文字数が400文字を超えると、モデルが無効になること" do
