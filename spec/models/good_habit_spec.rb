@@ -1,6 +1,8 @@
 require 'rails_helper'
 
 RSpec.describe GoodHabit, type: :model do
+  let(:text_max) { 400 }
+
   it "習慣名と効果、作成したユーザIDを入力すれば、モデルが有効になること" do
     expect(FactoryBot.build(:good_habit)).to be_valid
   end
@@ -31,6 +33,7 @@ RSpec.describe GoodHabit, type: :model do
     expect(FactoryBot.build(:good_habit, effect: " ")).to be_invalid
   end
   it "効果の文字数が400文字を超えると、モデルが無効になること" do
+    expect(FactoryBot.build(:good_habit, effect: "1" * (text_max + 1))).to be_invalid
   end
 
   it "作成したユーザーIDがなければ、モデルが無効になること" do
@@ -40,6 +43,6 @@ RSpec.describe GoodHabit, type: :model do
     expect(FactoryBot.build(:good_habit, creating_user_id: " ")).to be_invalid
   end
 
-  it "効果の文字数が400文字を超えると、モデルが無効になること" do
+  it "工夫の文字数が400文字を超えると、モデルが無効になること" do
   end
 end
