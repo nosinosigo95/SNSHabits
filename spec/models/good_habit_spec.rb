@@ -2,9 +2,11 @@ require 'rails_helper'
 
 RSpec.describe GoodHabit, type: :model do
   it "習慣名と効果、作成したユーザIDを入力すれば、モデルが有効になること" do
+    expect(FactoryBot.build(:good_habit)).to be_valid
   end
 
   it "習慣名とユーザーIDの組が重複していると、モデルが無効になること" do
+
   end
 
   it "習慣名がなければ、モデルが無効になること" do
