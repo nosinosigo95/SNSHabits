@@ -44,5 +44,6 @@ RSpec.describe GoodHabit, type: :model do
   end
 
   it "工夫の文字数が400文字を超えると、モデルが無効になること" do
+    expect(FactoryBot.build(:good_habit, scheme: "1" * (text_max + 1))).to be_invalid
   end
 end
