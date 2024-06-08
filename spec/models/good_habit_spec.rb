@@ -5,8 +5,17 @@ RSpec.describe GoodHabit, type: :model do
     expect(FactoryBot.build(:good_habit)).to be_valid
   end
 
-  it "習慣名とユーザーIDの組が重複していると、モデルが無効になること" do
-    
+  it "習慣名が重複していると、モデルが無効になること" do
+    FactoryBot.create(:dup_name_good_habit)
+    habit = FactoryBot.build(:good_habit)
+    habit.valid?
+    expect(habit.errors[:name]).to include("has already been taken")
+  end
+    it "作成したユーザIDが重複していると、モデルが無効になること" do
+    FactoryBot.create(:dup_creating_id_good_habit)
+    habit = FactoryBot.build(:good_habit)
+    habit.valid?
+    expect(habit.errors[:creating_user_id]).to include("has already been taken")
   end
   it "習慣名がなければ、モデルが無効になること" do
     expect(FactoryBot.build(:good_habit, name: nil)).to be_invalid
