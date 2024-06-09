@@ -1,0 +1,17 @@
+<%= form_with model: @habit, url: yield(:url) do |f| %>
+  <%= f.label :habit_name, class: "required" %>
+  <%= f.text_field :habit_name, placeholder: "例)ヨガ" %>
+  <%= f.label :effect, class: "required" %>
+  <%= f.text_field :effect, placeholder: "例)肩こりだけでなく、体全体が柔らかくなる。" %>
+  <%= f.label :scheme, class: "required" %>
+  <%= f.text_area :scheme, placeholder: "例)一つ一つの動きを意識して、取り組む。" %>
+  <%= f.label :working_time %>
+  <%= f.time_field :working_time %>
+  <%= f.label :url %>
+  <%= f.text_field :url, placeholder: "例)https://www.youtube.com/watch?v=e9HR7-3I3MA" %>
+  <%= f.label :period_for_effect %>
+  <%= f.text_field :period_for_effect, placeholder: "例)2ヶ月" %>
+  <!-- 挑戦中か結果済みか-->
+  <%= f.submit '保存する', class: "submit-button"%>
+  <%= link_to 'キャンセル', '#', class: "cancel-link" %>
+<% end %>
