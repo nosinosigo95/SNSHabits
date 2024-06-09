@@ -1,5 +1,6 @@
 Rails.application.routes.draw do
   get 'habits/new'
+  post 'habits/create'
   get 'user/show'
   get 'user/log_in_guest'
   devise_for :users

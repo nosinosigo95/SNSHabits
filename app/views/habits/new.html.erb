@@ -1,2 +1,20 @@
-<h1>Habits#new</h1>
-<p>Find me in app/views/habits/new.html.erb</p>
+<%= form_with model: @habit, url: habits_create_path do |f| %>
+  <%= f.label :problem_thing %>
+  <p>解決できる習慣</p>
+  <%= f.text_field :problem_thing %>
+  <%= f.label :habit_name %>
+  <%= f.text_field :habit_name %>
+  <%= f.label :effect %>
+  <%= f.text_area :effect %>
+  <%= f.label :scheme %>
+  <%= f.text_area :scheme %>
+  <%= f.label :working_time %>
+  <%= f.time_field :working_time %>
+  <%= f.label :url %>
+  <%= f.text_field :url %>
+  <%= f.label :period_for_effect %>
+  <%= f.text_field :period_for_effect %>
+  <!-- 挑戦中か結果済みか-->
+  <%= f.submit '保存する'%>
+  <%= link_to 'キャンセル', '#' %>
+<% end %>
