@@ -11,6 +11,7 @@ class HabitForm
   # 効果モデル
   #validates :split_effect_items, precense: true
 
+  delegate :persisted?, to: :habit
 
   def initialize(attributes = nil, habit: Habit.new)
     @habit = habit
@@ -30,7 +31,7 @@ class HabitForm
         end
         count += 1
       end
-      habit.update!(habit_name: habit_name, scheme: scheme, period_for_effect: period_for_effect, creating_user_id: current_user.id, effects: effects_items)
+      habit.update!(name: name, scheme: scheme, period_for_effect: period_for_effect, creating_user_id: current_user.id, effects: effects_items)
     end
   rescue ActiveRecord::RecordInvalid
     false
