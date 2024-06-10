@@ -6,15 +6,17 @@ class HabitForm
   # 習慣モデル
   TEXT_MAX = 400
   validates :name, presence: true
-  validates :creating_user_id, presence: true
+  #validates :creating_user_id, presence: true
   validates :scheme, length: {maximum: TEXT_MAX}
   # 効果モデル
   #validates :split_effect_items, precense: true
 
   delegate :persisted?, to: :habit
 
-  def initialize(attributes = nil, habit: Habit.new)
+  def initialize(attributes = nil, habit: Habit.new, user: nil)
     @habit = habit
+    @user = user
+    byebug
     attributes ||= default_attributes
     super(attributes)
   end
@@ -31,7 +33,7 @@ class HabitForm
         end
         count += 1
       end
-      habit.update!(name: name, scheme: scheme, period_for_effect: period_for_effect, creating_user_id: habit.creating_user_id, effects: effects_items)
+      habit.update!(name: name, scheme: scheme, period_for_effect: period_for_effect, creating_user_id: user.id, effects: effects_items)
     end
   rescue ActiveRecord::RecordInvalid
     false
@@ -43,12 +45,12 @@ class HabitForm
 
   private
 
-    attr_reader :habit
+    attr_reader :habit, :user
 
     def default_attributes
       {
         name: habit.name,
-        creating_user_id: habit.creating_user_id,
+        creating_user_id: user.id,
         effects: habit.effects.pluck(:effect_item).join(','),
       }
     end

@@ -1,10 +1,9 @@
 class HabitsController < ApplicationController
   def new
-    @form = HabitForm.new
-    @current_user = current_user
+    @form = HabitForm.new(user: current_user)
   end
   def create
-    @form = HabitForm.new(habit_params)
+    @form = HabitForm.new(habit_params, user: current_user)
     if @form.save
       redirect_to root_path
     else
@@ -12,11 +11,11 @@ class HabitsController < ApplicationController
     end
   end
   def edit
-    @habit = current_user.posts.find(params[:id])
+    @habit = current_user.posts.find(params[:id], user: current_user)
     @form = HabitForm.new(habit: @habit)
   end
   def update
-    @habit = current_user.posts.find(params[:id])
+    @habit = current_user.posts.find(params[:id], user: current_user)
     @form = HabitForm.new(habit_params, habit: @habit)
     if @form.save
       redirect_to @habit
