@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2024_06_07_082935) do
+ActiveRecord::Schema.define(version: 2024_06_10_012832) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -45,7 +45,6 @@ ActiveRecord::Schema.define(version: 2024_06_07_082935) do
 
   create_table "good_habits", force: :cascade do |t|
     t.string "name"
-    t.text "effect"
     t.text "scheme"
     t.string "doing_time"
     t.string "period_for_effect"

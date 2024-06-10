@@ -4,6 +4,7 @@ FactoryBot.define do
     name { "good_habit" }
     creating_user_id { 1 }
     # association :user
+
     factory :dup_name_good_habit do
       creating_user_id { 2 }
     end
