@@ -1,4 +1,4 @@
-class GoodHabit < ApplicationRecord
+class Habit < ApplicationRecord
   has_many :effects
   TEXT_MAX = 400
   validates :name, presence: true, uniqueness: true

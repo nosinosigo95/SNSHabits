@@ -1,3 +1,3 @@
 class Effect < ApplicationRecord
-  belong_to :good_habit
+  belongs_to :habit
 end
