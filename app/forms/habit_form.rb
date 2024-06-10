@@ -31,7 +31,7 @@ class HabitForm
         end
         count += 1
       end
-      habit.update!(name: name, scheme: scheme, period_for_effect: period_for_effect, creating_user_id: current_user.id, effects: effects_items)
+      habit.update!(name: name, scheme: scheme, period_for_effect: period_for_effect, creating_user_id: habit.creating_user_id, effects: effects_items)
     end
   rescue ActiveRecord::RecordInvalid
     false

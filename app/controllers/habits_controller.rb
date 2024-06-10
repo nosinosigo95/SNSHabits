@@ -1,6 +1,7 @@
 class HabitsController < ApplicationController
   def new
     @form = HabitForm.new
+    @current_user = current_user
   end
   def create
     @form = HabitForm.new(habit_params)
@@ -26,6 +27,6 @@ class HabitsController < ApplicationController
 
   private
   def habit_params
-    params.require(:habit).permit(:habit_name, :scheme, :period_for_effect, :creating_user_id, :working_time, :recently_viewed_time, :viewed_count, :challenged, :commited, :effects)
+    params.require(:habit).permit(:name, :scheme, :period_for_effect, :working_time, :recently_viewed_time, :viewed_count, :challenged, :commited, :effects)
   end
 end
