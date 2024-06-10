@@ -16,7 +16,7 @@ class HabitForm
   def initialize(attributes = nil, habit: Habit.new, user: nil)
     @habit = habit
     @user = user
-    byebug
+
     attributes ||= default_attributes
     super(attributes)
   end

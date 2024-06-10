@@ -26,6 +26,6 @@ class HabitsController < ApplicationController
 
   private
   def habit_params
-    params.require(:habit).permit(:name, :scheme, :period_for_effect, :working_time, :recently_viewed_time, :viewed_count, :challenged, :commited, :effects)
+    params.require(:habit).permit(:name, :scheme, :period_for_effect, :working_time, :recently_viewed_time, :viewed_count, :challenged, :commited, :effects, :creating_user_id)
   end
 end
