@@ -42,18 +42,18 @@ class HabitForm
   def update
     return false if invalid?
     ActiveRecord::Base.transaction do
-      saved_effect = habit.update!(name: name, scheme: scheme, period_for_effect: period_for_effect, user_id: user.id)
+      habit.update!(name: name, scheme: scheme, period_for_effect: period_for_effect, user_id: user.id)
       count = 0
       effects_max = 5
       get_effects_items_and_ids.each do |effect_item, id|
         if count >= effects_max
           break
         end
-        if(effect_item.id.empty?)
-          Effect.create!(effect_item: effect_item, habit_id: saved_habit.id)
+        if(id.empty?)
+          Effect.create!(effect_item: effect_item, habit_id: habit.id)
         else
-          effect = Effect.find(saved_habit.id)
-          effect.update!(effect_item: effect_item, habit_id: saved_habit.id)
+          effect = Effect.find(id)
+          effect.update!(effect_item: effect_item, habit_id: habit.id)
         end
         count += 1
       end
@@ -79,7 +79,8 @@ class HabitForm
     end
     def get_effects_items_and_ids
       effects_items_array = effects.split(',').map
-      effects_ids_array = effect_ids.split(',').map
+      byebug
+      effects_ids_array = effects_ids.split(',').map
       effects_items_array.zip(effects_ids_array)
     end
 end
