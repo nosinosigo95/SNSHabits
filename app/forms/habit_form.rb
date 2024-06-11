@@ -49,7 +49,7 @@ class HabitForm
         if count >= effects_max
           break
         end
-        if(id.empty?)
+        if(id.nil?)
           Effect.create!(effect_item: effect_item, habit_id: habit.id)
         else
           effect = Effect.find(id)
