@@ -46,14 +46,15 @@ class HabitForm
       saved_effect = habit.update!(name: name, scheme: scheme, period_for_effect: period_for_effect, creating_user_id: user.id)
       count = 0
       effects_max = 5
-      effects.split(',').each do |effect_item|
+      get_effects_items_and_ids.each do |effect_item, id|
         if count >= effects_max
           break
         end
         if(effect_item.id.empty?)
           Effect.create!(effect_item: effect_item, habit_id: saved_habit.id)
         else
-          effect_item.update!(effect_item: effect_item, habit_id: saved_habit.id)
+          effect = Effect.find(saved_habit.id)
+          effect.update!(effect_item: effect_item, habit_id: saved_habit.id)
         end
         count += 1
       end
@@ -75,7 +76,12 @@ class HabitForm
         name: habit.name,
         creating_user_id: user.id,
         effects: habit.effects.pluck(:effect_item).join(','),
-        effects_ids: habit.effects.plunck(:id).join(','),
+        effects_ids: habit.effects.pluck(:id).join(','),
       }
+    end
+    def get_effects_items_and_ids
+      effects_items_array = effects.split(',').map
+      effects_ids_array = effect_ids.split(',').map
+      effects_items_array.zip(effects_ids_array)
     end
 end
