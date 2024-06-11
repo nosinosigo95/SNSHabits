@@ -1,5 +1,6 @@
 class HabitsController < ApplicationController
-  before_active :set_habit, only:[edit, update]
+  before_action :set_habit, only:[:edit, :update]
+
   def new
     @form = HabitForm.new(user: current_user)
   end
