@@ -1,7 +1,7 @@
 class HabitForm
   include ActiveModel::Model
 
-  attr_accessor :name, :scheme, :period_for_effect, :effects, :effects_ids :working_time, :circumstance, :urls, :url_ids
+  attr_accessor :name, :scheme, :period_for_effect, :effects, :effects_ids, :working_time, :circumstance, :urls, :urls_ids
 
   # 習慣モデル
   TEXT_MAX = 400
@@ -35,9 +35,8 @@ class HabitForm
         Effect.create!(effect_item: effect_item, habit_id: saved_habit.id)
         count += 1
       end
-
       urls.map do |url|
-        Source.create!(url: url, habit_id: habit.id)
+        Source.create!(url: url, habit_id: saved_habit.id)
       end
     end
   rescue ActiveRecord::RecordInvalid => e
@@ -83,18 +82,18 @@ class HabitForm
 
   private
 
-    attr_reader :habit, :user
+    attr_reader :habit, :user, 
 
     def default_attributes
       {
         name: habit.name,
         effects: habit.effects.pluck(:effect_item).join(','),
         effects_ids: habit.effects.pluck(:id).join(','),
-        scheme: habit.scheme
-        working_time: habit.working_time
-        circumstance: habit.circumstance
-        urls: habit.urls.map(&:url)
-        urls_ids: habit.urls.map(&:id)
+        scheme: habit.scheme,
+        circumstance: circumstance,
+        working_time: habit.working_time,
+        urls: habit.sources.map(&:url),
+        urls_ids: habit.sources.map(&:id),
       }
     end
     def get_effects_items_and_ids

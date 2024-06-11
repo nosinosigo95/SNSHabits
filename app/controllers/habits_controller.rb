@@ -5,6 +5,7 @@ class HabitsController < ApplicationController
     @form = HabitForm.new(user: current_user)
   end
   def create
+    byebug
     @form = HabitForm.new(habit_params, user: current_user)
     if @form.save
       redirect_to root_path
@@ -30,7 +31,7 @@ class HabitsController < ApplicationController
 
   private
   def habit_params
-    params.require(:habit).permit(:name, :scheme, :period_for_effect, :working_time, :recently_viewed_time, :viewed_count, :challenged, :commited, :effects, :effects_ids)
+    params.require(:habit).permit(:name, :scheme, :period_for_effect, :working_time, :viewed_count, :effects, :effects_ids, :circumstance, urls: [], urls_ids: [])
   end
   def set_habit
     @habit = current_user.habits.find(params[:id])

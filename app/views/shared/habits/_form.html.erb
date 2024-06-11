@@ -7,10 +7,10 @@
   <%= f.hidden_field :effects_ids %>
   <%= f.label :scheme, class: "required" %>
   <%= f.text_area :scheme, placeholder: "例)一つ一つの動きを意識して、取り組む。" %>
-  <%= f.label :url %>
+  <%= f.label :urls %>
   <% get_url_max.times do |i| %>
-    <%= f.hidden_field :url_ids, value:@form.urls_ids[i] %>
-    <%= f.text_field :url, value: @form.urls[i], placeholder: "例)https://www.youtube.com/watch?v=e9HR7-3I3MA" %>
+    <%= f.hidden_field :urls_ids, multiple: true %>
+    <%= f.text_field :urls, multiple: true, placeholder: "例)https://www.youtube.com/watch?v=e9HR7-3I3MA" %>
   <% end %>
 
 
