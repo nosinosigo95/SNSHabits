@@ -25,7 +25,6 @@ class HabitForm
 
     ActiveRecord::Base.transaction do
       saved_habit = Habit.create!(name: name, scheme: scheme, period_for_effect: period_for_effect, user_id: user.id)
-      byebug
       count = 0
       effects_max = 5
       effects.split(',').map do |effect_item|
