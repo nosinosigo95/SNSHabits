@@ -24,7 +24,8 @@ class HabitForm
     return false if invalid?
 
     ActiveRecord::Base.transaction do
-      saved_habit = Habit.create!(name: name, scheme: scheme, period_for_effect: period_for_effect)
+      saved_habit = Habit.create!(name: name, scheme: scheme, period_for_effect: period_for_effect, user_id: user.id)
+      byebug
       count = 0
       effects_max = 5
       effects.split(',').map do |effect_item|
@@ -42,7 +43,7 @@ class HabitForm
   def update
     return false if invalid?
     ActiveRecord::Base.transaction do
-      saved_effect = habit.update!(name: name, scheme: scheme, period_for_effect: period_for_effect)
+      saved_effect = habit.update!(name: name, scheme: scheme, period_for_effect: period_for_effect, user_id: user.id)
       count = 0
       effects_max = 5
       get_effects_items_and_ids.each do |effect_item, id|
