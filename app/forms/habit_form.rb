@@ -1,7 +1,7 @@
 class HabitForm
   include ActiveModel::Model
 
-  attr_accessor :name, :scheme, :period_for_effect, :creating_user_id, :effects#, :working_time, :recently_viewed_time, :viewed_count, :challenged, :commited,
+  attr_accessor :name, :scheme, :period_for_effect, :creating_user_id, :effects, :effects_ids #, :working_time, :recently_viewed_time, :viewed_count, :challenged, :commited,
 
   # 習慣モデル
   TEXT_MAX = 400
@@ -75,6 +75,7 @@ class HabitForm
         name: habit.name,
         creating_user_id: user.id,
         effects: habit.effects.pluck(:effect_item).join(','),
+        effects_ids: habit.effects.plunck(:id).join(','),
       }
     end
 end
