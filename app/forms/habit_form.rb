@@ -25,17 +25,18 @@ class HabitForm
     return if invalid?
 
     ActiveRecord::Base.transaction do
+      saved_habit = Habit.create!(name: name, scheme: scheme, period_for_effect: period_for_effect, creating_user_id: user.id)
       count = 0
       effects_max = 5
       effects_items = effects.split(',').map do |effect_item|
-        if count < effect_max
-          Effect.find_or_create_by!(effect_item: effect_item)
+        if count >= effects_max
+          break
         end
+        Effect.create!(effect_item: effect_item, habit_id: saved_habit.id)
         count += 1
       end
-      habit.update!(name: name, scheme: scheme, period_for_effect: period_for_effect, creating_user_id: user.id, effects: effects_items)
     end
-  rescue ActiveRecord::RecordInvalid
+  rescue ActiveRecord::RecordInvalid => e
     false
   end
 

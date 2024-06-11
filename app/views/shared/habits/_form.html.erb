@@ -12,7 +12,7 @@
 
   <%= f.label :period_for_effect %>
   <%= f.text_field :period_for_effect, placeholder: "例)2ヶ月" %>
-  <%= f.hidden :creating_user_id %>
+  <%= f.hidden_field :creating_user_id, value: current_user.id %>
   <!-- 挑戦中か結果済みか-->
   <%= f.submit '保存する', class: "submit-button"%>
   <%= link_to 'キャンセル', '#', class: "cancel-link" %>

@@ -11,6 +11,7 @@ WORKDIR /docker_rails
 
 COPY Gemfile Gemfile.lock /docker_rails/
 
+
 RUN bundle install
 
 ADD . /docker_rails

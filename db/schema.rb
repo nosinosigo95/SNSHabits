@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2024_06_10_061122) do
+ActiveRecord::Schema.define(version: 2024_06_10_104518) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -47,6 +47,8 @@ ActiveRecord::Schema.define(version: 2024_06_10_061122) do
     t.string "effect_item"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.bigint "habit_id"
+    t.index ["habit_id"], name: "index_effects_on_habit_id"
   end
 
   create_table "habits", force: :cascade do |t|
@@ -79,4 +81,5 @@ ActiveRecord::Schema.define(version: 2024_06_10_061122) do
 
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
+  add_foreign_key "effects", "habits"
 end
