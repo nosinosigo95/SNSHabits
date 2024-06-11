@@ -79,7 +79,6 @@ class HabitForm
     end
     def get_effects_items_and_ids
       effects_items_array = effects.split(',').map
-      byebug
       effects_ids_array = effects_ids.split(',').map
       effects_items_array.zip(effects_ids_array)
     end

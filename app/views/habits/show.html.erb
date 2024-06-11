@@ -1,0 +1,11 @@
+
+<table>
+  <tr>
+    <th>習慣名</th>
+    <td><%= @habit.name %></td>
+  </tr>
+  <tr>
+    <th>効果(キーワード)</th>
+    <td><%= @habit.effects.pluck(:effect_item).join(',') %></td>
+  </tr>
+</table>

@@ -23,7 +23,11 @@ class HabitsController < ApplicationController
       render :edit
     end
   end
-  
+
+  def show
+    @habit = Habit.find(params[:id])
+  end
+
   private
   def habit_params
     params.require(:habit).permit(:name, :scheme, :period_for_effect, :working_time, :recently_viewed_time, :viewed_count, :challenged, :commited, :effects, :effects_ids)
