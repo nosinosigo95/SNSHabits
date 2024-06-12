@@ -4,9 +4,12 @@ class HabitForm
   attr_accessor :name, :scheme, :period_for_effect, :effects, :effects_ids, :working_time, :circumstance, :urls, :urls_ids
 
   # Habitモデル
-  TEXT_MAX = 400
-  validates :name, presence: true
-  validates :scheme, length: {maximum: TEXT_MAX}
+  SCHEME_TEXT_MAX = 400
+  NAME_TEXT_MAX = 20
+  PERIOD_FOR_EFFECT_TEXT_MAX = 10
+  validates :name, presence: true, length: {maximum: NAME_TEXT_MAX}
+  validates :scheme, length: {maximum: SCHEME_TEXT_MAX}
+  validates :period_for_effect, length: {maximum: PERIOD_FOR_EFFECT_TEXT_MAX}
   # Effectモデル
   validates :effects, presence: true
   validate :check_effects
