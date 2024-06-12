@@ -121,12 +121,16 @@ class HabitForm
       end
     end
 
+
+    #文字列が5つあり、区切り文字がカンマであることをチェックする
+    #例)文字列, 文字列, 文字列, 文字列, 文字列
+    #文字列は、英数字とひらがな、カタカナです。
     def check_effects
-      #文字列, 文字列, 文字列, 文字列, 文字列
-      #文字列, 文字列, 文字列, 文字列
-      #文字列, 文字列, 文字列
-      #文字列, 文字列
-      #文字列
-      #文字列は、英数字とひらがな、カタカナです。
+      ja_en_num_chr = "[0-9a-zA-Zぁ-んーァ-ヶーｱ-ﾝﾞﾟ一-龠]"
+      match_url_pattern = /^#{ja_en_num_chr}+(,#{ja_en_num_chr}+){,4}$/.match(effects)
+      byebug
+      if match_url_pattern.nil?
+        errors.add(:effects, "：5つの文字列(英数字,ひらがな,カタカナ)をカンマ区切りで区切ってください。") 
+      end
     end
 end
