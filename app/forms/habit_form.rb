@@ -8,14 +8,15 @@ class HabitForm
   validates :name, presence: true
   validates :scheme, length: {maximum: TEXT_MAX}
   # Effectモデル
-  validates :effects, precense: true
+  validates :effects, presence: true
+  #Sourceモデル
+  validate :check_urls
 
   delegate :persisted?, to: :habit
 
   def initialize(attributes = nil, habit: Habit.new, user: nil)
     @habit = habit
     @user = user
-
     attributes ||= default_attributes
     super(attributes)
   end
@@ -103,5 +104,15 @@ class HabitForm
     end
     def get_urls_and_ids
       urls.zip(urls_ids)
+    end
+
+    def check_urls
+      urls.each do |url|
+        match_url = url.match(URI::regexp(%w(http https)))
+        if match_url.nil?
+          errors.add(:urls, ':urlの形式が間違っています。')
+          return
+        end
+      end  
     end
 end
