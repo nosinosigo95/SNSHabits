@@ -3,12 +3,12 @@ class HabitForm
 
   attr_accessor :name, :scheme, :period_for_effect, :effects, :effects_ids, :working_time, :circumstance, :urls, :urls_ids
 
-  # 習慣モデル
+  # Habitモデル
   TEXT_MAX = 400
   validates :name, presence: true
   validates :scheme, length: {maximum: TEXT_MAX}
-  # 効果モデル
-  #validates :split_effect_items, precense: true
+  # Effectモデル
+  validates :effects, precense: true
 
   delegate :persisted?, to: :habit
 

@@ -5,7 +5,6 @@ class HabitsController < ApplicationController
     @form = HabitForm.new(user: current_user)
   end
   def create
-    byebug
     @form = HabitForm.new(habit_params, user: current_user)
     if @form.save
       redirect_to root_path
