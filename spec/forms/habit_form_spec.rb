@@ -53,5 +53,21 @@ RSpec.describe HabitForm, type: :model do
     habit_form.valid?
     expect(habit_form).to be_invalid
   end
-
+  it "無効なパターンを「効果」に入力すると、フォームオブジェクトが無効になること" do
+    invalid_effects = ["1, 2", "1, ", "1, -"]
+    invalid_effects.each do |invalid_effect|
+      habit_form.effects = invalid_effect
+      habit_form.valid?
+      expect(habit_form).to be_invalid
+    end
+  end
+  it "有効なパターンを「効果」に入力すると、フォームオブジェクトが有効になること" do
+    valid_effects = ["1", "1,a", "1,a,A", "1,a,A,あ", "1,a,A,あ,亜"]
+    valid_effects.each do |valid_effect|
+      habit_form.effects = valid_effect
+      binding.pry
+      habit_form.valid?
+      expect(habit_form).to be_valid
+    end
+  end
 end
