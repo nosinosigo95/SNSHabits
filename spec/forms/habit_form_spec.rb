@@ -65,9 +65,29 @@ RSpec.describe HabitForm, type: :model do
     valid_effects = ["1", "1,a", "1,a,A", "1,a,A,あ", "1,a,A,あ,亜"]
     valid_effects.each do |valid_effect|
       habit_form.effects = valid_effect
-      binding.pry
       habit_form.valid?
       expect(habit_form).to be_valid
     end
+  end
+
+  # 参考資料
+  it "無効なURLが入力されたら、フォームオブジェクトが無効になること" do
+    invalid_urls = %w(
+    "http://www.example.com/space%20here.html", 
+    "ftp://www.example.com/",
+    "http://www.example.com/and%26here.html",
+    )
+    habit_form.urls = invalid_urls
+    habit_form.valid?
+    expect(habit_form).to be_invalid
+  end
+  it "無効なURLが入力されたら、フォームオブジェクトが無効になること" do
+    valid_urls = %w(
+    "http://www.example.com/", 
+    "https://www.example.com/",
+    )
+    habit_form.urls = valid_urls
+    habit_form.valid?
+    expect(habit_form).to be_valid
   end
 end
