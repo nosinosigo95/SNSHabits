@@ -10,12 +10,13 @@ class HabitForm
   validates :name, presence: true, length: {maximum: NAME_TEXT_MAX}
   validates :scheme, length: {maximum: SCHEME_TEXT_MAX}
   validates :period_for_effect, length: {maximum: PERIOD_FOR_EFFECT_TEXT_MAX}
+  validate :check_commit_or_challenge
   # Effectモデル
   validates :effects, presence: true
   validate :check_effects
   #Sourceモデル
   validate :check_urls
-
+  
   delegate :persisted?, to: :habit
 
   def initialize(attributes = nil, habit: Habit.new, user: nil)
@@ -29,7 +30,8 @@ class HabitForm
     return false if invalid?
 
     ActiveRecord::Base.transaction do
-      saved_habit = Habit.create!(name: name, scheme: scheme, period_for_effect: period_for_effect, working_time: working_time, user_id: user.id)
+      circumstance_map = get_commit_and_challenge
+      saved_habit = Habit.create!(name: name, scheme: scheme, period_for_effect: period_for_effect, working_time: working_time, user_id: user.id, commit: circumstance_map[:commit], challenge: circumstance_map[:challenge])
 
       count = 0
       effects_max = 5
@@ -51,7 +53,8 @@ class HabitForm
   def update
     return false if invalid?
     ActiveRecord::Base.transaction do
-      habit.update!(name: name, scheme: scheme, period_for_effect: period_for_effect, working_time: working_time, user_id: user.id)
+      circumstance_map = get_commit_and_challenge
+      habit.update!(name: name, scheme: scheme, period_for_effect: period_for_effect, working_time: working_time, user_id: user.id, commit: circumstance_map[:commit], challenge: circumstance_map[:challenge])
 
       count = 0
       effects_max = 5
@@ -124,6 +127,18 @@ class HabitForm
       end
     end
 
+    def get_commit_and_challenge
+      if circumstance == "commit"
+        {commit: 1, challenge: 0}
+      elsif circumstance == "challenge"
+        {commit: 0, challenge: 1}
+      end
+    end
+
+    def check_commit_or_challenge
+      match_circumstance = /(challenge)|(commit)/.match(circumstance)
+      errors.add(:circumstance, ":「結果済み」か「挑戦中」を選んでください。") if match_circumstance.nil?
+    end
 
     #文字列が5つあり、区切り文字がカンマであることをチェックする
     #例)文字列, 文字列, 文字列, 文字列, 文字列
@@ -132,7 +147,7 @@ class HabitForm
       ja_en_num_chr = "[0-9a-zA-Zぁ-んーァ-ヶーｱ-ﾝﾞﾟ一-龠]"
       match_url_pattern = /^#{ja_en_num_chr}+(,#{ja_en_num_chr}+){,4}$/.match(effects)
       if match_url_pattern.nil?
-        errors.add(:effects, "：5つの文字列(英数字,ひらがな,カタカナ,漢字)をカンマ区切りで区切ってください。") 
+        errors.add(:effects, ":5つの文字列(英数字,ひらがな,カタカナ,漢字)をカンマ区切りで区切ってください。") 
       end
     end
 end
