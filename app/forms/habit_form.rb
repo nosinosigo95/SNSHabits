@@ -1,6 +1,6 @@
 class HabitForm
   include ActiveModel::Model
-
+  
   attr_accessor :name, :scheme, :period_for_effect, :effects, :effects_ids, :working_time, :circumstance, :urls, :urls_ids
 
   # Habitモデル
@@ -9,6 +9,7 @@ class HabitForm
   validates :scheme, length: {maximum: TEXT_MAX}
   # Effectモデル
   validates :effects, presence: true
+  validate :check_effects
   #Sourceモデル
   validate :check_urls
 
@@ -108,11 +109,23 @@ class HabitForm
 
     def check_urls
       urls.each do |url|
+        if url.empty?
+          next
+        end
         match_url = url.match(URI::regexp(%w(http https)))
         if match_url.nil?
           errors.add(:urls, ':urlの形式が間違っています。')
           return
         end
-      end  
+      end
+    end
+
+    def check_effects
+      #文字列, 文字列, 文字列, 文字列, 文字列
+      #文字列, 文字列, 文字列, 文字列
+      #文字列, 文字列, 文字列
+      #文字列, 文字列
+      #文字列
+      #文字列は、英数字とひらがな、カタカナです。
     end
 end
