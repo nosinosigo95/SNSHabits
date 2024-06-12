@@ -8,6 +8,7 @@ RSpec.describe HabitForm, type: :model do
   before do
     habit_form.name = "habit"
     habit_form.effects = "キーワード1,キーワード2"
+    habit_form.circumstance = "challenge"
   end
 
   it "習慣名、効果があれば、フォームオブジェクトが有効になる" do
@@ -40,6 +41,23 @@ RSpec.describe HabitForm, type: :model do
     habit_form.period_for_effect = "1" * (period_for_effect_text_max + 1)
     habit_form.valid?
     expect(habit_form).to be_invalid
+  end
+  it "「状況が」がコミットか挑戦中であるならば、フォームオブジェクトが有効になること" do
+    valid_circumstances = %w(commit challenge)
+    valid_circumstances.each do |valid_circumstance|
+      habit_form.circumstance = valid_circumstance
+      habit_form.valid?
+      expect(habit_form).to be_valid
+    end
+  end
+  it "「状況が」がコミットか挑戦中でない
+  ならば、フォームオブジェクトが有効になること" do
+    invalid_circumstances = %w(comit chllnge)
+    invalid_circumstances.each do |invalid_circumstance|
+      habit_form.circumstance = invalid_circumstance
+      habit_form.valid?
+      expect(habit_form).to be_invalid
+    end
   end
 
   # 効果
