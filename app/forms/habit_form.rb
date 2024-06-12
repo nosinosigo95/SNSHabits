@@ -131,7 +131,6 @@ class HabitForm
     def check_effects
       ja_en_num_chr = "[0-9a-zA-Zぁ-んーァ-ヶーｱ-ﾝﾞﾟ一-龠]"
       match_url_pattern = /^#{ja_en_num_chr}+(,#{ja_en_num_chr}+){,4}$/.match(effects)
-      byebug
       if match_url_pattern.nil?
         errors.add(:effects, "：5つの文字列(英数字,ひらがな,カタカナ)をカンマ区切りで区切ってください。") 
       end
