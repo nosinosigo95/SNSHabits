@@ -82,7 +82,7 @@ class HabitForm
 
   private
 
-    attr_reader :habit, :user, 
+    attr_reader :habit, :user
 
     def default_attributes
       {
