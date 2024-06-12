@@ -9,8 +9,8 @@
   <%= f.text_area :scheme, placeholder: "例)一つ一つの動きを意識して、取り組む。" %>
   <%= f.label :urls %>
   <% get_url_max.times do |i| %>
-    <%= f.hidden_field :urls_ids, multiple: true, value: @form.urls_ids[i] %>
-    <%= f.text_field :urls, multiple: true, value: @form.urls[i], placeholder: "例)https://www.youtube.com/watch?v=e9HR7-3I3MA" %>
+    <%= f.hidden_field :urls_ids, multiple: true, value: form.urls_ids[i] %>
+    <%= f.text_field :urls, multiple: true, value: form.urls[i], placeholder: "例)https://www.youtube.com/watch?v=e9HR7-3I3MA" %>
   <% end %>
 
 
