@@ -26,6 +26,7 @@ class HabitsController < ApplicationController
 
   def show
     @habit = Habit.find(params[:id])
+    @habit.update(viewed_count: Time.now)
   end
 
   private
