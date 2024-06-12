@@ -38,7 +38,7 @@ class HabitForm
         count += 1
       end
       urls.map do |url|
-        Source.create!(url: url, habit_id: saved_habit.id)
+        Source.create!(url: url, habit_id: saved_habit.id) if url.present?
       end
     end
   rescue ActiveRecord::RecordInvalid => e
@@ -66,6 +66,7 @@ class HabitForm
       end
 
       get_urls_and_ids.each do |url, id|
+        next if url.blank? 
         if(id.nil?)
           Source.create!(url: url, habit_id: habit.id)
         else
