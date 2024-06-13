@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2024_06_13_071249) do
+ActiveRecord::Schema.define(version: 2024_06_13_081142) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -56,8 +56,6 @@ ActiveRecord::Schema.define(version: 2024_06_13_071249) do
     t.string "effect_item"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.bigint "habit_id"
-    t.index ["habit_id"], name: "index_effects_on_habit_id"
   end
 
   create_table "habits", force: :cascade do |t|
@@ -72,14 +70,6 @@ ActiveRecord::Schema.define(version: 2024_06_13_071249) do
     t.boolean "challenge"
     t.boolean "commit"
     t.index ["user_id"], name: "index_habits_on_user_id"
-  end
-
-  create_table "habits_effects", force: :cascade do |t|
-    t.bigint "habit_id", null: false
-    t.bigint "effect_id", null: false
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
-    t.index ["habit_id", "effect_id"], name: "index_habits_effects_on_habit_id_and_effect_id", unique: true
   end
 
   create_table "sources", force: :cascade do |t|
@@ -112,9 +102,6 @@ ActiveRecord::Schema.define(version: 2024_06_13_071249) do
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
   add_foreign_key "effect_habits", "effects"
   add_foreign_key "effect_habits", "habits"
-  add_foreign_key "effects", "habits"
   add_foreign_key "habits", "users"
-  add_foreign_key "habits_effects", "effects"
-  add_foreign_key "habits_effects", "habits"
   add_foreign_key "sources", "habits"
 end

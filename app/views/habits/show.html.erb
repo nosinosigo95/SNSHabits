@@ -4,7 +4,7 @@
 </div>
 <div class="effect-display">
   <p>効果(キーワード):</p>
-  <p><%= @habit.effects.pluck(:effect_item).join(',') %></p>
+  <p><%= @habit.effect_habits.map(&:effect).pluck(:effect_item).join(',') %></p>
 </div>
 <% if @habit.period_for_effect.present? %>
   <div class="period_for_effect-display">

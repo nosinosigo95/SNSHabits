@@ -39,7 +39,8 @@ class HabitForm
         if count >= effects_max
           break
         end
-        Effect.create!(effect_item: effect_item, habit_id: saved_habit.id)
+        effect_obj = Effect.create!(effect_item: effect_item)
+        EffectHabit.create(habit_id: saved_habit.id, effect_id: effect_obj.id)
         count += 1
       end
       urls.map do |url|
@@ -63,10 +64,12 @@ class HabitForm
           break
         end
         if(id.nil?)
-          Effect.create!(effect_item: effect_item, habit_id: habit.id)
+          effect_obj = Effect.create!(effect_item: effect_item)
+          EffectHabit.create(habit_id: saved_habit.id, effect_id: effect_obj.id)
         else
-          effect = Effect.find(id)
-          effect.update!(effect_item: effect_item, habit_id: habit.id)
+          effect_obj = Effect.find(id)
+          effect_obj.update!(effect_item: effect_item)
+          EffectHabit.create(habit_id: habit.id, effect_id: effect_obj.id)
         end
         count += 1
       end
@@ -96,8 +99,8 @@ class HabitForm
     def default_attributes
       {
         name: habit.name,
-        effects: habit.effects.pluck(:effect_item).join(','),
-        effects_ids: habit.effects.pluck(:id).join(','),
+        effects: habit.effect_habits.map(&:effect).pluck(:effect_item).join(','),
+        effects_ids: habit.effect_habits.map(&:effect).pluck(:id).join(','),
         scheme: habit.scheme,
         circumstance: circumstance,
         working_time: habit.working_time,
