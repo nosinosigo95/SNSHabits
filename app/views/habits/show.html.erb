@@ -1,11 +1,32 @@
-
-<table>
-  <tr>
-    <th>習慣名</th>
-    <td><%= @habit.name %></td>
-  </tr>
-  <tr>
-    <th>効果(キーワード)</th>
-    <td><%= @habit.effects.pluck(:effect_item).join(',') %></td>
-  </tr>
-</table>
+<div class="habit-name-display">
+  <p>習慣名:</p>
+  <p><%= @habit.name %></p>
+</div>
+<div class="effect-display">
+  <p>効果(キーワード):</p>
+  <p><%= @habit.effects.pluck(:effect_item).join(',') %></p>
+</div>
+<%= @habit.period_for_effect.present? %>
+  <div class="period_for_effect-display">
+    <p>工夫:</p>
+    <p><%= @habit.period_for_effect %></p>
+  </div>
+<% end %>
+<%= @habit.working_time.present? %>
+  <div class="working_time-display">
+    <p>活動時間</p>
+    <p><%= @habit.working_time %></p>
+  </div>
+<% end %>
+<%= @habit.sources.present? %>
+  <div class="source-display">
+    <p>URL</p>
+    <% @habit.sources.each do |source| %>
+      <p><%= source.url %></p>
+    <% end %>
+  </div>
+<% end %>
+<div class="circumstance-display">
+  <p>この習慣の状況</p>
+  <p><%= get_circumstance(@habit) %></p>
+</div>
