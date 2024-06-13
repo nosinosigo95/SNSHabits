@@ -39,7 +39,10 @@ class HabitForm
         if count >= effects_max
           break
         end
-        effect_obj = Effect.create!(effect_item: effect_item)
+        effect_obj = Effect.find_by(effect_item: effect_item)
+        if effect_obj.nil?
+          effect_obj = Effect.create!(effect_item: effect_item)
+        end
         EffectHabit.create(habit_id: saved_habit.id, effect_id: effect_obj.id)
         count += 1
       end
@@ -64,7 +67,10 @@ class HabitForm
           break
         end
         if(id.nil?)
-          effect_obj = Effect.create!(effect_item: effect_item)
+          effect_obj = Effect.find_by(effect_item: effect_item)
+          if effect_obj.nil?
+            effect_obj = Effect.create!(effect_item: effect_item)
+          end
           EffectHabit.create(habit_id: saved_habit.id, effect_id: effect_obj.id)
         else
           effect_obj = Effect.find(id)
