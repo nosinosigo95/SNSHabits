@@ -8,7 +8,7 @@ class HabitForm
   NAME_TEXT_MAX = 20
   PERIOD_FOR_EFFECT_TEXT_MAX = 10
   validates :name, presence: true, length: {maximum: NAME_TEXT_MAX}
-  validates :scheme, length: {maximum: SCHEME_TEXT_MAX}
+  validates :scheme, presence: true, length: {maximum: SCHEME_TEXT_MAX}
   validates :period_for_effect, length: {maximum: PERIOD_FOR_EFFECT_TEXT_MAX}
   validate :check_commit_or_challenge
   # Effectモデル

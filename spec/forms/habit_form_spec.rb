@@ -9,6 +9,7 @@ RSpec.describe HabitForm, type: :model do
     habit_form.name = "habit"
     habit_form.effects = "キーワード1,キーワード2"
     habit_form.circumstance = "challenge"
+    habit_form.scheme = "工夫 工夫"
   end
 
   it "習慣名、効果があれば、フォームオブジェクトが有効になる" do
@@ -32,6 +33,16 @@ RSpec.describe HabitForm, type: :model do
     habit_form.valid?
     expect(habit_form).to be_invalid
   end
+  it "スキームがなければ、フォームオブジェクトが無効になること" do
+    habit_form.name = nil
+    habit_form.valid?
+    expect(habit_form).to be_invalid
+  end
+  it "スキームが空白であれば、フォームオブジェクトが無効になること" do
+    habit_form.name = " "
+    habit_form.valid?
+    expect(habit_form).to be_invalid
+  end
   it "スキームが400文字を超えると、フォームオブジェクトが無効になること" do
     habit_form.scheme = "1" * (scheme_text_max + 1)
     habit_form.valid?
@@ -50,8 +61,7 @@ RSpec.describe HabitForm, type: :model do
       expect(habit_form).to be_valid
     end
   end
-  it "「状況が」がコミットか挑戦中でない
-  ならば、フォームオブジェクトが有効になること" do
+  it "「状況が」がコミットか挑戦中でないならば、フォームオブジェクトが有効になること" do
     invalid_circumstances = %w(comit chllnge)
     invalid_circumstances.each do |invalid_circumstance|
       habit_form.circumstance = invalid_circumstance
