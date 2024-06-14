@@ -5,7 +5,8 @@ Rails.application.routes.draw do
   devise_for :users
   
   namespace :users do
-    resource :follows, only: [:create, :destroy] 
+    post ':user_id/follow', to: 'follows#create', as: 'create_follow'
+    delete ':user_id/follow', to: 'follows#destroy', as: 'destroy_follow'
     get 'followings', to: 'follows#followings', as: 'followings'
     get 'followers', to: 'follows#followers', as: "followers"
   end
