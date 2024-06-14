@@ -7,8 +7,8 @@ Rails.application.routes.draw do
   namespace :users do
     post ':user_id/follow', to: 'follows#create', as: 'create_follow'
     delete ':user_id/follow', to: 'follows#destroy', as: 'destroy_follow'
-    get 'followings', to: 'follows#followings', as: 'followings'
-    get 'followers', to: 'follows#followers', as: "followers"
+    get ':user_id/followings', to: 'follows#followings', as: 'followings'
+    get ':user_id/followers', to: 'follows#followers', as: "followers"
   end
   root 'home#index'
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
