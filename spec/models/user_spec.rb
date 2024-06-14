@@ -16,17 +16,10 @@ RSpec.describe User, type: :model do
     expect(FactoryBot.build(:user, name: "   ")).to be_invalid
   end
   it "重複した名前が登録されるとき、テストが無効になること" do
-    User.create(
-      name: "123",
-      email: "12@example.com",
-      password: "1" * password_min
-    )
-    user = User.create(
-      name: "123",
-      email: "123@sample.com",
-      password: "1" * password_min
-    )
-    expect(user.errors.full_messages).to include("Name has already been taken")
+    FactoryBot.create(:user, name: "123", email: "123@example.com")
+    user = FactoryBot.build(:user, name: "123", email: "e@example.com")
+    user.valid?
+    expect(user.errors[:name]).to include("has already been taken")
   end
 
   it "メールアドレスがなければ、テストが無効になること" do
@@ -36,24 +29,18 @@ RSpec.describe User, type: :model do
     expect(FactoryBot.build(:user, email: "    ")).to be_invalid
   end
   it "形式が無効であるメールアドレスを登録しようとすると、テストが無効になること" do
-    invalid_addresses = %w[user@example,com user_at_foo.org user.name@example.
-                           foo@bar_baz.com foo@bar+baz.com]
+    invalid_addresses = %w(
+      user@example,com user_at_foo.org user.name@example. foo@bar_baz.com foo@bar+baz.com
+    )
     invalid_addresses.each do |invalid_address|
       expect(FactoryBot.build(:user, email: invalid_address)).to be_invalid
     end
   end
   it "重複したメールアドレスが登録されるとき、テストが無効になること" do
-    User.create(
-      name: "sample",
-      email: "sample@sample.com",
-      password: "1" * password_min
-    )
-    user = User.create(
-      name: "example",
-      email: "sample@sample.com",
-      password: "1" * password_min
-    )
-    expect(user.errors.full_messages).to include("Email has already been taken")
+    FactoryBot.create(:user, name: "sample", email: "example@example.com")
+    user = FactoryBot.build(:user, name: "example", email: "example@example.com")
+    user.valid?
+    expect(user.errors[:email]).to include("has already been taken")
   end
 
   it "パスワードがなければ、テストが無効になること" do
