@@ -1,7 +1,7 @@
-inherit_from: .rubocop_todo.yml
-require:
-  - rubocop-performance
-  - rubocop-rails
+inherit_from: .rubocop_airbnb.yml
+
+Rails:
+  Enabled: true
 
 AllCops:
   SuggestExtensions: false
@@ -17,6 +17,8 @@ AllCops:
     - "log/**/*"
     - "tmp/**/*"
     - "vendor/**/*"
-    - "lib/tasks/auto_annotate_models.rake"
+    - "script/**/*"
     - "config/environments/*"
+    - "node_modules/**/*"
     - "config/puma.rb"
+    - ".git/**/*"
