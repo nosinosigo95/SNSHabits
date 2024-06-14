@@ -1,8 +1,8 @@
 require 'rails_helper'
 
 RSpec.describe "Users", type: :request do
-  let(:user){FactoryBot.create(:user, introduction: "text text")}
-  let(:image_name){ "person-circle.svg" }
+  let(:user) { FactoryBot.create(:user, introduction: "text text") }
+  let(:image_name) { "person-circle.svg" }
   before do
     sign_in user
   end

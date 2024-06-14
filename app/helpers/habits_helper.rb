@@ -2,6 +2,7 @@ module HabitsHelper
   def get_url_max
     3
   end
+
   def get_circumstance(habit)
     if habit.nil?
       nil

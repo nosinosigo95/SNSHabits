@@ -4,8 +4,8 @@ class User < ApplicationRecord
   has_many :habits
   INTRO_MAX = 400
   devise :database_authenticatable, :registerable,
-         :recoverable, :rememberable, :validatable#, :confirmable
+         :recoverable, :rememberable, :validatable # , :confirmable
   validates :name, presence: true, uniqueness: true
-  validates :introduction, length: {maximum: INTRO_MAX}
+  validates :introduction, length: { maximum: INTRO_MAX }
   has_one_attached :icon
 end
