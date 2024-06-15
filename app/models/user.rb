@@ -16,11 +16,11 @@ class User < ApplicationRecord
   has_one_attached :icon
 
   def follow(followed_user)
-    follower_relations.create(followed: followed_user.id)
+    follower_relations.create(followed_id: followed_user.id)
   end
 
   def unfollow(unfollowed_user)
-    follower_relations.find_by(followed: followed_user.id).destroy
+    follower_relations.find_by(followed_id: followed_user.id).destroy
   end
 
   def following?(user)

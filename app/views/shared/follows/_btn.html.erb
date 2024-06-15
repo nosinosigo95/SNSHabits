@@ -1,7 +1,7 @@
 <% if current_user != followed_user %>
-  <% if current_user.folloing?(user) %>
-    <%= link_to 'フォローしない', users_destroy_follow(followed_user.id), method: :delete %>
+  <% if current_user.following?(followed_user) %>
+    <%= link_to 'フォローしない', user_destroy_follow_path(followed_user.id), method: :delete %>
   <% else %>
-    <%= link_to 'フォロ-する', users_create_follow(followed_user.id), method: :post %>
+    <%= link_to 'フォロ-する', user_create_follow_path(followed_user.id), method: :post %>
   <% end %>
 <% end %>
