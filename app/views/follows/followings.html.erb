@@ -1,0 +1,6 @@
+<%= render 'shared/users/info', user: @user %>
+<%= if @users.present? %>
+  <%= render 'shared/user/index', users: @users %>
+<% else %>
+  <p>フォロされているユーザーはいません。</p>
+<% end %>

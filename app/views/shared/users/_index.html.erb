@@ -1,0 +1,9 @@
+<div class="">
+  <% users.each do |user| %>
+    <ul>
+      <li><%= image_tag user.icon%></li>
+      <li><%= image_tag user.name%></li>
+      <li><%= render 'shared/follows/btn', followed_user: user %></li>
+    </ul>
+  <% end %>
+</div>
