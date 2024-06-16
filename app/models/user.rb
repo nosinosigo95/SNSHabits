@@ -5,8 +5,8 @@ class User < ApplicationRecord
   has_many :followed_relations, class_name: "Follow", foreign_key: "followed_id", dependent: :destroy
 
   # 簡潔に取得
-  has_many :followers, through: :follower_relations, source: :follower
-  has_many :followings, through: :followed_relations, source: :followed
+  has_many :followers, through: :follower_relations, source: :followed
+  has_many :followings, through: :followed_relations, source: :follower
 
   INTRO_MAX = 400
   devise :database_authenticatable, :registerable,
@@ -20,7 +20,7 @@ class User < ApplicationRecord
   end
 
   def unfollow(unfollowed_user)
-    follower_relations.find_by(followed_id: followed_user.id).destroy
+    follower_relations.find_by(followed_id: unfollowed_user.id).destroy
   end
 
   def following?(user)

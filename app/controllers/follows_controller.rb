@@ -6,7 +6,7 @@ class FollowsController < ApplicationController
     redirect_to request.referer
   end
 
-  def destory
+  def destroy
     followed_user = User.find(params[:user_id])
     current_user.unfollow(followed_user)
     redirect_to request.referer
@@ -19,6 +19,6 @@ class FollowsController < ApplicationController
 
   def followers
     @user = User.find(params[:user_id])
-    @users = @user.followers
+    @users = @user.follower
   end
 end
