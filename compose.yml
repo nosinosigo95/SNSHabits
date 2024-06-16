@@ -36,5 +36,3 @@ volumes:
   public-data:
   tmp-data:
   log-data:
-
-
