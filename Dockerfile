@@ -15,3 +15,6 @@ COPY Gemfile Gemfile.lock /docker_rails/
 RUN bundle install
 
 ADD . /docker_rails
+
+# puma.sockを置くディレクトリ
+RUN mkdir -p tmp/sockets
