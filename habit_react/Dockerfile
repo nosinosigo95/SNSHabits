@@ -5,6 +5,6 @@ RUN /bin/bash &&\
   apt-get -y upgrade &&\
   npm install -g npm
 
-WORKDIR /app/frontend
+WORKDIR /app/habit_react
 
 CMD /bin/bash

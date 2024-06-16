@@ -33,9 +33,9 @@ services:
       - app
   front:
     build:
-      context: ./frontend/
+      context: ./habit_react/
     volumes:
-      - ./frontend:/docker_rails/frontend
+      - ./habit_react/:/docker_rails/habit_react
     command: 'yarn dev'
     ports:
       - "8080:3000"
