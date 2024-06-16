@@ -8,20 +8,6 @@ services:
     environment:
       - POSTGRES_PASSWORD=password
       - POSTGRES_HOST_AUTH_METHOD=trust
-  app:
-    stdin_open: true
-    tty: true
-    build: .
-    command: /bin/sh -c "bundle exec rails s -p 3000 -b '0.0.0.0'"
-    depends_on:
-      - db
-    ports:
-      - "3000:3000"
-    volumes:
-      - .:/docker_rails
-      - public-data:/docker_rails/public
-      - tmp-data:/docker_rails/tmp
-      - log-data:/docker_rails/log
   web:
     build: nginx
     volumes:
@@ -39,6 +25,20 @@ services:
     command: 'yarn dev'
     ports:
       - "8080:3000"
+  app:
+    stdin_open: true
+    tty: true
+    build: .
+    command: /bin/sh -c "rm -f tmp/pids/server.pid && bundle exec puma -C config/puma.rb"
+    depends_on:
+      - db
+    ports:
+      - "3000:3000"
+    volumes:
+      - .:/docker_rails
+      - public-data:/docker_rails/public
+      - tmp-data:/docker_rails/tmp
+      - log-data:/docker_rails/log
 
 volumes:
   db-store:

@@ -17,4 +17,4 @@ RUN bundle install
 ADD . /docker_rails
 
 # puma.sockを置くディレクトリ
-RUN mkdir -p tmp/sockets
+RUN mkdir -p docker_rails/tmp/sockets
