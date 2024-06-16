@@ -5,6 +5,6 @@ RUN /bin/bash &&\
   apt-get -y upgrade &&\
   npm install -g npm
 
-WORKDIR /app/habit_react
+WORKDIR /docker_rails/habit_react
 
 CMD /bin/bash
