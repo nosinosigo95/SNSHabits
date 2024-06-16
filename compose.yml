@@ -8,16 +8,33 @@ services:
     environment:
       - POSTGRES_PASSWORD=password
       - POSTGRES_HOST_AUTH_METHOD=trust
-  web:
+  app:
     stdin_open: true
     tty: true
     build: .
-    command: /bin/sh -c "rm -f /tmp/pids/server.pid && bundle exec rails s -p 3000 -b '0.0.0.0'"
+    command: /bin/sh -c "bundle exec rails s -p 3000 -b '0.0.0.0'"
     depends_on:
       - db
     ports:
       - "3000:3000"
     volumes:
       - .:/docker_rails
+      - public-data:/docker_rails/public
+      - tmp-data:/docker_rails/tmp
+      - log-data:/docker_rails/log
+  web:
+    build: nginx
+    volumes:
+      - public-data:/docker_rails/public
+      - tmp-data:/docker_rails/tmp
+    ports:
+      - "80:80"
+    depends_on:
+      - app
 volumes:
   db-store:
+  public-data:
+  tmp-data:
+  log-data:
+
+
