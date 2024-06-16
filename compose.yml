@@ -31,6 +31,15 @@ services:
       - "80:80"
     depends_on:
       - app
+  front:
+    build:
+      context: ./frontend/
+    volumes:
+      - ./frontend:/docker_rails/frontend
+    command: 'yarn dev'
+    ports:
+      - "8080:3000"
+
 volumes:
   db-store:
   public-data:
