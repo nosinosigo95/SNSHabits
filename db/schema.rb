@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2024_06_14_074140) do
+ActiveRecord::Schema.define(version: 2024_06_17_050000) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -41,6 +41,18 @@ ActiveRecord::Schema.define(version: 2024_06_14_074140) do
     t.bigint "blob_id", null: false
     t.string "variation_digest", null: false
     t.index ["blob_id", "variation_digest"], name: "index_active_storage_variant_records_uniqueness", unique: true
+  end
+
+  create_table "diaries", force: :cascade do |t|
+    t.text "description"
+    t.date "doing_time"
+    t.boolean "private"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.bigint "user_id"
+    t.bigint "habit_id"
+    t.index ["habit_id"], name: "index_diaries_on_habit_id"
+    t.index ["user_id"], name: "index_diaries_on_user_id"
   end
 
   create_table "effect_habits", force: :cascade do |t|
@@ -109,6 +121,8 @@ ActiveRecord::Schema.define(version: 2024_06_14_074140) do
 
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
+  add_foreign_key "diaries", "habits"
+  add_foreign_key "diaries", "users"
   add_foreign_key "effect_habits", "effects"
   add_foreign_key "effect_habits", "habits"
   add_foreign_key "habits", "users"
