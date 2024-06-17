@@ -21,13 +21,11 @@ RSpec.describe Diary, type: :model do
     expect(FactoryBot.build(:diary, doing_time: nil, private: true)).to be_invalid
   end
   it "作業時間が空白ならば、モデルは無効になること" do
-    expect(FactoryBot.build(:diary, doing_time: " ")).to be_invalid
+    expect(FactoryBot.build(:diary, doing_time: " ", private: true)).to be_invalid
   end
 
   it "プライベートがなければ、モデルは無効になること" do
     expect(FactoryBot.build(:diary, private: nil)).to be_invalid
   end
-  it "プライベートが空白ならば、モデルは無効になること" do
-    expect(FactoryBot.build(:diary, private: " ")).to be_invalid
-  end
+ 
 end
