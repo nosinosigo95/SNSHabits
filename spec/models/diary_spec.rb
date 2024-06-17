@@ -14,7 +14,7 @@ RSpec.describe Diary, type: :model do
     expect(FactoryBot.build(:diary, description: " ", private: true)).to be_invalid
   end
   it "記述が600文字を超えるならば、モデルは無効になること" do
-    expect(FactoryBot.build(:diary, description: "1" * description_max, private: true)).to be_invalid
+    expect(FactoryBot.build(:diary, description: "1" * (description_max + 1), private: true)).to be_invalid
   end
 
   it "作業時間がなければ、モデルは無効になること" do
