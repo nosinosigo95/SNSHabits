@@ -1,4 +1,7 @@
 <%= form_with model: diary, url: diaries_path, method: method do |f| %>
+  <%= render 'shared/form/error_messages', object: f.object %>
+  <%= f.label :action_date %>
+  <%= f.date_field :action_date, value: diary.action_date %>
   <%= f.label :description %>
   <%= f.text_area :description, placeholder: "今日は、1km散歩しました。" %>
   <%= f.label :doing_time %>
