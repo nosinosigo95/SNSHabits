@@ -1,8 +1,8 @@
 require 'rails_helper'
 
 RSpec.describe Diary, type: :model do
-
   let (:description_max) { 600 }
+
   it "記述と作業時間、プライベートを入力すれば、モデルは有効になること" do
     expect(FactoryBot.build(:diary, private: true)).to be_valid
   end
@@ -39,7 +39,7 @@ RSpec.describe Diary, type: :model do
       expect(diary).to be_valid
     end
   end
-  
+
   it "プライベートがなければ、モデルは無効になること" do
     expect(FactoryBot.build(:diary, private: nil)).to be_invalid
   end
