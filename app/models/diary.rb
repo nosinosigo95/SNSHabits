@@ -1,4 +1,4 @@
 class Diary < ApplicationRecord
   has_one :habit
-  belongs :user
+  belongs_to :user
 end
