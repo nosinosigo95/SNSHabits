@@ -1,0 +1,2 @@
+class Continuation < ApplicationRecord
+end
