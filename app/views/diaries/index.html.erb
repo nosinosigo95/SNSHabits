@@ -7,6 +7,7 @@
   <% @diaries.each do |diary| %>
     <div>
       <p>実行日：<%= diary.action_date %></p>
+      <!-- <p>習慣名: <%= diary.habit.id %></p> -->
       <p>内容：</p>
       <p><%= diary.description %></p>
       <p>実行時間：<%= diary.doing_time %></p>
