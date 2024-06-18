@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2024_06_17_122753) do
+ActiveRecord::Schema.define(version: 2024_06_18_045603) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -43,6 +43,16 @@ ActiveRecord::Schema.define(version: 2024_06_17_122753) do
     t.index ["blob_id", "variation_digest"], name: "index_active_storage_variant_records_uniqueness", unique: true
   end
 
+  create_table "continuations", force: :cascade do |t|
+    t.boolean "now"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.bigint "user_id"
+    t.bigint "habit_id"
+    t.index ["habit_id"], name: "index_continuations_on_habit_id"
+    t.index ["user_id"], name: "index_continuations_on_user_id"
+  end
+
   create_table "diaries", force: :cascade do |t|
     t.text "description"
     t.string "doing_time"
@@ -70,6 +80,15 @@ ActiveRecord::Schema.define(version: 2024_06_17_122753) do
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["effect_item"], name: "index_effects_on_effect_item", unique: true
+  end
+
+  create_table "favorite_habits", force: :cascade do |t|
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.bigint "user_id"
+    t.bigint "habit_id"
+    t.index ["habit_id"], name: "index_favorite_habits_on_habit_id"
+    t.index ["user_id"], name: "index_favorite_habits_on_user_id"
   end
 
   create_table "follows", force: :cascade do |t|

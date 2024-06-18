@@ -118,4 +118,19 @@ RSpec.describe HabitForm, type: :model do
     habit_form.valid?
     expect(habit_form).to be_valid
   end
+
+  it "作業時間のフォーマットが合っていなければ、フォームオブジェクトが無効になること" do
+    invalid_working_times = %w(001:00 01:000 01:01:00)
+    invalid_working_times.each do |invalid_doing_time|
+      habit_form.working_time = invalid_doing_time
+      expect(habit_form).to be_invalid
+    end
+  end
+  it "作業時間のフォーマットが合っていなければ、フォームオブジェクトが有効になること" do
+    valid_working_times = %w(01:00 00:00 1:0)
+    valid_working_times.each do |valid_working_time|
+      habit_form.working_time = valid_working_time
+      expect(habit_form).to be_valid
+    end
+  end
 end

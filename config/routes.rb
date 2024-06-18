@@ -1,11 +1,11 @@
 Rails.application.routes.draw do
   resources :habits
-  get '/diaries/new/:habit_id', to: 'diaries#new', as: 'new_diary' 
+  get '/diaries/new/:habit_id', to: 'diaries#new', as: 'new_diary'
   resources :diaries, except: [:show, :new]
   get 'user/show'
   get 'user/log_in_guest'
   devise_for :users
-  resources :users, only:[:show] do
+  resources :users, only: [:show] do
     post 'follow', to: 'follows#create', as: 'create_follow'
     delete 'follow', to: 'follows#destroy', as: 'destroy_follow'
     get 'followings', to: 'follows#followings', as: 'followings'
