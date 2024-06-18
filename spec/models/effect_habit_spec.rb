@@ -1,5 +1,7 @@
 require 'rails_helper'
 
 RSpec.describe EffectHabit, type: :model do
-  pending "add some examples to (or delete) #{__FILE__}"
+  it "effect_idとhabit_idがあれば、モデルが有効になること" do
+    expect(FactoryBot.build(:effect_habit)).to be_valid
+  end
 end

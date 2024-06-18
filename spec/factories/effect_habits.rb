@@ -1,6 +1,6 @@
 FactoryBot.define do
   factory :effect_habit do
-    effect { nil }
-    habit { nil }
+    association :effect
+    association :habit
   end
 end
