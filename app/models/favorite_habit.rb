@@ -1,0 +1,2 @@
+class FavoriteHabit < ApplicationRecord
+end
