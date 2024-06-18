@@ -32,6 +32,11 @@ class HabitsController < ApplicationController
     @habit.update(recently_viewed_time: Time.now)
   end
 
+  def index
+    @recently_viewed_habits = Habit.All.order(:recently_viewed_time).limit(5)
+  end
+  def destroy
+  end
   private
 
   def habit_params

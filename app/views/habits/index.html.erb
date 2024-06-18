@@ -1,0 +1,24 @@
+<h2>習慣検索</h2>
+<%= form_with url: habits_path, method: :get %>
+  <%= text_field :page, :search %>
+  <%= submit "検索" %>
+<% end %>
+<p>最近検索されたキーワード</p>
+<!--
+プルダウンで選択して、同じページに遷移する
+habitsテーブルのrecently_viewed_timeを使って、5件表示する
+-->
+
+<h3>検索結果</h3>
+<!--
+ソートのプルダウン
+-->
+<div>
+  <div>
+    <p>習慣名：</p>
+    <p>工夫：</p>
+    <p>URL:</p>
+    <p>作業時間：</p>
+    <p>効果が出始める頃</p>
+  </div>
+</div>
