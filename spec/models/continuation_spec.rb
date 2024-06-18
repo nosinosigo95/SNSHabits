@@ -5,6 +5,6 @@ RSpec.describe Continuation, type: :model do
     expect(FactoryBot.build(:continuation)).to be_valid
   end
   it "nowがなければ、モデルは無効になること" do
-    expect(FactoryBot.build(:continuation)).to be_invalid
+    expect(FactoryBot.build(:continuation, now: nil)).to be_invalid
   end
 end

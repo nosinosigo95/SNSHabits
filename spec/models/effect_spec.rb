@@ -14,6 +14,6 @@ RSpec.describe Effect, type: :model do
     FactoryBot.create(:effect)
     effect = FactoryBot.build(:effect)
     effect.valid?
-    expect(effect.errors[:effect_item]).to include("has already been taken")
+    expect(effect.errors[:effect_item]).to include("はすでに存在します")
   end
 end

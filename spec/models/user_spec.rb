@@ -19,7 +19,7 @@ RSpec.describe User, type: :model do
     FactoryBot.create(:user, name: "123", email: "123@example.com")
     user = FactoryBot.build(:user, name: "123", email: "e@example.com")
     user.valid?
-    expect(user.errors[:name]).to include("has already been taken")
+    expect(user.errors[:name]).to include("はすでに存在します")
   end
 
   it "メールアドレスがなければ、テストが無効になること" do
@@ -40,7 +40,7 @@ RSpec.describe User, type: :model do
     FactoryBot.create(:user, name: "sample", email: "example@example.com")
     user = FactoryBot.build(:user, name: "example", email: "example@example.com")
     user.valid?
-    expect(user.errors[:email]).to include("has already been taken")
+    expect(user.errors[:email]).to include("はすでに存在します")
   end
 
   it "パスワードがなければ、テストが無効になること" do

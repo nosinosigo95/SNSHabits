@@ -1,5 +1,5 @@
 class Diary < ApplicationRecord
-  has_one :habit
+  belongs_to :habit
   belongs_to :user
 
   description_max = 600
