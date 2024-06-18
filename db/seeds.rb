@@ -11,6 +11,7 @@ user_id_sft = 3
 increase_sft = 1
 effect_num = 10
 diary_num = 5
+
 # users
 User.create!(
   name: "guest",
@@ -60,6 +61,7 @@ User.all.each do |user|
     commit: "false"
   )
 end
+
 # effect_habits
 Habit.all.each do |habit|
   rand(1..5).times.each do |effect_id|

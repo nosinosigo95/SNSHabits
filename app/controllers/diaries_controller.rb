@@ -4,7 +4,7 @@ class DiariesController < ApplicationController
     @diary.habit_id = params[:habit_id]
   end
 
-  def create 
+  def create
     diary = Diary.create(diary_params)
     if diary.save
       redirect_to root_url
@@ -39,7 +39,9 @@ class DiariesController < ApplicationController
   end
 
   private
-    def diary_params
-      params.require(:diary).permit(:description, :doing_time, :private, :action_date).merge(user_id: current_user.id)
-    end
+
+  def diary_params
+    params.require(:diary).permit(:description, :doing_time, :private,
+      :action_date).merge(user_id: current_user.id)
+  end
 end
