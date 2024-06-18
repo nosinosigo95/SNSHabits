@@ -10,8 +10,8 @@
       <p>内容：</p>
       <p><%= diary.description %></p>
       <p>実行時間：<%= diary.doing_time %></p>
-      <p>作成日：<%= diary.created_at %></p>
-      <p>更新日:<%= diary.updated_at %></p>
+      <p>作成日：<%= l diary.created_at %></p>
+      <p>更新日:<%= l diary.updated_at %></p>
     </div>
   <% end %>
 </div>
