@@ -1,4 +1,5 @@
 class DiariesController < ApplicationController
+  before_action :authenticate_user!
   def new
     @diary = Diary.new
     @diary.habit_id = params[:habit_id]
