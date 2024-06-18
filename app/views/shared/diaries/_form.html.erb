@@ -1,0 +1,16 @@
+<%= form_with model: diary, url: url do |f| %>
+  <%= render 'shared/form/error_messages', object: f.object %>
+  <%= f.label :action_date %>
+  <%= f.date_field :action_date, value: diary.action_date %>
+  <%= f.label :description %>
+  <%= f.text_area :description, placeholder: "今日は、1km散歩しました。" %>
+  <%= f.label :doing_time %>
+  <%= f.time_field :doing_time, value: diary.doing_time %>
+  <p>非公開にしますか?</p>
+  <%= f.radio_button :private, true , value: true %>
+  <%= f.label :private, 'はい', value: true %>
+  <%= f.radio_button :private, false, value: false %>
+  <%= f.label :private, 'いいえ', value: false%>
+  <%= f.hidden_field :habit_id %>
+  <%= f.submit '記録する' %>
+<% end %>

@@ -1,0 +1,25 @@
+<h2>日記</h2>
+<p>作成項目</p>
+<!-- お気に入り項目をプルダウンで選んで、作成ボタンを押すと、新規作成ページに遷移する-->
+<!--
+<%= form_with url: diaries_path, method: :get %>
+  <%= collection_select(:page, :favorite_id, @user.favorites, :id, :favorite_name) %>
+  <%= submit_tag '検索する' %>
+<% end %>
+-->
+<p>取り組み中</p>
+<!-- 取り組み中の項目をプルダウンで選ぶと、同じページに遷移して、クエリパラメータをその項目に設定する。そして、その項目にあった日記と取り組み時間を表示する -->
+
+<div>
+  <% @diaries.each do |diary| %>
+    <div>
+      <p>実行日：<%= diary.action_date %></p>
+      <!-- <p>習慣名: <%= diary.habit.id %></p> -->
+      <p>内容：</p>
+      <p><%= diary.description %></p>
+      <p>実行時間：<%= diary.doing_time %></p>
+      <p>作成日：<%= l diary.created_at %></p>
+      <p>更新日:<%= l diary.updated_at %></p>
+    </div>
+  <% end %>
+</div>
