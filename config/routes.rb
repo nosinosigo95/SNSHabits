@@ -1,7 +1,7 @@
 Rails.application.routes.draw do
   resources :habits
   get '/diaries/new/:habit_id', to: 'diaries#new', as: 'new_diary' 
-  resources :diaries, except: [:index, :new]
+  resources :diaries, except: [:show, :new]
   get 'user/show'
   get 'user/log_in_guest'
   devise_for :users

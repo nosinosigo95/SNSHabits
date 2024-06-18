@@ -26,8 +26,13 @@ class DiariesController < ApplicationController
     end
   end
 
-  def show
-
+  def index
+    habit_id = params[:habit_id]
+    if habit_id.present?
+      @diaries = current_user.diaries.where(habit_id: habit_id)
+    else
+      @diaries = current_user.diaries
+    end
   end
 
   def destroy
