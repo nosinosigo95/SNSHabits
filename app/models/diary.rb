@@ -4,6 +4,7 @@ class Diary < ApplicationRecord
 
   description_max = 600
   validates :action_date, presence: true
+  validate :is_action_date_after_today
   validates :description, presence: true, length: { maximum: description_max }
   validates(
     :doing_time,
@@ -14,4 +15,9 @@ class Diary < ApplicationRecord
     :private,
     inclusion: { in: [true, false], message: "選択してください" },
   )
+  def is_action_date_after_today
+    if action_date.present? && action_date > Date.current
+      errors.add(:action_date, 'は、今日以前を指定してください')
+    end
+  end
 end

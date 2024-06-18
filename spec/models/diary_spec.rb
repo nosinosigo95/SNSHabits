@@ -1,4 +1,5 @@
 require 'rails_helper'
+require 'date'
 
 RSpec.describe Diary, type: :model do
   let(:description_max) { 600 }
@@ -18,6 +19,14 @@ RSpec.describe Diary, type: :model do
       description: "1" * (description_max + 1),
       private: true,
     })).to(be_invalid)
+  end
+
+  it "実行日がなければ、モデルは無効になること" do
+    expect(FactoryBot.build(:diary, action_date: nil, private: true)).to be_invalid
+  end
+  it "実行日が今日より後ならば、モデルは無効になること" do
+    tomorrow = Date.tomorrow.strftime("%F")
+    expect(FactoryBot.build(:diary, action_date: tomorrow, private: true)).to be_invalid
   end
 
   it "作業時間がなければ、モデルは無効になること" do
