@@ -7,8 +7,8 @@ class Habit < ApplicationRecord
   has_one :diary
   accepts_nested_attributes_for :effect_habits
 
-  def self.search_attr(habit_index, page, sort)
-    search_attr = self.get_search_attr(habit_index)
+  def self.search_attr(habit_index, page, sort, user)
+    search_attr = self.get_search_attr(habit_index, user)
 
     if search_attr.nil?
       if sort.blank?
@@ -30,7 +30,7 @@ class Habit < ApplicationRecord
 
   private
 
-  def self.get_search_attr(habit_index)
+  def self.get_search_attr(habit_index, user)
     atr = {}
 
     atr['name'] = habit_index.name if habit_index.name.present?
@@ -39,7 +39,7 @@ class Habit < ApplicationRecord
       atr['effects']['effect_item'] = habit_index.effect_item 
     end
     atr['period_for_effect'] = habit_index.period_for_effect if habit_index.period_for_effect.present?
-
+    atr['user_id'] = user.id if habit_index.created = '1'
     atr
   end
 end

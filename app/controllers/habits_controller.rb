@@ -37,7 +37,7 @@ class HabitsController < ApplicationController
     @habit_index.valid?
     if params[:habit_index_form]
       sort = nil if @habit_index.sort.blank?
-      @habits = Habit.search_attr(@habit_index, params[:page], sort)
+      @habits = Habit.search_attr(@habit_index, params[:page], sort, current_user)
     else
       @habits = Habit.search_all(params[:page])
     end
@@ -55,7 +55,7 @@ class HabitsController < ApplicationController
 
   def habit_index_params
     if params[:habit_index_form]
-      params.require(:habit_index_form).permit(:name, :working_time, :effect_item, :period_for_effect, :created, :sort)
+      params.require(:habit_index_form).permit(:name, :effect_item, :period_for_effect, :created, :sort)
     else
       nil
     end
