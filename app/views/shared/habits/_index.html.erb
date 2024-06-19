@@ -2,18 +2,18 @@
   <%= render 'shared/error_messages', object: f.object %>
 
   <%= f.label :name, '習慣名' %>
-  <%= f.text_field :name %>
+  <%= f.text_field :name, placeholder: "生活習慣" %>
 
   <%= f.label :effect_item, '効果(キーワード)' %>
-  <%= f.text_field :effect_item %>
+  <%= f.text_field :effect_item, placeholder: "ヨガ" %>
 
   <%= f.label :period_for_effect, '効果が出始める頃' %>
-  <%= f.text_field :period_for_effect %>
+  <%= f.text_field :period_for_effect, placeholder: "2ヶ月" %>
 
   <%= f.label :working_time, '作業時間' %>
   <%= f.time_field :working_time, value: habit_index.working_time %>
 
-  <%= f.label :created, '自身が作成したもの'%>
+  <%= f.label :created, '自身が作成したもの' %>
   <%= f.check_box :created %>
 
   <%= f.select :sort, [["最近作成されたもの", "created_at"], ["最近更新されたもの", "updated_at"], ["最近見られたもの", "recently_viewed_time"], ], include_blank: "並べる順を選択して下さい" %>

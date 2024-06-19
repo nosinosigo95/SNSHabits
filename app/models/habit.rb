@@ -15,14 +15,12 @@ class Habit < ApplicationRecord
       if sort.blank?
         self.search_all(page)
       else
-        binding.pry
         self.search_all(page).order(sort)
       end  
     else
       if sort.blank? 
       includes(:sources, :effects).where(self.get_search_attr(habit_index)).page(page)
       else
-        binding.pry
         includes(:sources, :effects).where(self.get_search_attr(habit_index)).page(page)
       end
     end
