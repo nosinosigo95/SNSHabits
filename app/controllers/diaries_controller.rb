@@ -32,17 +32,21 @@ class DiariesController < ApplicationController
     if params[:habit].present?
       favorite_id = /\A[0-9]+\z/.match(params[:habit][:favorite_id])
       if favorite_id[0].present?
-        redirect_to new_diary_url(habit_id: favorite_id[0])
+        redirect_to new_diary_url("habit_id = ?", favorite_id[0])
       end
     end
-    habit_id = params[:habit_id]
-    if habit_id.present?
-      @diaries = current_user.diaries.where(habit_id: habit_id)
+
+    if params[:continuation].present?
+      continuation_habit_id = /\A[0-9]+\z/.match(params[:continuation][:habit_id])
+      if continuation_habit_id[0].present?
+        @diaries = current_user.diaries.where("habit_id = ?", continuation_habit_id[0])
+      else
+        @diaries = current_user.diaries
+      end
     else
       @diaries = current_user.diaries
     end
   end
-
   def destroy
   end
 
