@@ -8,7 +8,7 @@ class Habit < ApplicationRecord
   accepts_nested_attributes_for :effect_habits
 
   def self.search_attr(habit_index, page)
-    includes(:sources, :effects).where(get_search_attr(habit_index)).page(page)
+    includes(:sources, :effects).where(self.get_search_attr(habit_index)).page(page)
   end
 
   def self.search_all(page)
@@ -16,7 +16,7 @@ class Habit < ApplicationRecord
   end
 
   private
-  def get_search_attr(habit_index)
+  def self.get_search_attr(habit_index)
     atr = {}
     atr['effects'] = {}
 
