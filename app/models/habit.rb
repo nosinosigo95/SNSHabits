@@ -7,10 +7,26 @@ class Habit < ApplicationRecord
   has_one :diary
   accepts_nested_attributes_for :effect_habits
 
-  def self.search_attr(habit_index, page)
-    includes(:sources, :effects).where(self.get_search_attr(habit_index)).page(page)
-  end
+  def self.search_attr(habit_index, page, sort)
+    empty_attr = {"effects" => {}}
+    search_attr = self.get_search_attr(habit_index)
 
+    if empty_attr == search_attr
+      if sort.blank?
+        self.search_all(page)
+      else
+        binding.pry
+        self.search_all(page).order(sort)
+      end  
+    else
+      if sort.blank? 
+      includes(:sources, :effects).where(self.get_search_attr(habit_index)).page(page)
+      else
+        binding.pry
+        includes(:sources, :effects).where(self.get_search_attr(habit_index)).page(page)
+      end
+    end
+  end
   def self.search_all(page)
     all.includes(:sources, :effects).page(page)
   end
