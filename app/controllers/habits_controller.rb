@@ -34,7 +34,11 @@ class HabitsController < ApplicationController
 
   def index
     # @recently_viewed_habits = Habit.All.order(:recently_viewed_time).limit(5)
-    @habits = Habit.all.page(params[:page])
+    if params[:habit] && params[:habit][:effect_item]
+      @habits = Habit.includes(:sources, :effects).where(effects: {effect_item: params[:habit][:effect_item]}).page(params[:page])
+    else
+      @habits = Habit.all.includes(:sources, :effects).page(params[:page])
+    end
   end
   def destroy
   end
