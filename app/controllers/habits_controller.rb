@@ -33,7 +33,8 @@ class HabitsController < ApplicationController
   end
 
   def index
-    @recently_viewed_habits = Habit.All.order(:recently_viewed_time).limit(5)
+    # @recently_viewed_habits = Habit.All.order(:recently_viewed_time).limit(5)
+    @habits = Habit.all.page(params[:page])
   end
   def destroy
   end
