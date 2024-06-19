@@ -3,7 +3,7 @@ class DiariesController < ApplicationController
   def new
     @diary = Diary.new
     @diary.habit_id = params[:habit_id]
-  end
+    end
 
   def create
     diary = Diary.create(diary_params)
