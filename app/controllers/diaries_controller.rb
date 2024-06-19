@@ -28,6 +28,11 @@ class DiariesController < ApplicationController
   end
 
   def index
+    favorite_id = /\A[0-9]+\z/.match(params[:search][:favorite_id])
+    if favorite_id[0].present?
+      redirect_to new_diary_url(habit_id: favorite_id[0])
+    end
+
     habit_id = params[:habit_id]
     if habit_id.present?
       @diaries = current_user.diaries.where(habit_id: habit_id)
