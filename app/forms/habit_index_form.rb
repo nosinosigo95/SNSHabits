@@ -1,7 +1,7 @@
 class HabitIndexForm
   include ActiveModel::Model
 
-  attr_accessor :name, :working_time, :effect_items, :period_for_effect, :created
+  attr_accessor :name, :working_time, :effect_item, :period_for_effect, :created
 
   validates :created, inclusion: { in: ['1', '0'] }, allow_nil: true
   validates :working_time, format:{ with: /\A(|\d{1,2}:\d{1,2})\z/}, allow_nil: true

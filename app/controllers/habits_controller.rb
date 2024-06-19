@@ -35,10 +35,11 @@ class HabitsController < ApplicationController
   def index
     @habit_index = HabitIndexForm.new(attributes: habit_index_params)
     @habit_index.valid?
-    if params[:habit] 
-      @habits = Habit.includes(:sources, :effects).where(effects: {effect_item: params[:habit][:effect_item]}).page(params[:page])
+
+    if params[:habit_index_form]
+      @habits = Habit.search_attr(@habit_index, params[:page])
     else
-      @habits = Habit.all.includes(:sources, :effects).page(params[:page])
+      @habits = Habit.search_all(params[:page])
     end
   end
 
