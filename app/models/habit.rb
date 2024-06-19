@@ -8,10 +8,9 @@ class Habit < ApplicationRecord
   accepts_nested_attributes_for :effect_habits
 
   def self.search_attr(habit_index, page, sort)
-    empty_attr = {"effects" => {}}
     search_attr = self.get_search_attr(habit_index)
 
-    if empty_attr == search_attr
+    if search_attr.nil?
       if sort.blank?
         self.search_all(page)
       else
@@ -19,9 +18,9 @@ class Habit < ApplicationRecord
       end  
     else
       if sort.blank? 
-      includes(:sources, :effects).where(self.get_search_attr(habit_index)).page(page)
+        includes(:sources, :effects).where(search_attr).page(page)
       else
-        includes(:sources, :effects).where(self.get_search_attr(habit_index)).page(page)
+        includes(:sources, :effects).where(search_attr).order(sort).page(page)
       end
     end
   end
@@ -30,13 +29,15 @@ class Habit < ApplicationRecord
   end
 
   private
+
   def self.get_search_attr(habit_index)
     atr = {}
-    atr['effects'] = {}
 
     atr['name'] = habit_index.name if habit_index.name.present?
-    atr['working_time'] = habit_index.working_time if habit_index.working_time.present?
-    atr['effects']['effect_item'] = habit_index.effect_item if habit_index.effect_item.present?
+    if habit_index.effect_item.present?
+      atr['effects'] = {}
+      atr['effects']['effect_item'] = habit_index.effect_item 
+    end
     atr['period_for_effect'] = habit_index.period_for_effect if habit_index.period_for_effect.present?
 
     atr
