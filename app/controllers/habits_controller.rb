@@ -45,6 +45,7 @@ class HabitsController < ApplicationController
 
   def destroy
   end
+
   private
 
   def habit_params
@@ -55,7 +56,8 @@ class HabitsController < ApplicationController
 
   def habit_index_params
     if params[:habit_index_form]
-      params.require(:habit_index_form).permit(:name, :effect_item, :period_for_effect, :created, :sort)
+      params.require(:habit_index_form).permit(:name, :effect_item,
+      :period_for_effect, :created, :sort)
     else
       nil
     end

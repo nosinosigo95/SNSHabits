@@ -12,7 +12,7 @@ class HabitForm
   validates :scheme, presence: true, length: { maximum: SCHEME_TEXT_MAX }
   validates :period_for_effect, length: { maximum: PERIOD_FOR_EFFECT_TEXT_MAX }
   validate :check_commit_or_challenge
-  validates :working_time, format:{ with: /\A(\d{1,2}:\d{1,2})\z/}, allow_nil: true
+  validates :working_time, format: { with: /\A(\d{1,2}:\d{1,2})\z/ }, allow_nil: true
   # Effectモデル
   validates :effects, presence: true
   validate :check_effects
