@@ -1,0 +1,20 @@
+<%= form_with model: habit_index, url: habits_path, method: :get do |f| %>
+  <%= render 'shared/error_messages', object: f.object %>
+
+  <%= f.label :name, '習慣名' %>
+  <%= f.text_field :name %>
+
+  <%= f.label :effect_item, '効果(キーワード)' %>
+  <%= f.text_field :effect_item %>
+
+  <%= f.label :period_for_effect, '効果が出始める頃' %>
+  <%= f.text_field :period_for_effect %>
+
+  <%= f.label :working_time, '作業時間' %>
+  <%= f.time_field :working_time, value: habit_index.working_time %>
+
+  <%= f.label :created, '自身が作成したもの'%>
+  <%= f.check_box :created %>
+
+  <%= f.submit "検索" %>
+<% end %>

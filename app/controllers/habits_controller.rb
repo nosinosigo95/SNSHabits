@@ -33,13 +33,15 @@ class HabitsController < ApplicationController
   end
 
   def index
-    # @recently_viewed_habits = Habit.All.order(:recently_viewed_time).limit(5)
-    if params[:habit] && params[:habit][:effect_item]
+    @habit_index = HabitIndexForm.new(attributes: habit_index_params)
+    @habit_index.valid?
+    if params[:habit] 
       @habits = Habit.includes(:sources, :effects).where(effects: {effect_item: params[:habit][:effect_item]}).page(params[:page])
     else
       @habits = Habit.all.includes(:sources, :effects).page(params[:page])
     end
   end
+
   def destroy
   end
   private
@@ -48,6 +50,14 @@ class HabitsController < ApplicationController
     params.require(:habit).permit(:name, :scheme,
     :period_for_effect, :working_time, :viewed_count,
     :effects, :effects_ids, :circumstance, urls: [], urls_ids: [])
+  end
+
+  def habit_index_params
+    if params[:habit_index_form]
+      params.require(:habit_index_form).permit(:name, :working_time, :effect_item, :period_for_effect, :created)
+    else
+      nil
+    end
   end
 
   def set_habit

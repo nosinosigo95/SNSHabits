@@ -1,23 +1,5 @@
 <h2>習慣検索</h2>
-<%= form_with url: habits_path, method: :get do %>
-
-  <%= label :habit, :search, '習慣名' %>
-  <%= text_field :habit, :search %>
-
-  <%= label :habit, :effect_item, '効果(キーワード)' %>
-  <%= text_field :habit, :effect_item %>
-
-  <%= label :habit, :period_for_effect, '効果が出始める頃' %>
-  <%= text_field :habit, :period_for_effect %>
-
-  <%= label :habit, :working_time, '作業時間' %>
-  <%= text_field :habit, :working_time %>
-
-  <%= label :habit, :created, '自身が作成したもの'%>
-  <%= check_box :habit, :created %>
-
-  <%= submit_tag "検索" %>
-<% end %>
+  <%= render 'shared/habits/index', habit_index: @habit_index %>
 <p>最近検索されたキーワード</p>
 <!--
 プルダウンで選択して、同じページに遷移する
@@ -43,7 +25,7 @@ habitsテーブルのrecently_viewed_timeを使って、5件表示する
         <p><%= source.url %></p>
       <% end %>
       <% if habit.working_time.present? %>
-        <p>作業時間：<%= habit.working_time%></p>
+        <p>作業時間：<%= habit.working_time %></p>
       <% end %>
       <% if habit.period_for_effect.present? %>
         <p>効果が出始める頃:<%= habit.period_for_effect %></p>
