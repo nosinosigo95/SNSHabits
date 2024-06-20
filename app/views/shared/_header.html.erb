@@ -10,44 +10,54 @@
         <div class="height-border-inner"></div>
       </div>
       <li class="nav-item">
-        <a class="" href="#">習慣</a>
+        <%= link_to "習慣", habits_path %>
       </li>
       <div class="height-border">
         <div class="height-border-inner"></div>
       </div>
       <li class="nav-item">
-        <a class="" href="#">日記</a>
+        <%= link_to "日記", diaries_path %>
       </li>
     </ul>
-    <ul class="header-right">
-      <% if user_signed_in? %>
-        <li class="nav-item">
-          <%= link_to 'アカウント', user_show_path %>
-        </li>
-        <div class="height-border">
-          <div class="height-border-inner"></div>
-        </div>
-        <li class="nav-item">
-          <%= link_to 'ログアウト', destroy_user_session_path, method: :delete %>
-        </li>
-      <% else %>
-        <li class="nav-item">
-          <%= link_to 'ユーザー登録', new_user_registration_path %>
-        </li>
-        <div class="height-border">
-          <div class="height-border-inner"></div>
-        </div>
-        <li class="nav-item">
-          <%= link_to 'ログイン', new_user_session_path %>
-        </li>
-        <div class="height-border">
-          <div class="height-border-inner"></div>
-        </div>
-        <li class="nav-item">
-          <%= link_to 'ゲストログイン', user_log_in_guest_path %>
-        </li>
-      <% end %>
-    </ul>
+    <div class="header-right">
+      <!--ハンバーガーメニュ-->
+      <input id="hamburger" class="hidden-hamburger" type="checkbox">
+      <label for="hamburger" class="hamburger-display">
+        <span class="ham-top"></span>
+        <span class="ham-middle"></span>
+        <span class="ham-bottom"></span>
+      </label>
+      <ul class="header-right-inner">
+        <% if user_signed_in? %>
+          <li class="nav-item">
+            <%= link_to 'アカウント', user_show_path %>
+          </li>
+          <div class="height-border">
+            <div class="height-border-inner"></div>
+          </div>
+          <div class="width-border"></div>
+          <li class="nav-item">
+            <%= link_to 'ログアウト', destroy_user_session_path, method: :delete, data: {confirm: "ログアウトしますか?"} %>
+          </li>
+        <% else %>
+          <li class="nav-item">
+            <%= link_to 'ユーザー登録', new_user_registration_path %>
+          </li>
+          <div class="height-border">
+            <div class="height-border-inner"></div>
+          </div>
+          <li class="nav-item">
+            <%= link_to 'ログイン', new_user_session_path %>
+          </li>
+          <div class="height-border">
+            <div class="height-border-inner"></div>
+          </div>
+          <li class="nav-item">
+            <%= link_to 'ゲストログイン', user_log_in_guest_path %>
+          </li>
+        <% end %>
+      </ul>
+    </div>
   </nav>
 
 </header>

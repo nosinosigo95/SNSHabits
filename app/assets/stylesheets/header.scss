@@ -1,3 +1,5 @@
+@use 'var';
+
 //幅と高さ
 $nav-height: 50px;
 $nav-link-height: $nav-height;
@@ -25,6 +27,9 @@ $nav-link-padding: 10px;
 .height-border{
   position: relative;
   height: 100%;
+}
+.width-border{
+  display: none;
 }
 .height-border-inner{
   display: inline;
@@ -56,10 +61,86 @@ $nav-link-padding: 10px;
   justify-content: space-between;
   
 }
-.header-left, .header-right{
+.header-left, .header-right, .header-right-inner{
   margin: 0;
   height: 100%;
   display: flex;
   list-style: none;
 }
+.hidden-hamburger {
+  display: none;
+}
 
+@media screen and (max-width: 1024px) {
+  .hamburger-display{
+    display: block;
+    position: relative;
+    height: $nav-height;
+    width: $nav-height;
+    z-index: 100;
+    .ham-top, .ham-middle, .ham-bottom{
+      display: block;
+      height: 3px;
+      width: 30px;
+      border-radius: 3px;
+      background: #333;
+      transition: 0.5s;
+      position: absolute;
+    }
+
+    .ham-top{
+      top: 10px;
+      left: 50%;
+      transform: translateX(-50%);
+    }
+    .ham-middle {
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+    }
+    .ham-bottom{
+      bottom: 10px;
+      left: 50%;
+      transform: translateX(-50%);
+    }
+  }
+  .header-right-inner{
+    display: none;
+  }
+  #hamburger:checked ~ .hamburger-display .ham-bottom{
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%) rotate(45deg);
+  }
+  #hamburger:checked ~ .hamburger-display .ham-top {
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%) rotate(-45deg);
+  }
+  #hamburger:checked ~ .hamburger-display .ham-middle{
+    background: rgba(0, 0, 0, 0);
+  }
+  #hamburger:checked ~ .header-right-inner{
+    display: block;
+    position: fixed;
+    top: $nav-height;
+    left: 0;
+    width: 100%;
+    height: calc(100% - #{$nav-height});
+    background-color: rgba(220,220,220, 0.4);
+  }
+  #hamburger:checked ~ .header-right-inner li{
+    display: block;
+    text-align: center;
+    height: 50px;
+  }
+  #hamburger:checked ~ .header-right-inner .height-border{
+    display:none;
+  }
+  #hamburger:checked ~ .header-right-inner .width-border{
+    display: block;
+    width: 60%;
+    border: solid 1px black;
+    margin: 0 auto;
+  }
+}
