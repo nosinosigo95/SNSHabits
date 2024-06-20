@@ -48,6 +48,10 @@ class DiariesController < ApplicationController
     end
   end
   def destroy
+    diary = Diary.find(params[:id])
+    diary.destroy
+    flash[:notice] = "日記を削除しました"
+    redirect_to diaries_url
   end
 
   private

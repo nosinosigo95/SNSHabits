@@ -17,11 +17,13 @@
     <div>
       <p>実行日：<%= diary.action_date %></p>
       <p>習慣名: <%= diary.habit.name %></p>
+      <p><%= link_to "編集", edit_diary_path(diary.id) %></p>
+      <p><%= link_to "削除", diary_path(diary.id), method: :delete %></p>
       <p>内容：</p>
       <p><%= diary.description %></p>
       <p>実行時間：<%= diary.doing_time %></p>
       <p>作成日：<%= l diary.created_at %></p>
-      <p>更新日:<%= l diary.updated_at %></p>
+      <p>更新日：<%= l diary.updated_at %></p>
     </div>
   <% end %>
 </div>
