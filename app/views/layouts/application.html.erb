@@ -11,11 +11,12 @@
   </head>
   <body>
     <%= render 'shared/header' %>
-    <div class="under-header"></div>
-    <div class="auth-information">
-      <p class="notice"><%= notice %></p>
-      <p class="alert"><% alert %></p>
-    </div>
+    <% if flash.present? %>
+      <div class="auth-information">
+        <p class="notice"><%= notice %></p>
+        <p class="alert"><% alert %></p>
+      </div>
+    <% end %>
     <div class="container-fluid">
       <main>
         <div class="main-inner">

@@ -1,54 +1,53 @@
-<nav class="navbar navbar-expand-md fixed-top bg-horizon-blue nav-height">
-  <div class="container-fluid">
-    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarDropdown" aria-expanded="false" aria-label="Toggle navigation">
-      <span class="navbar-toggler-icon"></span>
-    </button>
-    <div class="collapse navbar-collapse" id="navbarCollapse">
-      <ul class="navbar-nav me-auto mb-2 mb-md-0">
-        <li class="nav-item">
-          <a class="nav-link link-dark active" aria-current="page" href="#">
-            <%= image_tag 'house.svg', class: "home-icon" %>
-            Home
-          </a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link link-dark" href="#">習慣</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link link-dark" href="#">目標</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link link-dark" href="#">日記</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link link-dark" href="#">コミュニティ</a>
-        </li>
-      </ul>
-      <ul class="navbar-nav ms-auto mb-2 mb-md-0" id="navbarToggleExternalContent">
-        <% if user_signed_in? %>
-          <li class="nav-item">
-            <%= link_to 'アカウント', user_show_path,
-            class: "nav-link link-dark" %>
-            </li>
-            <li class="nav-item">
-            <%= link_to 'ログアウト', destroy_user_session_path,
-            class: "nav-link link-dark", method: :delete %>
-            </li>
-        <% else %>
-          <li class="nav-item">
-            <%= link_to 'ユーザー登録', new_user_registration_path,
-            class: "nav-link link-dark" %>
-          </li>
-          <li class="nav-item">
-            <%= link_to 'ログイン', new_user_session_path,
-            class: "nav-link link-dark" %>
-          </li>
-          <li class="nav-item">
-            <%= link_to 'ゲストログイン', user_log_in_guest_path,
-            class: "nav-link link-dark" %>
-          </li>
+<header>
+  <nav class="header-bg-color fix-top header-size header-nav">
+    <ul class="header-left">
+      <li>
+        <%= link_to root_path do %>
+          <%= image_tag 'house.svg', class: "home-icon" %><span>Home
         <% end %>
-      </ul>
-    </div>
-  </div>
-</nav>
+      </li>
+      <div class="height-border">
+        <div class="height-border-inner"></div>
+      </div>
+      <li class="nav-item">
+        <a class="" href="#">習慣</a>
+      </li>
+      <div class="height-border">
+        <div class="height-border-inner"></div>
+      </div>
+      <li class="nav-item">
+        <a class="" href="#">日記</a>
+      </li>
+    </ul>
+    <ul class="header-right">
+      <% if user_signed_in? %>
+        <li class="nav-item">
+          <%= link_to 'アカウント', user_show_path %>
+        </li>
+        <div class="height-border">
+          <div class="height-border-inner"></div>
+        </div>
+        <li class="nav-item">
+          <%= link_to 'ログアウト', destroy_user_session_path, method: :delete %>
+        </li>
+      <% else %>
+        <li class="nav-item">
+          <%= link_to 'ユーザー登録', new_user_registration_path %>
+        </li>
+        <div class="height-border">
+          <div class="height-border-inner"></div>
+        </div>
+        <li class="nav-item">
+          <%= link_to 'ログイン', new_user_session_path %>
+        </li>
+        <div class="height-border">
+          <div class="height-border-inner"></div>
+        </div>
+        <li class="nav-item">
+          <%= link_to 'ゲストログイン', user_log_in_guest_path %>
+        </li>
+      <% end %>
+    </ul>
+  </nav>
+
+</header>

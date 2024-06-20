@@ -1,0 +1,65 @@
+//幅と高さ
+$nav-height: 50px;
+$nav-link-height: $nav-height;
+$nav-link-width: 30px;
+$nav-link-padding: 10px;
+
+.home-icon{
+  vertical-align: initial !important;
+}
+.header-size {
+  width: 100%;
+  height: $nav-height;
+  li {
+    line-height: $nav-height;
+    height: 100%;
+    a{
+      text-decoration: none;
+      display: inline-block;
+      height: $nav-link-height;
+      padding-left: $nav-link-padding;
+      padding-right: $nav-link-padding;
+    }
+  }
+}
+.height-border{
+  position: relative;
+  height: 100%;
+}
+.height-border-inner{
+  display: inline;
+  height: $nav-height/2;
+  border-left: solid 1px black;
+  vertical-align: middle;
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+}
+
+.fix-top {
+  position: fixed;
+  top: 0px;
+}
+.nav-height {
+  height: $nav-height;
+}
+
+.under-header {
+  width: 100%;
+  height: $nav-height;
+}
+.header-bg-color{
+  background-color: orange;
+}
+.header-nav{
+  display: flex;
+  justify-content: space-between;
+  
+}
+.header-left, .header-right{
+  margin: 0;
+  height: 100%;
+  display: flex;
+  list-style: none;
+}
+

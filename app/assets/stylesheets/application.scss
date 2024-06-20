@@ -14,8 +14,7 @@
  *= require_self
  */
 
-//幅と高さ
-$nav-height: 50px;
+
 
 //余白
 $padding-bottom: 30px;
@@ -25,13 +24,15 @@ $padding-top: 10px;
 $chamois: #e0af6f;
 $horizon-blue: #a0d8ea;
 $black: black;
-$red: red;
+$yellow-green: #DCF9B8;
 
 *{
   font-family: '游明朝',' Yu Mincho',YuMincho,' Hiragino Mincho Pro',serif;
 }
+
 a:hover{
   text-decoration: underline;
+  opacity: 0.6;
 }
 .content-padding{
   padding: $padding-top 0 $padding-bottom;
@@ -40,24 +41,24 @@ a:hover{
   border-bottom: solid 1px black;
 }
 main{
-  width: 100%;
+  width: 90%;
   background-repeat: repeat;
   background-size: 80px;
+  margin: 0 auto;
+
 }
 .main-inner{
-  width: 80%;
+  width: 95%;
   margin: 0 auto;
 }
-.nav-height{
-  height: $nav-height;
-}
-.under-header{
-  width: 100%;
-  height: $nav-height;
-}
-.bg-horizon-blue{
-  background-color: $horizon-blue;
-}
+
 .text-center{
   text-align: center;
+}
+.container-fluid{
+  background-color: $yellow-green;
+}
+
+main{
+  background-color: white;
 }
