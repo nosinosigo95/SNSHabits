@@ -1,19 +1,20 @@
 <%= form_with model: habit_index, url: habits_path, method: :get do |f| %>
   <%= render 'shared/error_messages', object: f.object %>
 
-  <%= f.label :name, '習慣名' %>
-  <%= f.text_field :name, placeholder: "生活習慣" %>
+  <%= f.label :name, '習慣名', class: "block-label" %>
+  <%= f.text_field :name, placeholder: "生活習慣", class: "block-input-parts" %>
 
-  <%= f.label :effect_item, '効果(キーワード)' %>
-  <%= f.text_field :effect_item, placeholder: "ヨガ" %>
+  <%= f.label :effect_item, '効果(キーワード)', class: "block-label" %>
+  <%= f.text_field :effect_item, placeholder: "ヨガ", class: "block-input-parts" %>
 
-  <%= f.label :period_for_effect, '効果が出始める頃' %>
-  <%= f.text_field :period_for_effect, placeholder: "2ヶ月" %>
+  <%= f.label :period_for_effect, '効果が出始める頃', class: "block-label" %>
+  <%= f.text_field :period_for_effect, placeholder: "2ヶ月", class: "block-input-parts" %>
 
-  <%= f.label :created, '自身が作成したもの' %>
-  <%= f.check_box :created %>
+  <div class="inline-div">
+    <%= f.label :created, '自身が作成したもの' %>
+    <%= f.check_box :created %>
+  </div>
+  <%= f.select :sort, [["最近作成されたもの", "created_at"], ["最近更新されたもの", "updated_at"], ["最近見られたもの", "recently_viewed_time"], ], {include_blank: "並べる順を選択して下さい" }, {class: "block-input-parts-after-inline text-center"} %>
 
-  <%= f.select :sort, [["最近作成されたもの", "created_at"], ["最近更新されたもの", "updated_at"], ["最近見られたもの", "recently_viewed_time"], ], include_blank: "並べる順を選択して下さい" %>
-
-  <%= f.submit "検索" %>
+  <%= f.submit "検索", class: "submit-button" %>
 <% end %>

@@ -8,21 +8,28 @@ $form-top-bottom-padding: 30px;
 $border-radius: 2px;
 $border-bold: 2px;
 $border-thin: 1px;
-input, textarea{
-  display: block;
-  width: 100%;
-}
-label{
-  display:inline-block;
-  margin-top: $big-space-between-form-parts;
-  margin-bottom: $small-spece-between-form-parts;
-}
-form{
+
+form {
   margin: 0 auto;
   max-width: 800px;
   padding: $form-top-bottom-padding $form-top-bottom-padding*2;
-  border: solid $border-thin black;
-  border-radius: $border-radius;
+  &::after{
+    content: "";
+    display: block;
+    border: solid 1px black;
+  }
+}
+
+.block-input-parts{
+  display: block;
+  width: 100%;
+}
+
+.block-label, .block-input-parts-after-inline, .inline-div{
+  display: block;
+  width: 100%;
+  margin-top: $big-space-between-form-parts;
+  margin-bottom: $small-spece-between-form-parts;
 }
 
 .required::after{
@@ -36,7 +43,7 @@ form{
 .submit-button, .cancel-link{
   display: block;
   margin: $big-space-between-form-parts auto;
-  width: 80%;
+  width: 50%;
   height: $button-height;
   text-align: center;
   border: solid $border-bold black;
