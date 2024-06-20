@@ -6,7 +6,7 @@
   <%= submit_tag '日記を書く' %>
 <% end %>
 
-<!-- 取り組み中の項目をプルダウンで選ぶと、同じページに遷移して、クエリパラメータをその項目に設定する。そして、その項目にあった日記と取り組み時間を表示する -->
+
 <%= form_with url: diaries_path, method: :get do %> 
   <p>取り組み中:<%= select(:continuation, :habit_id, get_continuation_habit) %></p>
   <%= submit_tag '検索' %>
@@ -64,11 +64,3 @@
   });
 
 </script>
-<!--doing_timeの棒グラフ-->
-
-<!--
-1週間の棒グラフを作る。
-1日あたりどれだけdoing_timeしたのかを表示する。
-その棒グラフはdoing_timeの合計を表示する。
-
--->
