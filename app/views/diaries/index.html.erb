@@ -12,6 +12,8 @@
   <%= submit_tag '検索' %>
 <% end %>
 
+<canvas id="doing_time_chart"></canvas>
+
 <div>
   <% @diaries.each do |diary| %>
     <div>
@@ -27,4 +29,46 @@
     </div>
   <% end %>
 </div>
+
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script>
+  $(document).on('turbolinks:load', function(){
+    let canvas = document.getElementById('doing_time_chart');
+    let doing_time_chart = new Chart(canvas, {
+      type: 'bar',
+      data: {
+        labels: ['6日前', '5日前', '4日前', '3日前', '一昨日', '昨日', '今日'],
+        datasets:[
+          {
+            label: '実行時間',
+            data: [
+              <%= sum_doing_time(@diaries.doing_time_day_ago(6)) %>,
+              <%= sum_doing_time(@diaries.doing_time_day_ago(5)) %>,
+              <%= sum_doing_time(@diaries.doing_time_day_ago(4)) %>,
+              <%= sum_doing_time(@diaries.doing_time_day_ago(3)) %>,
+              <%= sum_doing_time(@diaries.doing_time_day_ago(2)) %>,
+              <%= sum_doing_time(@diaries.doing_time_day_ago(1)) %>,
+              <%= sum_doing_time(@diaries.doing_time_day_ago(0)) %>
+            ]
+          }
+        ]
+      },
+      options: {
+        title: {
+          display: true,
+          text: '7日間の投稿数の比較'
+        }
+      }
+    });
+  });
+
+</script>
 <!--doing_timeの棒グラフ-->
+
+<!--
+1週間の棒グラフを作る。
+1日あたりどれだけdoing_timeしたのかを表示する。
+その棒グラフはdoing_timeの合計を表示する。
+
+-->

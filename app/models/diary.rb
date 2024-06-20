@@ -20,4 +20,6 @@ class Diary < ApplicationRecord
       errors.add(:action_date, 'は、今日以前を指定してください')
     end
   end
+
+  scope :doing_time_day_ago, -> (n) { where(action_date: n.day.ago.strftime('%Y-%m-%d'))}
 end
