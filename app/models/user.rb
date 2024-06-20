@@ -2,7 +2,10 @@ class User < ApplicationRecord
   # 関連付け
   has_many :habits
   has_many :favorite_habits
+  has_many :favorites, through: :favorite_habits, source: :habit
+
   has_many :continuations
+  has_many :continuation_habits, through: :continuations, source: :habit
   has_many :diaries
   has_many(
     :follower_relations,

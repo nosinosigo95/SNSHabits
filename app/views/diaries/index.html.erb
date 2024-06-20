@@ -1,25 +1,66 @@
 <h2>日記</h2>
-<p>作成項目</p>
-<!-- お気に入り項目をプルダウンで選んで、作成ボタンを押すと、新規作成ページに遷移する-->
-<!--
-<%= form_with url: diaries_path, method: :get %>
-  <%= collection_select(:page, :favorite_id, @user.favorites, :id, :favorite_name) %>
-  <%= submit_tag '検索する' %>
+
+<%= form_with url: diaries_path, method: :get do %> 
+  <p>日記の作成</p>
+  <p>お気に入り:<%= select(:habit, :favorite_id, get_favorite_habit) %></p>
+  <%= submit_tag '日記を書く' %>
 <% end %>
--->
-<p>取り組み中</p>
-<!-- 取り組み中の項目をプルダウンで選ぶと、同じページに遷移して、クエリパラメータをその項目に設定する。そして、その項目にあった日記と取り組み時間を表示する -->
+
+
+<%= form_with url: diaries_path, method: :get do %> 
+  <p>取り組み中:<%= select(:continuation, :habit_id, get_continuation_habit) %></p>
+  <%= submit_tag '検索' %>
+<% end %>
+
+<canvas id="doing_time_chart"></canvas>
 
 <div>
   <% @diaries.each do |diary| %>
     <div>
       <p>実行日：<%= diary.action_date %></p>
-      <!-- <p>習慣名: <%= diary.habit.id %></p> -->
+      <p>習慣名: <%= diary.habit.name %></p>
+      <p><%= link_to "編集", edit_diary_path(diary.id) %></p>
+      <p><%= link_to "削除", diary_path(diary.id), method: :delete, data: {confirm: "削除しますか?"}%></p>
       <p>内容：</p>
       <p><%= diary.description %></p>
       <p>実行時間：<%= diary.doing_time %></p>
       <p>作成日：<%= l diary.created_at %></p>
-      <p>更新日:<%= l diary.updated_at %></p>
+      <p>更新日：<%= l diary.updated_at %></p>
     </div>
   <% end %>
 </div>
+
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script>
+  $(document).on('turbolinks:load', function(){
+    let canvas = document.getElementById('doing_time_chart');
+    let doing_time_chart = new Chart(canvas, {
+      type: 'bar',
+      data: {
+        labels: ['6日前', '5日前', '4日前', '3日前', '一昨日', '昨日', '今日'],
+        datasets:[
+          {
+            label: '実行時間',
+            data: [
+              <%= sum_doing_time(@diaries.doing_time_day_ago(6)) %>,
+              <%= sum_doing_time(@diaries.doing_time_day_ago(5)) %>,
+              <%= sum_doing_time(@diaries.doing_time_day_ago(4)) %>,
+              <%= sum_doing_time(@diaries.doing_time_day_ago(3)) %>,
+              <%= sum_doing_time(@diaries.doing_time_day_ago(2)) %>,
+              <%= sum_doing_time(@diaries.doing_time_day_ago(1)) %>,
+              <%= sum_doing_time(@diaries.doing_time_day_ago(0)) %>
+            ]
+          }
+        ]
+      },
+      options: {
+        title: {
+          display: true,
+          text: '7日間の投稿数の比較'
+        }
+      }
+    });
+  });
+
+</script>

@@ -3,7 +3,7 @@ class DiariesController < ApplicationController
   def new
     @diary = Diary.new
     @diary.habit_id = params[:habit_id]
-  end
+    end
 
   def create
     diary = Diary.create(diary_params)
@@ -28,15 +28,30 @@ class DiariesController < ApplicationController
   end
 
   def index
-    habit_id = params[:habit_id]
-    if habit_id.present?
-      @diaries = current_user.diaries.where(habit_id: habit_id)
+    # current_user.includes(:continuation_habits)
+    if params[:habit].present?
+      favorite_id = /\A[0-9]+\z/.match(params[:habit][:favorite_id])
+      if favorite_id[0].present?
+        redirect_to new_diary_url("habit_id = ?", favorite_id[0])
+      end
+    end
+
+    if params[:continuation].present?
+      continuation_habit_id = /\A[0-9]+\z/.match(params[:continuation][:habit_id])
+      if continuation_habit_id[0].present?
+        @diaries = current_user.diaries.where("habit_id = ?", continuation_habit_id[0])
+      else
+        @diaries = current_user.diaries
+      end
     else
       @diaries = current_user.diaries
     end
   end
-
   def destroy
+    diary = Diary.find(params[:id])
+    diary.destroy
+    flash[:notice] = "日記を削除しました"
+    redirect_to diaries_url
   end
 
   private
