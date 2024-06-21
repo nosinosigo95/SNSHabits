@@ -3,8 +3,13 @@
 $link-margin: 5px;
 $page-link-margin: 10px;
 $page-line-size: 30px;
+
+.top-pagination{
+  margin-top: 50px;
+}
+
 .pagination{
-  margin: 10px auto;
+  margin: 0 auto;
   width: fit-content;
   .current{
     color: black;

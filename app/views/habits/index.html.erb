@@ -4,7 +4,9 @@
 <!--
 ソートのプルダウン
 -->
-<%= paginate @habits %>
+<div class="top-pagination">
+  <%= paginate @habits %>
+</div>
 <div class="search-result-habits">
   <% @habits.each do |habit| %>
     <div class="card-habit">
@@ -29,4 +31,6 @@
     </div>
   <% end %>
 </div>
-<%= paginate @habits %>
+<div class="bottom-pagination">
+  <%= paginate @habits %>
+</div>
