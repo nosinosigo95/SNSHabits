@@ -1,5 +1,8 @@
 @import "var";
 
+
+$card-content-left-padding: 10px;
+
 .card-habit{
   border: solid 6px $cornflower;
   width: 360px;
@@ -11,4 +14,29 @@
   display: flex;
   flex-wrap: wrap;
   justify-content: space-around;
+}
+.card-title{
+  display: block;
+  text-align: center;
+  font-size: 18px;
+}
+
+.card-item{
+  display: block;
+  box-sizing: border-box;
+  border-left: 4px solid $green;
+}
+.card-content{
+  display: block;
+  padding-left: $card-content-left-padding;
+}
+.favorite-habit{
+  text-align: center;
+}
+.edit-habit{
+  display: block;
+  text-align: center;
+  &:visited{
+    color: blue;
+  }
 }

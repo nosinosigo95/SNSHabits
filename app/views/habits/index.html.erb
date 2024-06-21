@@ -10,23 +10,26 @@
 <div class="search-result-habits">
   <% @habits.each do |habit| %>
     <div class="card-habit">
-      <p><%= link_to habit.name, habit_path(habit.id) %></p>
-      <% if habit.user_id == current_user.id %>
-        <%= link_to '編集', edit_habit_path(habit.id) %>
-      <% end %>
-      <p>効果：</p>
-      <p><%= habit.effect_habits.map(&:effect).pluck(:effect_item).join(',') %></p>
-      <p>工夫：</p>
-      <p><%= habit.scheme %></p>
-      <p>URL:</p>
-      <% habit.sources.each do |source| %>
-        <p><%= source.url %></p>
-      <% end %>
+      <p class="card-title"><%= link_to habit.name, habit_path(habit.id) %></p>
+      <p class="card-item">効果</p>
+      <p class="card-content">
+        <%= habit.effect_habits.map(&:effect).pluck(:effect_item).join(',') %>
+      </p>
       <% if habit.working_time.present? %>
-        <p>作業時間：<%= habit.working_time %></p>
+        <p class="card-item">作業時間：</p>
+        <p class="card-content">
+          <%= habit.working_time %>
+        </p>
       <% end %>
       <% if habit.period_for_effect.present? %>
-        <p>効果が出始める頃:<%= habit.period_for_effect %></p>
+        <p class="card-item">効果が出始める頃:</p>
+        <p class="card-content">
+          <%= habit.period_for_effect %>
+        </p>
+      <% end %>
+      <p class="favorite-habit">お気に入り</p>
+      <% if habit.user_id == current_user.id %>
+        <%= link_to '編集', edit_habit_path(habit.id), class: "edit-habit" %>
       <% end %>
     </div>
   <% end %>
