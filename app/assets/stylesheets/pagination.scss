@@ -1,0 +1,33 @@
+@import "var";
+
+$link-margin: 5px;
+$page-link-margin: 10px;
+$page-line-size: 30px;
+.pagination{
+  margin: 10px auto;
+  width: fit-content;
+  .current{
+    color: black;
+  }
+  a{
+    text-decoration: none;
+    color: blue;
+    display: inline-block;
+    margin: $link-margin;
+    &:hover, &:visited{
+      text-decoration: none;
+    }
+  }
+  .page a{
+    margin: $page-link-margin;
+    width: $page-line-size;
+    height: $page-line-size;
+    text-align: center;
+    line-height: $page-line-size;
+    &:hover{
+      background: $cornflower;
+      border-radius: $page-line-size;
+    }
+  }
+}
+
