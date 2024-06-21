@@ -1,5 +1,8 @@
 Rails.application.routes.draw do
   resources :habits
+  get 'favorites_habit/:habit_id', to: 'favorite_habits#add', as: 'add_favorite_habit'
+  delete 'favorites_habit/:habit_id', to: 'favorite_habits#delete', as: 'delete_favorite_habit'
+
   get '/diaries/new/:habit_id', to: 'diaries#new', as: 'new_diary'
   resources :diaries, except: [:show, :new]
   get 'user/show'

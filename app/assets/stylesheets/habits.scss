@@ -32,7 +32,7 @@ $card-content-left-padding: 10px;
   padding-left: $card-content-left-padding;
 }
 
-.favorite-habit{
+.common-favorite-habit{
   display: block;
   width: fit-content;
   height: $favorite-height;
@@ -40,14 +40,23 @@ $card-content-left-padding: 10px;
   border-radius: $favorite-height/2;
   padding: 0 20px;
   margin: 10px auto;
-  border: 2px solid rgb(255, 204, 51);
-  &:hover{
+  text-decoration: none;
+  &:hover {
     background-color: rgba(255, 204, 51, 0.9);
     text-decoration: none;
   }
 }
+.favorite-habit{
+  border: 2px solid rgb(255, 204, 51);
+  .star{
+    background-image: url("star.svg");
+  }
+}
 .favorite-habit-active {
   background-color: rgb(255, 204, 51);
+  .star {
+    background-image: url("star-fill.svg");
+  }
 }
 .favorite-text{
   display: inline-block;
@@ -56,7 +65,6 @@ $card-content-left-padding: 10px;
   display: inline-block;
   width: $star-size;
   height: $star-size;
-  background-image: url("star.svg");
   background-repeat: no-repeat;
   background-size: contain;
 }
