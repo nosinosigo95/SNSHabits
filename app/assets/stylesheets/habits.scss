@@ -1,0 +1,14 @@
+@import "var";
+
+.card-habit{
+  border: solid 6px $cornflower;
+  width: 360px;
+  margin: 20px 10px;
+  padding: 20px 10px;
+  box-sizing: border-box;
+}
+.search-result-habits{
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-around;
+}
