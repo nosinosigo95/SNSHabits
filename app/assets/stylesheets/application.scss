@@ -14,17 +14,12 @@
  *= require_self
  */
 
-
+@import "var";
 
 //余白
 $padding-bottom: 30px;
 $padding-top: 10px;
 
-//使う色
-$chamois: #e0af6f;
-$horizon-blue: #a0d8ea;
-$black: black;
-$yellow-green: #DCF9B8;
 
 *{
   font-family: '游明朝',' Yu Mincho',YuMincho,' Hiragino Mincho Pro',serif;
@@ -45,20 +40,18 @@ main{
   background-repeat: repeat;
   background-size: 80px;
   margin: 0 auto;
-
+  background-color: white;
+  border: solid 5px $green;
 }
 .main-inner{
+  padding-top: 50px;
   width: 95%;
   margin: 0 auto;
 }
-
 .text-center{
   text-align: center;
 }
 .container-fluid{
+  padding-top: 80px;
   background-color: $yellow-green;
-}
-
-main{
-  background-color: white;
 }

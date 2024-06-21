@@ -1,4 +1,4 @@
-@use 'var';
+@import "var";
 
 //幅と高さ
 $nav-height: 50px;
@@ -6,6 +6,10 @@ $nav-link-height: $nav-height;
 $nav-link-width: 30px;
 $nav-link-padding: 10px;
 
+.under-header{
+  height: $nav-height;
+  width: 100%;
+}
 .home-icon{
   vertical-align: initial !important;
 }
@@ -54,7 +58,8 @@ $nav-link-padding: 10px;
   height: $nav-height;
 }
 .header-bg-color{
-  background-color: orange;
+  background-color: white;
+  border-bottom: solid 2px $green;
 }
 .header-nav{
   display: flex;
