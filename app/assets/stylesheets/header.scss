@@ -6,6 +6,9 @@ $nav-link-height: $nav-height;
 $nav-link-width: 30px;
 $nav-link-padding: 10px;
 
+header a:visited{
+  color: blue;
+}
 .under-header{
   height: $nav-height;
   width: 100%;
