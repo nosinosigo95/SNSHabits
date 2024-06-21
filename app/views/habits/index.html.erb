@@ -27,7 +27,10 @@
           <%= habit.period_for_effect %>
         </p>
       <% end %>
-      <p class="favorite-habit">お気に入り</p>
+      <a class="favorite-habit">
+        <span class="star"></span>
+        <span class="favorite-text">お気に入り</span>
+      </a>
       <% if habit.user_id == current_user.id %>
         <%= link_to '編集', edit_habit_path(habit.id), class: "edit-habit" %>
       <% end %>

@@ -1,6 +1,7 @@
 @import "var";
 
-
+$favorite-height: 30px;
+$star-size: 15px;
 $card-content-left-padding: 10px;
 
 .card-habit{
@@ -30,9 +31,36 @@ $card-content-left-padding: 10px;
   display: block;
   padding-left: $card-content-left-padding;
 }
+
 .favorite-habit{
-  text-align: center;
+  display: block;
+  width: fit-content;
+  height: $favorite-height;
+  line-height: $favorite-height;
+  border-radius: $favorite-height/2;
+  padding: 0 20px;
+  margin: 10px auto;
+  border: 2px solid rgb(255, 204, 51);
+  &:hover{
+    background-color: rgba(255, 204, 51, 0.9);
+    text-decoration: none;
+  }
 }
+.favorite-habit-active {
+  background-color: rgb(255, 204, 51);
+}
+.favorite-text{
+  display: inline-block;
+}
+.star{
+  display: inline-block;
+  width: $star-size;
+  height: $star-size;
+  background-image: url("star.svg");
+  background-repeat: no-repeat;
+  background-size: contain;
+}
+
 .edit-habit{
   display: block;
   text-align: center;
