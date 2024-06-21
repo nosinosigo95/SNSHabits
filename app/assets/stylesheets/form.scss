@@ -5,6 +5,7 @@ $form-top-bottom-padding: 30px;
 $border-radius: 2px;
 $border-bold: 2px;
 $border-thin: 1px;
+$input-part-height: 30px;
 
 form {
   margin: 0 auto;
@@ -20,11 +21,13 @@ form {
 .block-input-parts{
   display: block;
   width: 100%;
+  height: $input-part-height;
 }
 
 .block-label, .block-input-parts-after-inline, .inline-div{
   display: block;
   width: 100%;
+  height: $input-part-height;
   margin-top: $big-space-between-form-parts;
   margin-bottom: $small-spece-between-form-parts;
 }
