@@ -120,11 +120,21 @@ class HabitForm
       effects_ids: habit.effect_habits.map(&:effect).pluck(:id).join(','),
       summary: habit.summary,
       scheme: habit.scheme,
-      circumstance: circumstance,
+      circumstance: get_circumstance,
       working_time: habit.working_time,
       urls: habit.sources.map(&:url),
       urls_ids: habit.sources.map(&:id),
     }
+  end
+
+  def get_circumstance
+    if(habit.commit)
+      "commit"
+    elsif(habit.challenge)
+      "challenge"
+    else
+      circumstance
+    end
   end
 
   def get_effects_items_and_ids
