@@ -3,20 +3,27 @@
     <ul class="header-left">
       <li>
         <%= link_to root_path do %>
-          <%= image_tag 'house.svg', class: "home-icon" %><span>Home
+          <%= image_tag 'house-fill.svg', class: "header-icon" %>
+          Home
         <% end %>
       </li>
       <div class="height-border">
         <div class="height-border-inner"></div>
       </div>
       <li class="nav-item">
-        <%= link_to "習慣", habits_path %>
+        <%= link_to habits_path do %>
+          <%= image_tag 'arrow-repeat.svg', class: "header-icon" %>
+          習慣
+        <% end %>
       </li>
       <div class="height-border">
         <div class="height-border-inner"></div>
       </div>
       <li class="nav-item">
-        <%= link_to "日記", diaries_path %>
+        <%= link_to diaries_path do %>
+          <%= image_tag 'pen-fill.svg', class: "header-icon" %>
+          日記
+        <% end %>
       </li>
     </ul>
     <div class="header-right">

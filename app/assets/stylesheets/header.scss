@@ -13,8 +13,11 @@ header a:visited{
   height: $nav-height;
   width: 100%;
 }
-.home-icon{
+.header-icon{
+  display: inline-block;
   vertical-align: initial !important;
+  padding-left: $nav-link-padding;
+  line-height: $nav-link-height;
 }
 .header-size {
   width: 100%;
