@@ -2,15 +2,14 @@ require "uri"
 class HabitForm
   include ActiveModel::Model
   attr_accessor :name, :scheme, :period_for_effect,
-  :effects, :effects_ids, :working_time, :circumstance, :urls, :urls_ids, :summary
+  :effects, :effects_ids, :working_time, :circumstance, :urls, :urls_ids
 
   # Habitモデル
-  SUMMARY_TEXT_MAX = 200
+  SCHEME_TEXT_MAX = 400
   NAME_TEXT_MAX = 20
   PERIOD_FOR_EFFECT_TEXT_MAX = 10
   validates :name, presence: true, length: { maximum: NAME_TEXT_MAX }
-  validates :summary, presence: true, length: { maximum: SUMMARY_TEXT_MAX }
-  validates :scheme, presence: true
+  validates :scheme, presence: true, length: { maximum: SCHEME_TEXT_MAX }
   validates :period_for_effect, length: { maximum: PERIOD_FOR_EFFECT_TEXT_MAX }
   validate :check_commit_or_challenge
   validates :working_time, format: { with: /\A(\d{1,2}:\d{1,2})\z/ }, allow_nil: true
@@ -118,23 +117,12 @@ class HabitForm
       name: habit.name,
       effects: habit.effect_habits.map(&:effect).pluck(:effect_item).join(','),
       effects_ids: habit.effect_habits.map(&:effect).pluck(:id).join(','),
-      summary: habit.summary,
       scheme: habit.scheme,
-      circumstance: get_circumstance,
+      circumstance: circumstance,
       working_time: habit.working_time,
       urls: habit.sources.map(&:url),
       urls_ids: habit.sources.map(&:id),
     }
-  end
-
-  def get_circumstance
-    if(habit.commit)
-      "commit"
-    elsif(habit.challenge)
-      "challenge"
-    else
-      circumstance
-    end
   end
 
   def get_effects_items_and_ids

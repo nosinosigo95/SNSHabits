@@ -19,9 +19,9 @@ class HabitsController < ApplicationController
   end
 
   def update
-    form = HabitForm.new(attributes: habit_params, habit: @habit, user: current_user)
-    if form.update
-      redirect_to habit
+    @form = HabitForm.new(attributes: habit_params, habit: @habit, user: current_user)
+    if @form.update
+      redirect_to @habit
     else
       render :edit
     end
@@ -44,12 +44,6 @@ class HabitsController < ApplicationController
   end
 
   def destroy
-    habit = Habit.find(params[:id])
-    if habit.present?
-      habit.destroy
-      flash[:notice] = "習慣を削除しました"
-    end
-    redirect_to habits_url
   end
 
   private
@@ -57,13 +51,13 @@ class HabitsController < ApplicationController
   def habit_params
     params.require(:habit).permit(:name, :scheme,
     :period_for_effect, :working_time, :viewed_count,
-    :effects, :effects_ids, :circumstance, :summary,urls: [], urls_ids: [])
+    :effects, :effects_ids, :circumstance, urls: [], urls_ids: [])
   end
 
   def habit_index_params
     if params[:habit_index_form]
       params.require(:habit_index_form).permit(:name, :effect_item,
-      :period_for_effect, :created, :sort, :summary)
+      :period_for_effect, :created, :sort)
     else
       nil
     end
