@@ -20,6 +20,12 @@ $card-content-left-padding: 10px;
   display: block;
   text-align: center;
   font-size: 18px;
+  a{
+    text-decoration: none;
+  }
+  a:hover{
+    text-decoration: none;
+  }
   a:visited{
     color: blue;
   }
