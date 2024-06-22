@@ -1,3 +1,5 @@
+@import "var";
+
 $big-space-between-form-parts: 20px;
 $small-spece-between-form-parts: 1px;
 $button-height: 40px;
@@ -6,7 +8,7 @@ $border-radius: 2px;
 $border-bold: 2px;
 $border-thin: 1px;
 $input-part-height: 30px;
-
+$link-button-height: 20px;
 form {
   margin: 0 auto;
   max-width: 800px;
@@ -73,4 +75,21 @@ form {
 .radio{
   display: inline;
   width: fit-content;
+}
+
+.button-addition{
+  display: inline-block;
+  height: $link-button-height;
+  line-height: $link-button-height;
+  padding: 0 10px;
+  border-radius: $link-button-height/2;
+  background-color: $cornflower;
+  color: blue;
+  text-decoration: none;
+  &:hover{
+    text-decoration: none;
+  }
+  &:visited{
+    color: blue;
+  }
 }
