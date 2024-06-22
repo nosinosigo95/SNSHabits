@@ -27,20 +27,7 @@
           <%= habit.period_for_effect %>
         </p>
       <% end %>
-      <% if is_have_favorite_habit(habit) %>
-        <%= link_to delete_favorite_habit_path(habit), method: :delete,
-          class: "favorite-habit-active common-favorite-habit" do %>
-          <span class="star"></span>
-          <span class="favorite-text">お気に入り</span>
-        <% end %>
-      <% else %>
-        <%= link_to add_favorite_habit_path(habit),
-          class: "favorite-habit common-favorite-habit" do %>
-          <span class="star"></span>
-          <span class="favorite-text">お気に入り</span>
-        <% end %>
-      <% end %>
-
+      <%= render 'shared/habits/favorite_habit', habit: habit %>
       <% if habit.user_id == current_user.id %>
         <%= link_to '編集', edit_habit_path(habit.id), class: "edit-habit" %>
       <% end %>

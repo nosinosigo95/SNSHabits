@@ -1,0 +1,13 @@
+<% if is_have_favorite_habit(habit) %>
+  <%= link_to delete_favorite_habit_path(habit), method: :delete,
+    class: "favorite-habit-active common-favorite-habit" do %>
+    <span class="star"></span>
+    <span class="favorite-text">お気に入り</span>
+  <% end %>
+<% else %>
+  <%= link_to add_favorite_habit_path(habit),
+    class: "favorite-habit common-favorite-habit" do %>
+    <span class="star"></span>
+    <span class="favorite-text">お気に入り</span>
+  <% end %>
+<% end %>
