@@ -2,12 +2,12 @@
 .search-result {
   display: flex;
   flex-wrap: wrap;
-  justify-content: space-around;
+  justify-content: center;
 }
 .card {
   border: solid 6px $cornflower;
   width: 360px;
-  margin: 20px 10px;
+  margin: 20px 20px;
   padding: 20px 10px;
   box-sizing: border-box;
 }
