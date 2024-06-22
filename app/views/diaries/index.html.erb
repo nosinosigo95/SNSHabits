@@ -1,5 +1,4 @@
-<h2>日記</h2>
-
+<% content_for(:page_title, "日記") %>
 <%= form_with url: diaries_path, method: :get do %> 
   <p>日記の作成</p>
   <p>お気に入り:<%= select(:habit, :favorite_id, get_favorite_habit) %></p>
@@ -12,7 +11,6 @@
   <%= submit_tag '検索' %>
 <% end %>
 <h3 class="text-center">検索結果</h3>
-<canvas id="doing_time_chart"></canvas>
 <div class="search-result">
   <div class="top-pagination">
     <%= paginate @diaries %>
@@ -38,7 +36,8 @@
     <%= paginate @diaries %>
   </div>
 </div>
-
+<h4 class="doing-time-title">実行時間グラフ</h4>
+<canvas id="doing_time_chart"></canvas>
 
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 <script>
