@@ -66,7 +66,9 @@ form {
     opacity: 0.8;
   }
 }
-
+.text-area{
+  height: 100px;
+}
 .cancel-link{
   color: gray;
   text-decoration: none;
@@ -102,7 +104,7 @@ form {
   }
 }
 .button-removal{
-  color: white;
+  color: red;
   border: 1px solid red;
   &:visited{
     color: red;
