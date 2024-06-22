@@ -11,6 +11,10 @@
   <% @habits.each do |habit| %>
     <div class="card-habit">
       <p class="card-title"><%= link_to habit.name, habit_path(habit.id) %></p>
+      <p class="card-item">概要</p>
+      <p class="card-content">
+        <%= habit.summary %>
+      </p>
       <p class="card-item">効果</p>
       <p class="card-content">
         <%= habit.effect_habits.map(&:effect).pluck(:effect_item).join(',') %>
