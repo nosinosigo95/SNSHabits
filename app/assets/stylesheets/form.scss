@@ -1,0 +1,73 @@
+$big-space-between-form-parts: 20px;
+$small-spece-between-form-parts: 1px;
+$button-height: 40px;
+$form-top-bottom-padding: 30px;
+$border-radius: 2px;
+$border-bold: 2px;
+$border-thin: 1px;
+$input-part-height: 30px;
+
+form {
+  margin: 0 auto;
+  max-width: 800px;
+  padding: $form-top-bottom-padding $form-top-bottom-padding*2;
+  &::after{
+    content: "";
+    display: block;
+    border: solid 1px black;
+  }
+}
+
+.block-input-parts{
+  display: block;
+  width: 100%;
+  height: $input-part-height;
+}
+
+.block-label, .block-input-parts-after-inline, .inline-div{
+  display: block;
+  width: 100%;
+  height: $input-part-height;
+  margin-top: $big-space-between-form-parts;
+  margin-bottom: $small-spece-between-form-parts;
+}
+
+.required::after{
+  content: '必須';
+  display: inline-block;
+  background-color: orange;
+  color: white;
+  border-radius: $border-radius;
+  margin-left: 10px;
+}
+.submit-button, .cancel-link{
+  display: block;
+  margin: $big-space-between-form-parts auto;
+  width: 50%;
+  height: $button-height;
+  text-align: center;
+  border: solid $border-bold black;
+  border-radius: $button-height/2;
+}
+.submit-button{
+  background-color: orange;
+  color: white;
+  &:hover{
+    opacity: 0.8;
+  }
+}
+
+.cancel-link{
+  color: gray;
+  text-decoration: none;
+  line-height: $button-height;
+  border: solid $border-bold gray;
+  &:hover{
+    text-decoration: none;
+    color: black;
+  }
+}
+.radio{
+  display: inline;
+  width: fit-content;
+}

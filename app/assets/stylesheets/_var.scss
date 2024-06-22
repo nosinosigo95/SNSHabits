@@ -1,0 +1,19 @@
+$breakpoints: (
+  "pc": "screen and (min-width: 796px)",
+  "tablet": "screen and (max-width: 795px)",
+  "sp": "screen and (max-width: 420px)",
+  "small-screen": "screen and (max-width: 320px)",
+);
+
+@mixin breakPoint($key) {
+  @media #{map-get($breakpoints, $key)} {
+    @content;
+  }
+}
+
+//使う色
+$chamois: #e0af6f;
+$cornflower: #9ed1ea;
+$black: black;
+$yellow-green: #DCF9B8;
+$green: #539600;

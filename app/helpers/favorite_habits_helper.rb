@@ -1,0 +1,2 @@
+module FavoriteHabitsHelper
+end

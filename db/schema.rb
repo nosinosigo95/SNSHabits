@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2024_06_18_045603) do
+ActiveRecord::Schema.define(version: 2024_06_22_023943) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -109,6 +109,7 @@ ActiveRecord::Schema.define(version: 2024_06_18_045603) do
     t.date "recently_viewed_time"
     t.boolean "challenge"
     t.boolean "commit"
+    t.string "summary"
     t.index ["user_id"], name: "index_habits_on_user_id"
   end
 

@@ -1,37 +1,25 @@
 /*
- * This is a manifest file that'll be compiled into application.css, which will include all the files
- * listed below.
- *
- * Any CSS and SCSS file within this directory, lib/assets/stylesheets, or any plugin's
- * vendor/assets/stylesheets directory can be referenced here using a relative path.
- *
- * You're free to add application-wide styles to this file and they'll appear at the bottom of the
- * compiled file so the styles you add here take precedence over styles defined in any other CSS/SCSS
- * files in this directory. Styles in this file should be added after the last require_* statement.
- * It is generally better to create a new file per style scope.
- *
  *= require_tree .
  *= require_self
  */
 
-//幅と高さ
-$nav-height: 50px;
+@import "var";
 
 //余白
 $padding-bottom: 30px;
 $padding-top: 10px;
 
-//使う色
-$chamois: #e0af6f;
-$horizon-blue: #a0d8ea;
-$black: black;
-$red: red;
+html, body{
+  margin: 0;
+}
 
 *{
   font-family: '游明朝',' Yu Mincho',YuMincho,' Hiragino Mincho Pro',serif;
 }
+
 a:hover{
   text-decoration: underline;
+  opacity: 0.6;
 }
 .content-padding{
   padding: $padding-top 0 $padding-bottom;
@@ -40,22 +28,22 @@ a:hover{
   border-bottom: solid 1px black;
 }
 main{
-  width: 100%;
+  width: 90%;
   background-repeat: repeat;
   background-size: 80px;
+  margin: 0 auto;
+  background-color: white;
+  border: solid 5px $green;
 }
 .main-inner{
-  width: 80%;
+  padding: 60px 0;
+  width: 95%;
   margin: 0 auto;
 }
-.nav-height{
-  height: $nav-height;
+.text-center{
+  text-align: center;
 }
-.under-header{
-  width: 100%;
-  height: $nav-height;
+.container-fluid{
+  padding: 80px 0;
+  background-color: $yellow-green;
 }
-.bg-horizon-blue{
-  background-color: $horizon-blue;
-}
-

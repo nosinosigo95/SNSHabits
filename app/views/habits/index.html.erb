@@ -1,32 +1,43 @@
-<h2>習慣検索</h2>
+<h2 class="text-center">習慣検索</h2>
   <%= render 'shared/habits/index', habit_index: @habit_index %>
-<h3>検索結果</h3>
+<h3 class="text-center">検索結果</h3>
 <!--
 ソートのプルダウン
 -->
-<%= paginate @habits %>
-<div>
+<div class="top-pagination">
+  <%= paginate @habits %>
+</div>
+<div class="search-result-habits">
   <% @habits.each do |habit| %>
-    <div>
-      <p><%= link_to habit.name, habit_path(habit.id) %></p>
-      <% if habit.user_id == current_user.id %>
-        <%= link_to '編集', edit_habit_path(habit.id) %>
-      <% end %>
-      <p>効果：</p>
-      <p><%= habit.effect_habits.map(&:effect).pluck(:effect_item).join(',') %></p>
-      <p>工夫：</p>
-      <p><%= habit.scheme %></p>
-      <p>URL:</p>
-      <% habit.sources.each do |source| %>
-        <p><%= source.url %></p>
-      <% end %>
+    <div class="card-habit">
+      <p class="card-title"><%= link_to habit.name, habit_path(habit.id) %></p>
+      <p class="card-item">概要</p>
+      <p class="card-content">
+        <%= habit.summary %>
+      </p>
+      <p class="card-item">効果</p>
+      <p class="card-content">
+        <%= habit.effect_habits.map(&:effect).pluck(:effect_item).join(',') %>
+      </p>
       <% if habit.working_time.present? %>
-        <p>作業時間：<%= habit.working_time %></p>
+        <p class="card-item">作業時間：</p>
+        <p class="card-content">
+          <%= habit.working_time %>
+        </p>
       <% end %>
       <% if habit.period_for_effect.present? %>
-        <p>効果が出始める頃:<%= habit.period_for_effect %></p>
+        <p class="card-item">効果が出始める頃:</p>
+        <p class="card-content">
+          <%= habit.period_for_effect %>
+        </p>
+      <% end %>
+      <%= render 'shared/habits/favorite_habit', habit: habit %>
+      <% if habit.user_id == current_user.id %>
+        <%= link_to '編集', edit_habit_path(habit.id), class: "edit-habit" %>
       <% end %>
     </div>
   <% end %>
 </div>
-<%= paginate @habits %>
+<div class="bottom-pagination">
+  <%= paginate @habits %>
+</div>

@@ -12,4 +12,8 @@ module HabitsHelper
       "挑戦中"
     end
   end
+
+  def is_have_favorite_habit(habit)
+    current_user.favorite_habits.where(habit_id: habit.id).present?
+  end
 end
