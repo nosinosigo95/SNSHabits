@@ -8,9 +8,15 @@
   margin-top: 150px;
   margin-bottom: 30px;
 }
+.diary-form-button{
+  display: block;
+}
 .diary-select{
-  display:inline-block;
+  display: block;
   text-align: center;
   height: 30px;
-  width: 60%;
+  width: 100%;
+}
+.diary-form-button{
+  display:block;
 }
