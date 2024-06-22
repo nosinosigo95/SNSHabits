@@ -88,3 +88,12 @@ $card-content-left-padding: 10px;
     color: blue;
   }
 }
+
+.one-card-item{
+  font-size: 18px;
+}
+.one-card-content{
+  font-size: 16px;
+  padding-left:$card-content-left-padding * 2;
+  margin: 30px 0;
+}
