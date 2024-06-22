@@ -1,32 +1,45 @@
 <%= form_with model: form, url: moved_path do |f| %>
   <%= render 'shared/error_messages', object: f.object %>
 
-  <%= f.label :name, class: "required" %>
-  <%= f.text_field :name, placeholder: "例)ヨガ" %>
+  <%= f.label :name, class: "required block-label" %>
+  <%= f.text_field :name, placeholder: "例)ヨガ", class: "block-input-parts" %>
 
-  <%= f.label :effects, class: "required" %>
-  <%= f.text_field :effects, placeholder: "例)肩こり,体全体" %>
+  <%= f.label :effects, class: "required block-label" %>
+  <%= f.text_field :effects, placeholder: "例)肩こり,体全体", class: "block-input-parts" %>
   <%= f.hidden_field :effects_ids %>
 
-  <%= f.label :scheme, class: "required" %>
-  <%= f.text_area :scheme, placeholder: "例)一つ一つの動きを意識して、取り組む。" %>
+  <%= f.label :summary, class: "required block-label" %>
+  <%= f.text_field :summary, placeholder: "例)体の動き", class: "block-input-parts" %>
 
-  <%= f.label :urls %>
+  <%= f.label :scheme, class: "required block-label" %>
+  <%= f.text_area :scheme, placeholder: "例)一つ一つの動きを意識して、取り組む。", class: "block-input-parts text-area" %>
+
+
+  <%= f.label :urls, class: "block-label" do %>
+    <%= "URL" %>
+    <%= link_to "追加",'#',class: "button-addition button-link" %>
+  <% end %>
   <% get_url_max.times do |i| %>
-    <%= f.hidden_field :urls_ids, multiple: true, value: form.urls_ids[i] %>
-    <%= f.text_field :urls, multiple: true, value: form.urls[i], placeholder: "例)https://www.youtube.com/watch?v=e9HR7-3I3MA" %>
+    <%= f.hidden_field :urls_ids, multiple: true, value: form.urls_ids[i], class: "block-label" %>
+      <% if i == 0 || form.urls[i].present? %>
+        <%= f.text_field :urls, multiple: true, value: form.urls[i], placeholder: "例)https://www.youtube.com/watch?v=e9HR7-3I3MA", class: "inline-block-input-parts displayed-url-input-parts" %>
+        <%= link_to '削除', '#', class: "button-removal button-link" %>
+      <% else %>
+        <%= f.text_field :urls, multiple: true, value: form.urls[i], placeholder: "例)https://www.youtube.com/watch?v=e9HR7-3I3MA", class: "inline-block-input-parts hidden-url-input-parts" %>
+        <%= link_to '削除', '#', class: "button-removal button-link hidden-button" %>
+      <% end %>
+      <div></div>
   <% end %>
 
-  <%= f.label :period_for_effect %>
-  <%= f.text_field :period_for_effect, placeholder: "例)2ヶ月" %>
+  <%= f.label :period_for_effect, class: "block-label" %>
+  <%= f.text_field :period_for_effect, placeholder: "例)2ヶ月", class: "block-input-parts" %>
 
   
   <%= f.radio_button :circumstance, "commit", class: "radio" %>
-  <%= f.label :circumstance, "commit", value: "commit", class: "radio" %>
+  <%= f.label :circumstance, "結果済", value: "commit", class: "radio" %>
   <%= f.radio_button :circumstance, "challenge", class: "radio" %>
-  <%= f.label :circumstance, "challenge", value: "challenge", class: "radio" %>
+  <%= f.label :circumstance, "挑戦中", value: "challenge", class: "radio" %>
 
-  <!-- 挑戦中か結果済みか-->
   <%= f.submit '保存する', class: "submit-button"%>
   <%= link_to 'キャンセル', '#', class: "cancel-link" %>
 <% end %>

@@ -2,12 +2,13 @@ require 'rails_helper'
 
 RSpec.describe HabitForm, type: :model do
   let(:habit_form) { HabitForm.new }
-  let(:scheme_text_max) { 400 }
+  let(:summary_text_max) { 200 }
   let(:name_text_max) { 20 }
   let(:period_for_effect_text_max) { 10 }
   before do
     habit_form.name = "habit"
     habit_form.effects = "キーワード1,キーワード2"
+    habit_form.summary = "概要"
     habit_form.circumstance = "challenge"
     habit_form.scheme = "工夫 工夫"
   end
@@ -33,18 +34,28 @@ RSpec.describe HabitForm, type: :model do
     habit_form.valid?
     expect(habit_form).to be_invalid
   end
+  it "概要がなければ、フォームオブジェクトが無効になること" do
+    habit_form.summary = nil
+    habit_form.valid?
+    expect(habit_form).to be_invalid
+  end
+  it "概要が空白であれば、フォームオブジェクトが無効になること" do
+    habit_form.summary = " "
+    habit_form.valid?
+    expect(habit_form).to be_invalid
+  end
+  it "概要が200文字を超えると、フォームオブジェクトが無効になること" do
+    habit_form.summary = "1" * (summary_text_max + 1)
+    habit_form.valid?
+    expect(habit_form).to be_invalid
+  end
   it "スキームがなければ、フォームオブジェクトが無効になること" do
-    habit_form.name = nil
+    habit_form.scheme = nil
     habit_form.valid?
     expect(habit_form).to be_invalid
   end
   it "スキームが空白であれば、フォームオブジェクトが無効になること" do
-    habit_form.name = " "
-    habit_form.valid?
-    expect(habit_form).to be_invalid
-  end
-  it "スキームが400文字を超えると、フォームオブジェクトが無効になること" do
-    habit_form.scheme = "1" * (scheme_text_max + 1)
+    habit_form.scheme = " "
     habit_form.valid?
     expect(habit_form).to be_invalid
   end

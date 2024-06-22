@@ -1,41 +1,44 @@
+<%= content_for(:page_title, @habit.name) %>
+<%= render 'shared/habits/favorite_habit', habit: @habit %>
+
 <div class="habit-display">
-  <div class="habit-name-display">
-    <p>習慣名:</p>
-    <p><%= @habit.name %></p>
-  </div>
   <div class="effect-display">
-    <p>効果(キーワード):</p>
-    <p><%= @habit.effect_habits.map(&:effect).pluck(:effect_item).join(',') %></p>
+    <p class="card-item one-card-item">効果(キーワード):</p>
+    <p class="card-content one-card-content"><%= @habit.effect_habits.map(&:effect).pluck(:effect_item).join(',') %></p>
   </div>
-  <div class="scheme-display">
-    <p>工夫・方法:</p>
-    <p><%= @habit.scheme %></p>
+  <div class="scheme-display one-card-item">
+    <p class="card-item one-card-item">工夫・方法:</p>
+    <p class="card-content one-card-content"><%= @habit.scheme %></p>
   </div>
 
   <% if @habit.period_for_effect.present? %>
     <div class="period_for_effect-display">
-      <p>効果が出るまでの期間</p>
-      <p><%= @habit.period_for_effect %></p>
+      <p class="card-item one-card-item">効果が出るまでの期間</p>
+      <p class="card-content one-card-content"><%= @habit.period_for_effect %></p>
     </div>
   <% end %>
   <% if @habit.working_time.present? %>
     <div class="working_time-display">
-      <p>活動時間</p>
-      <p><%= @habit.working_time %></p>
+      <p class="card-item one-card-item">活動時間</p>
+      <p class="card-content one-card-content"><%= @habit.working_time %></p>
     </div>
   <% end %>
   <% if @habit.sources.present? %>
     <div class="source-display">
-      <p>URL</p>
+      <p class="card-item one-card-item">URL</p>
       <ul>
       <% @habit.sources.each do |source| %>
-        <li><%= source.url %></li>
+        <li class="card-content one-card-content"><%= source.url %></li>
       <% end %>
       </ul>
     </div>
   <% end %>
   <div class="circumstance-display">
-    <p>この習慣の状況</p>
-    <p><%= get_circumstance(@habit) %></p>
+    <p class="card-item one-card-item">この習慣の状況</p>
+    <p  class="card-content one-card-content"><%= get_circumstance(@habit) %></p>
   </div>
+  <% if @habit.user_id == current_user.id %>
+  <%= link_to "編集", edit_habit_path(@habit.id), class: "inline-center" %>
+    <%= link_to "削除", habit_path(@habit.id), method: :delete, class: "inline-center", data: {confirm: "削除してもよろしいですか?"} %>
+  <% end %>
 </div>

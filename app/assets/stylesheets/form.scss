@@ -1,3 +1,5 @@
+@import "var";
+
 $big-space-between-form-parts: 20px;
 $small-spece-between-form-parts: 1px;
 $button-height: 40px;
@@ -6,22 +8,30 @@ $border-radius: 2px;
 $border-bold: 2px;
 $border-thin: 1px;
 $input-part-height: 30px;
-
+$link-button-height: 20px;
 form {
   margin: 0 auto;
   max-width: 800px;
   padding: $form-top-bottom-padding $form-top-bottom-padding*2;
-  &::after{
-    content: "";
-    display: block;
-    border: solid 1px black;
-  }
+
+}
+.search-form{
+  &::after {
+      content: "";
+      display: block;
+      border: solid 1px black;
+    }
 }
 
 .block-input-parts{
   display: block;
   width: 100%;
   height: $input-part-height;
+}
+.inline-block-input-parts{
+  display: inline-block;
+  height: $input-part-height;
+  width: 90%;
 }
 
 .block-label, .block-input-parts-after-inline, .inline-div{
@@ -56,7 +66,9 @@ form {
     opacity: 0.8;
   }
 }
-
+.text-area{
+  height: 100px;
+}
 .cancel-link{
   color: gray;
   text-decoration: none;
@@ -70,4 +82,34 @@ form {
 .radio{
   display: inline;
   width: fit-content;
+}
+
+.button-link{
+  display: inline-block;
+  height: $link-button-height;
+  line-height: $link-button-height;
+  padding: 0 10px;
+  border-radius: $link-button-height/2;
+  text-decoration: none;
+  &:hover{
+    text-decoration: none;
+  }
+}
+.button-addition{
+  color: blue;
+  background-color: $cornflower;
+  background-color: $cornflower;
+  &:visited{
+    color: blue;
+  }
+}
+.button-removal{
+  color: red;
+  border: 1px solid red;
+  &:visited{
+    color: red;
+  } 
+}
+.hidden-button, .hidden-url-input-parts{
+  display: none;
 }
