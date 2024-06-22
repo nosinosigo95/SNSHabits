@@ -11,11 +11,14 @@ form {
   margin: 0 auto;
   max-width: 800px;
   padding: $form-top-bottom-padding $form-top-bottom-padding*2;
-  &::after{
-    content: "";
-    display: block;
-    border: solid 1px black;
-  }
+
+}
+.search-form{
+  &::after {
+      content: "";
+      display: block;
+      border: solid 1px black;
+    }
 }
 
 .block-input-parts{
