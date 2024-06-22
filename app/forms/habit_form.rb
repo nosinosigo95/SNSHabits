@@ -2,14 +2,15 @@ require "uri"
 class HabitForm
   include ActiveModel::Model
   attr_accessor :name, :scheme, :period_for_effect,
-  :effects, :effects_ids, :working_time, :circumstance, :urls, :urls_ids
+  :effects, :effects_ids, :working_time, :circumstance, :urls, :urls_ids, :summary
 
   # Habitモデル
-  SCHEME_TEXT_MAX = 400
+  SUMMARY_TEXT_MAX = 200
   NAME_TEXT_MAX = 20
   PERIOD_FOR_EFFECT_TEXT_MAX = 10
   validates :name, presence: true, length: { maximum: NAME_TEXT_MAX }
-  validates :scheme, presence: true, length: { maximum: SCHEME_TEXT_MAX }
+  validates :summary, presence: true, length: { maximum: SUMMARY_TEXT_MAX }
+  validates :scheme, presence: true
   validates :period_for_effect, length: { maximum: PERIOD_FOR_EFFECT_TEXT_MAX }
   validate :check_commit_or_challenge
   validates :working_time, format: { with: /\A(\d{1,2}:\d{1,2})\z/ }, allow_nil: true
@@ -117,6 +118,7 @@ class HabitForm
       name: habit.name,
       effects: habit.effect_habits.map(&:effect).pluck(:effect_item).join(','),
       effects_ids: habit.effect_habits.map(&:effect).pluck(:id).join(','),
+      summary: habit.summary,
       scheme: habit.scheme,
       circumstance: circumstance,
       working_time: habit.working_time,

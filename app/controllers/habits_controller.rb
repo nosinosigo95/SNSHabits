@@ -51,13 +51,13 @@ class HabitsController < ApplicationController
   def habit_params
     params.require(:habit).permit(:name, :scheme,
     :period_for_effect, :working_time, :viewed_count,
-    :effects, :effects_ids, :circumstance, urls: [], urls_ids: [])
+    :effects, :effects_ids, :circumstance, :summary,urls: [], urls_ids: [])
   end
 
   def habit_index_params
     if params[:habit_index_form]
       params.require(:habit_index_form).permit(:name, :effect_item,
-      :period_for_effect, :created, :sort)
+      :period_for_effect, :created, :sort, :summary)
     else
       nil
     end

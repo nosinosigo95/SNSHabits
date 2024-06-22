@@ -8,6 +8,9 @@
   <%= f.text_field :effects, placeholder: "例)肩こり,体全体" %>
   <%= f.hidden_field :effects_ids %>
 
+  <%= f.label :summary, class: "required" %>
+  <%= f.text_field :summary, placeholder: "例)体の動き" %>
+
   <%= f.label :scheme, class: "required" %>
   <%= f.text_area :scheme, placeholder: "例)一つ一つの動きを意識して、取り組む。" %>
 
