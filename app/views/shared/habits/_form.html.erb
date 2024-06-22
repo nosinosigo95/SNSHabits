@@ -22,13 +22,11 @@
   <% get_url_max.times do |i| %>
     <%= f.hidden_field :urls_ids, multiple: true, value: form.urls_ids[i], class: "block-label" %>
       <% if i == 0 || form.urls[i].present? %>
-        <%= f.text_field :urls, multiple: true, value: form.urls[i], placeholder: "例)https://www.youtube.com/watch?v=e9HR7-3I3MA", class: "inline-block-input-parts" %>
-        <%= link_to '削除', '#', class: "button-removal url-button#{i} button-link" %>
-
+        <%= f.text_field :urls, multiple: true, value: form.urls[i], placeholder: "例)https://www.youtube.com/watch?v=e9HR7-3I3MA", class: "inline-block-input-parts displayed-url-input-parts" %>
+        <%= link_to '削除', '#', class: "button-removal button-link" %>
       <% else %>
-        <%= f.text_field :urls, multiple: true, value: form.urls[i], placeholder: "例)https://www.youtube.com/watch?v=e9HR7-3I3MA", class: "inline-block-input-parts hidden" %>
-        <%= link_to '削除', '#', class: "button-removal url-button#{i} button-link hidden" %>
-
+        <%= f.text_field :urls, multiple: true, value: form.urls[i], placeholder: "例)https://www.youtube.com/watch?v=e9HR7-3I3MA", class: "inline-block-input-parts hidden-url-input-parts" %>
+        <%= link_to '削除', '#', class: "button-removal button-link hidden-button" %>
       <% end %>
       <div></div>
   <% end %>
