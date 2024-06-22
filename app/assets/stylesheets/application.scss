@@ -16,11 +16,18 @@ html, body{
 *{
   font-family: '游明朝',' Yu Mincho',YuMincho,' Hiragino Mincho Pro',serif;
 }
-
-a:hover{
-  text-decoration: underline;
-  opacity: 0.6;
+a{
+  color:blue;
+  text-decoration: none;
+  &:visited{
+    color: blue;
+  }
+  &:hover{
+    text-decoration: underline;
+    opacity: 0.6;
+  }
 }
+
 .content-padding{
   padding: $padding-top 0 $padding-bottom;
 }
@@ -49,4 +56,8 @@ main{
 }
 .hidden{
   display: none;
+}
+.inline-center{
+  display: block;
+  text-align: center;
 }

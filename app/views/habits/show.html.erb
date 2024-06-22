@@ -37,4 +37,6 @@
     <p class="card-item one-card-item">この習慣の状況</p>
     <p  class="card-content one-card-content"><%= get_circumstance(@habit) %></p>
   </div>
+  <%= link_to "編集", edit_habit_path(@habit.id), class: "inline-center" %>
+  <%= link_to "削除", habit_path(@habit.id), method: :delete, class: "inline-center", data: {confirm: "削除してもよろしいですか?"} %>
 </div>

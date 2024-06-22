@@ -19,9 +19,9 @@ class HabitsController < ApplicationController
   end
 
   def update
-    @form = HabitForm.new(attributes: habit_params, habit: @habit, user: current_user)
-    if @form.update
-      redirect_to @habit
+    form = HabitForm.new(attributes: habit_params, habit: @habit, user: current_user)
+    if form.update
+      redirect_to habit
     else
       render :edit
     end
@@ -44,6 +44,12 @@ class HabitsController < ApplicationController
   end
 
   def destroy
+    habit = Habit.find(params[:id])
+    if habit.present?
+      habit.destroy
+      flash[:notice] = "習慣を削除しました"
+    end
+    redirect_to habits_url
   end
 
   private
