@@ -6,8 +6,9 @@ ja:
     attributes:
       habit:
         name: '習慣名'
-        scheme: '工夫'
+        scheme: '説明・工夫'
         effects: '効果'
+        summary: '概要'
         urls: 'URL'
         period_for_effect: '効果が出始める頃'
         working_time: '1日あたりの活動時間'
