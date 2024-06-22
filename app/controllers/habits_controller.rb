@@ -1,5 +1,5 @@
 class HabitsController < ApplicationController
-  before_action :set_habit, only: [:edit, :update]
+  before_action :set_habit, only: [:edit, :update, :destroy]
   before_action :authenticate_user!
   def new
     @form = HabitForm.new(user: current_user)
@@ -70,6 +70,10 @@ class HabitsController < ApplicationController
   end
 
   def set_habit
-    @habit = current_user.habits.find(params[:id])
+    @habit = current_user.habits.where('id = ?', params[:id])
+    if @habit.empty?
+      flash[:alert] = "そのようなページはありません"
+      redirect_to habits_url
+    end
   end
 end
