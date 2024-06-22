@@ -17,15 +17,20 @@
 
   <%= f.label :urls, class: "block-label" do %>
     <%= "URL" %>
-    <%= link_to "追加",'#',class: "button-addition" %>
+    <%= link_to "追加",'#',class: "button-addition button-link" %>
   <% end %>
   <% get_url_max.times do |i| %>
     <%= f.hidden_field :urls_ids, multiple: true, value: form.urls_ids[i], class: "block-label" %>
       <% if i == 0 || form.urls[i].present? %>
-        <%= f.text_field :urls, multiple: true, value: form.urls[i], placeholder: "例)https://www.youtube.com/watch?v=e9HR7-3I3MA", class: "block-input-parts" %>
+        <%= f.text_field :urls, multiple: true, value: form.urls[i], placeholder: "例)https://www.youtube.com/watch?v=e9HR7-3I3MA", class: "inline-block-input-parts" %>
+        <%= link_to '削除', '#', class: "button-removal url-button#{i} button-link" %>
+
       <% else %>
-        <%= f.text_field :urls, multiple: true, value: form.urls[i], placeholder: "例)https://www.youtube.com/watch?v=e9HR7-3I3MA", class: "block-input-parts hidden" %>
+        <%= f.text_field :urls, multiple: true, value: form.urls[i], placeholder: "例)https://www.youtube.com/watch?v=e9HR7-3I3MA", class: "inline-block-input-parts hidden" %>
+        <%= link_to '削除', '#', class: "button-removal url-button#{i} button-link hidden" %>
+
       <% end %>
+      <div></div>
   <% end %>
 
   <%= f.label :period_for_effect, class: "block-label" %>

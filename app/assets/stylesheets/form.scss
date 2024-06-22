@@ -28,6 +28,11 @@ form {
   width: 100%;
   height: $input-part-height;
 }
+.inline-block-input-parts{
+  display: inline-block;
+  height: $input-part-height;
+  width: 90%;
+}
 
 .block-label, .block-input-parts-after-inline, .inline-div{
   display: block;
@@ -77,19 +82,29 @@ form {
   width: fit-content;
 }
 
-.button-addition{
+.button-link{
   display: inline-block;
   height: $link-button-height;
   line-height: $link-button-height;
   padding: 0 10px;
   border-radius: $link-button-height/2;
-  background-color: $cornflower;
-  color: blue;
   text-decoration: none;
   &:hover{
     text-decoration: none;
   }
+}
+.button-addition{
+  color: blue;
+  background-color: $cornflower;
+  background-color: $cornflower;
   &:visited{
     color: blue;
   }
+}
+.button-removal{
+  color: white;
+  border: 1px solid red;
+  &:visited{
+    color: red;
+  } 
 }
