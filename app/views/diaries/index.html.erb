@@ -11,23 +11,32 @@
   <p>取り組み中:<%= select(:continuation, :habit_id, get_continuation_habit) %></p>
   <%= submit_tag '検索' %>
 <% end %>
-
+<h3 class="text-center">検索結果</h3>
 <canvas id="doing_time_chart"></canvas>
-
-<div>
+<div class="search-result">
+  <div class="top-pagination">
+    <%= paginate @diaries %>
+  </div>
   <% @diaries.each do |diary| %>
-    <div>
-      <p>実行日：<%= diary.action_date %></p>
-      <p>習慣名: <%= diary.habit.name %></p>
-      <p><%= link_to "編集", edit_diary_path(diary.id) %></p>
-      <p><%= link_to "削除", diary_path(diary.id), method: :delete, data: {confirm: "削除しますか?"}%></p>
-      <p>内容：</p>
-      <p><%= diary.description %></p>
-      <p>実行時間：<%= diary.doing_time %></p>
-      <p>作成日：<%= l diary.created_at %></p>
-      <p>更新日：<%= l diary.updated_at %></p>
+    <div class="card">
+      <p class="card-item">実行日：<%= diary.action_date %></p>
+      <p class="card-item">習慣名</p>
+      <p class="card-content"><%= diary.habit.name %></p>
+      <p class="card-item">内容</p>
+      <p class="card-content"><%= diary.description %></p>
+      <p class="card-item">実行時間</p>
+      <p class="card-content"><%= diary.doing_time %></p>
+      <p class="card-item">作成日</p>
+      <p class="card-content"><%= l diary.created_at %></p>
+      <p class="card-item">更新日</p>
+      <p class="card-content"><%= l diary.updated_at %></p>
+      <p><%= link_to "編集", edit_diary_path(diary.id), class: "diary-edition" %></p>
+      <p><%= link_to "削除", diary_path(diary.id), method: :delete, data: {confirm: "削除しますか?"}, class: "diary-delete"%></p>
     </div>
   <% end %>
+  <div class="bottom-pagination">
+    <%= paginate @diaries %>
+  </div>
 </div>
 
 

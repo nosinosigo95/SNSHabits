@@ -4,9 +4,9 @@
 <div class="top-pagination">
   <%= paginate @habits %>
 </div>
-<div class="search-result-habits">
+<div class="search-result">
   <% @habits.each do |habit| %>
-    <div class="card-habit">
+    <div class="card">
       <p class="card-title"><%= link_to habit.name, habit_path(habit.id) %></p>
       <p class="card-item">概要</p>
       <p class="card-content">
