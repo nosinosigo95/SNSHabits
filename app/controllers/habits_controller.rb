@@ -2,7 +2,7 @@ class HabitsController < ApplicationController
   before_action :set_habit, only: [:edit, :update, :destroy]
   before_action :authenticate_user!
 
-  
+
   def new
     @form = HabitForm.new(user: current_user)
   end
@@ -35,11 +35,10 @@ class HabitsController < ApplicationController
 
     # 前訪れたhabitのid(キャッシュ)は今のページのhabit_idと結びつける。
     # キャッシュを今回訪問したhabit_idにする。
+    set_related_habit_table(@habit)
+    set_cache_habit_id(@habit)
 
-    if RelatedHabit.find_by(now_habit_id: @habit.id).present?
-      binding.pry
-      @related_habits = @habit.related_habits
-    end
+    @related_habits = @habit.related_habits
   end
 
   def index
@@ -77,6 +76,25 @@ class HabitsController < ApplicationController
     else
       nil
     end
+  end
+
+  def set_cache_habit_id(habit)
+    cookies.signed[:forward_habit_id] = { value: habit.id, expires: 7.days.from_now }
+  end
+
+  def set_related_habit_table(now_habit)
+    old_habit_id = cookies.signed[:forward_habit_id]
+    if old_habit_id.nil?
+      return
+    end
+    if old_habit_id == now_habit.id
+      return
+    end
+    if RelatedHabit.where(old_habit_id: old_habit_id, now_habit_id: now_habit.id).present?
+      return
+    end
+
+    RelatedHabit.create(old_habit_id: old_habit_id, now_habit_id: now_habit.id)
   end
 
   def set_habit
