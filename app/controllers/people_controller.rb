@@ -21,4 +21,16 @@ class PeopleController < ApplicationController
     @user = User.find(params[:user_id])
     @users = @user.followers
   end
+
+  def index
+    if params[:search].empty?
+      @users = User.all.page(params[:page])
+    else
+      @users = User.where('name = ?', params[:search][:name]).page(params[:page])
+      if @users.empty?
+        @users = User.all.page(params[:page])
+        flash[:notice] = "ユーザーを見つけられませんでした"
+      end
+    end
+  end
 end

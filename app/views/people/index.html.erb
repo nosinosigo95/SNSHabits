@@ -1,7 +1,27 @@
 <!--ユーザ検索-->
+<% content_for(:page_title, "ユーザー検索") %>
 <%= form_with url: people_path, method: :get do %>
   <%= label :search, :name, 'ユーザー名', class: "block-label" %>
   <%= text_field :search, :name, class: "block-input-parts" %>
   <%= submit_tag '検索する', class: "submit-button" %>
 <% end %>
 <!--ユーザ一覧-->
+
+<h3 class="center-text">検索結果</h3>
+<div class="search-result">
+  <div class="top-pagination">
+    <%= paginate @users %>
+  </div>
+  <% @users.each do |user| %>
+      <div class="card">
+        <p><%= image_tag get_user_icon(user) %></p>
+        <p class="card-item">ユーザー名:</p>
+        <p class="card-content"><%= link_to user.name, '#' %></p>
+        <p class="card-item">自己紹介</p>
+        <p class="card-content"><%= user.introduction %></p>
+      </div>
+  <% end %>
+  <div class="bottom-pagination">
+    <%= paginate @users %>
+  </div>
+</div>

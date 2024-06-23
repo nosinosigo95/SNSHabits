@@ -21,6 +21,6 @@ $(document).ready(function(){
     event.preventDefault();
   });
   /*修正 */
-  $('.card').hide();
-  $('.card').first().show();
+  $('.related-habits .card').hide();
+  $('.related-habits .card').first().show();
 });
