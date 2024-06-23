@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2024_06_22_023943) do
+ActiveRecord::Schema.define(version: 2024_06_23_050533) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -113,6 +113,13 @@ ActiveRecord::Schema.define(version: 2024_06_22_023943) do
     t.index ["user_id"], name: "index_habits_on_user_id"
   end
 
+  create_table "related_habits", force: :cascade do |t|
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.bigint "old_habit_id"
+    t.bigint "now_habit_id"
+  end
+
   create_table "sources", force: :cascade do |t|
     t.string "url"
     t.bigint "habit_id"
@@ -147,5 +154,7 @@ ActiveRecord::Schema.define(version: 2024_06_22_023943) do
   add_foreign_key "effect_habits", "effects"
   add_foreign_key "effect_habits", "habits"
   add_foreign_key "habits", "users"
+  add_foreign_key "related_habits", "habits", column: "now_habit_id"
+  add_foreign_key "related_habits", "habits", column: "old_habit_id"
   add_foreign_key "sources", "habits"
 end

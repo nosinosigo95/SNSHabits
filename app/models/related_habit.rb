@@ -1,0 +1,2 @@
+class RelatedHabit < ApplicationRecord
+end
