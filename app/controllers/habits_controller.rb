@@ -30,6 +30,13 @@ class HabitsController < ApplicationController
   def show
     @habit = Habit.find(params[:id])
     @habit.update(recently_viewed_time: Time.now)
+
+    # 前訪れたhabitのid(キャッシュ)は今のページのhabit_idと結びつける。
+    # キャッシュを今回訪問したhabit_idにする。
+
+    if RelatedHabit.find_by(now_habit_id: @habit.id).present?
+      @related_habits = @habit.related_habits
+    end
   end
 
   def index

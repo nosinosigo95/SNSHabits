@@ -7,6 +7,9 @@ class Habit < ApplicationRecord
   belongs_to :user
   has_one :diary
   accepts_nested_attributes_for :effect_habits
+  has_many :forward_habit_relationships, class_name: "related_habit", foreign_key: "old_habit_id", dependent: :destroy
+  has_many :now_habit_relationships, class_name: "related_habit", foreign_key: "now_habit_id", dependent: :destroy
+  has_many :related_habits, through: :now_habit_relationships, source: :old_habit
 
   def self.search_attr(habit_index, page, sort, user)
     search_attr = get_search_attr(habit_index, user)
