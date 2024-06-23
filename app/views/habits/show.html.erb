@@ -46,17 +46,34 @@
   <h3>関連する習慣</h3>
   <% if @related_habits.present? %>
     <div class="related-habits-inner">
-      <div class="left-arrow">
-      <%= image_tag 'arrow-left-circle.svg', alt: "左矢印" %>
-      </div>
+        <%= link_to '#', class: "left-arrow" do %>
+          <%= image_tag 'arrow-left-circle.svg', alt: "左矢印" %>
+        <% end %>
       <div class="related-habits-cards">
         <%= render 'shared/habits/card', habits: @related_habits %>
       </div>
-      <div class="right-arrow">
+      <%= link_to '#', class: "right-arrow" do %>
         <%= image_tag 'arrow-right-circle.svg', alt: "右矢印" %>
-      </div>
+      <% end %>
     </div>
   <% else %>
     <p>現在そのような習慣はございません。</p>
   <% end %>
 </div>
+
+<script>
+
+  let displayed_card_index = 0;
+  let card_num = <%= @related_habits.count %>;
+  let right_shift_num = 1;
+  $('.left-arrow').click("turbo:load", function(){
+    $('.card').eq(displayed_card_index).hide();
+    displayed_card_index = (displayed_card_index + card_num - 1) % card_num;
+    $('.card').eq(displayed_card_index).show();
+  });
+  $('.right-arrow').click("turbo:load", function(){
+    $('.card').eq(displayed_card_index).hide();
+    displayed_card_index = (displayed_card_index + right_shift_num) % card_num;
+    $('.card').eq(displayed_card_index).show();
+  });
+</script>
