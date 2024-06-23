@@ -2,6 +2,7 @@ class HabitsController < ApplicationController
   before_action :set_habit, only: [:edit, :update, :destroy]
   before_action :authenticate_user!
 
+  related_habits_number = 4
 
   def new
     @form = HabitForm.new(user: current_user)
@@ -33,12 +34,10 @@ class HabitsController < ApplicationController
     @habit = Habit.find(params[:id])
     @habit.update(recently_viewed_time: Time.now)
 
-    # 前訪れたhabitのid(キャッシュ)は今のページのhabit_idと結びつける。
-    # キャッシュを今回訪問したhabit_idにする。
     set_related_habit_table(@habit)
     set_cache_habit_id(@habit)
 
-    @related_habits = @habit.related_habits
+    @related_habits = @habit.related_habits.order(:updated_at :desc).limit(related_habits_number)
   end
 
   def index
@@ -90,10 +89,10 @@ class HabitsController < ApplicationController
     if old_habit_id == now_habit.id
       return
     end
-    if RelatedHabit.where(old_habit_id: old_habit_id, now_habit_id: now_habit.id).present?
-      return
+    related_habit = RelatedHabit.where(old_habit_id: old_habit_id, now_habit_id: now_habit.id)
+    if related_habit.present?
+      related_habit.updated_at = Time.zone.now
     end
-
     RelatedHabit.create(old_habit_id: old_habit_id, now_habit_id: now_habit.id)
   end
 
