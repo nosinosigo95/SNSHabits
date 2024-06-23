@@ -89,9 +89,11 @@ class HabitsController < ApplicationController
     if old_habit_id == now_habit.id
       return
     end
-    related_habit = RelatedHabit.where(old_habit_id: old_habit_id, now_habit_id: now_habit.id)
-    if related_habit.present?
-      related_habit.updated_at = Time.zone.now
+    related_habits = RelatedHabit.where(old_habit_id: old_habit_id, now_habit_id: now_habit.id)
+    if related_habits.present?
+      related_habits.each do |related_habit|
+        related_habit.updated_at = Time.zone.now
+      end
     end
     RelatedHabit.create(old_habit_id: old_habit_id, now_habit_id: now_habit.id)
   end

@@ -44,9 +44,18 @@
 </div>
 <div class="related-habits">
   <h3>関連する習慣</h3>
-
   <% if @related_habits.present? %>
-    <%= render 'shared/habits/card', habits: @related_habits %>
+    <div class="related-habits-inner">
+      <div class="left-arrow">
+      <%= image_tag 'arrow-left-circle.svg', alt: "左矢印" %>
+      </div>
+      <div class="related-habits-cards">
+        <%= render 'shared/habits/card', habits: @related_habits %>
+      </div>
+      <div class="right-arrow">
+        <%= image_tag 'arrow-right-circle.svg', alt: "右矢印" %>
+      </div>
+    </div>
   <% else %>
     <p>現在そのような習慣はございません。</p>
   <% end %>
