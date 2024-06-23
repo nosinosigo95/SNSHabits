@@ -37,7 +37,7 @@
       <ul class="header-right-inner">
         <% if user_signed_in? %>
           <li class="nav-item">
-            <%= link_to 'アカウント', user_show_path %>
+            <%= link_to 'アカウント', user_path(current_user.id) %>
           </li>
           <div class="height-border">
             <div class="height-border-inner"></div>
