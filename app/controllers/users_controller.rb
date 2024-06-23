@@ -1,5 +1,5 @@
 class UsersController < ApplicationController
-  before_action :authenticate_user!
+  before_action :authenticate_user!, except: [:log_in_guest]
   def create
     followed_user = User.find(params[:user_id])
     current_user.follow(followed_user)
@@ -41,8 +41,19 @@ class UsersController < ApplicationController
       end
     end
   end
+
   def show
     @user = User.find(params[:id])
     @diaries = @user.diaries.page(params[:page])
+  end
+
+  def log_in_guest
+    @user = User.find_by(name: "guest")
+    if @user.present?
+      sign_in(@user)
+    end
+    # ログイン後に処理する
+    flash[:notice] = "Welcome! You have signed up successfully."
+    redirect_to root_path
   end
 end

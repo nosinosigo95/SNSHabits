@@ -5,7 +5,7 @@ Rails.application.routes.draw do
 
   get '/diaries/new/:habit_id', to: 'diaries#new', as: 'new_diary'
   resources :diaries, except: [:show, :new]
-  get 'user/log_in_guest'
+  get 'user/log_in_guest', to: 'users#log_in_guest', as: 'log_in_guest'
   devise_for :users
   resources :users, only: [:show] do
     post 'follow', to: 'follows#create', as: 'create_follow'
