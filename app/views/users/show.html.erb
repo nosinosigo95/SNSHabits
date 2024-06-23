@@ -18,33 +18,38 @@
   </div>
 </div>
 <% if @followers.present? %>
+  <h3 class="center-text">フォローしたユーザー</h3>
   <%= render 'shared/users/index', users: @followers, displayed_user: @user %>
 <% end %>
 <% if @followings.present? %>
+  <h3 class="center-text">フォローされたユーザー</h3>
   <%= render 'shared/users/index', users: @followings, displayed_user: @user %>
 <% end %>
+
 <% if flash[:searched_result].present? %>
   <p><%= flash[:searched_result] %></p>
 <% end%>
-<h3 class="center-text">日記一覧(公開)</h3>
-<div class="search-result">
-  <div class="top-pagination">
-    <%= paginate @diaries %>
-  </div>
-<% @diaries.each do |diary| %>
-  <% if !diary.private %>
-    <div class="card">
-      <p class="card-item">実行日：<%= diary.action_date %></p>
-      <p class="card-item">習慣名</p>
-      <p class="card-content"><%= diary.habit.name %></p>
-      <p class="card-item">内容</p>
-      <p class="card-content"><%= diary.description %></p>
-      <p class="card-item">実行時間</p>
-      <p class="card-content"><%= diary.doing_time %></p>
+<% if @followers.empty? && @followings.empty? %>
+  <h3 class="center-text">日記一覧(公開)</h3>
+  <div class="search-result">
+    <div class="top-pagination">
+      <%= paginate @diaries %>
     </div>
+  <% @diaries.each do |diary| %>
+    <% if !diary.private %>
+      <div class="card">
+        <p class="card-item">実行日：<%= diary.action_date %></p>
+        <p class="card-item">習慣名</p>
+        <p class="card-content"><%= diary.habit.name %></p>
+        <p class="card-item">内容</p>
+        <p class="card-content"><%= diary.description %></p>
+        <p class="card-item">実行時間</p>
+        <p class="card-content"><%= diary.doing_time %></p>
+      </div>
+    <% end %>
   <% end %>
-<% end %>
-  <div class="bottom-pagination">
-    <%= paginate @diaries %>
+    <div class="bottom-pagination">
+      <%= paginate @diaries %>
+    </div>
   </div>
-</div>
+<% end %>
