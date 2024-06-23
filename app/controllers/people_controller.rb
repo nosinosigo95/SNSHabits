@@ -1,4 +1,4 @@
-class FollowsController < ApplicationController
+class PeopleController < ApplicationController
   before_action :authenticate_user!
   def create
     followed_user = User.find(params[:user_id])
@@ -19,6 +19,6 @@ class FollowsController < ApplicationController
 
   def followers
     @user = User.find(params[:user_id])
-    @users = @user.follower
+    @users = @user.followers
   end
 end

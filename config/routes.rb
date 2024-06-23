@@ -11,8 +11,8 @@ Rails.application.routes.draw do
   resources :users, only: [:show] do
     post 'follow', to: 'follows#create', as: 'create_follow'
     delete 'follow', to: 'follows#destroy', as: 'destroy_follow'
-    get 'followings', to: 'follows#followings', as: 'followings'
-    get 'followers', to: 'follows#followers', as: "followers"
+    get 'followings', to: 'people#followings', as: 'followings'
+    get 'followers', to: 'people#followers', as: "followers"
   end
 
   root 'home#index'
