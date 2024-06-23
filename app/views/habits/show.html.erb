@@ -46,35 +46,7 @@
   <h3>関連する習慣</h3>
 
   <% if @related_habits.present? %>
-    <% @related_habits.each do |related_habit| %>
-      <div class="card">
-        <p class="card-title"><%= link_to habit.name, habit_path(habit.id) %></p>
-        <p class="card-item">概要</p>
-        <p class="card-content">
-          <%= habit.summary %>
-        </p>
-        <p class="card-item">効果</p>
-        <p class="card-content">
-          <%= habit.effect_habits.map(&:effect).pluck(:effect_item).join(',') %>
-        </p>
-        <% if habit.working_time.present? %>
-          <p class="card-item">作業時間：</p>
-          <p class="card-content">
-            <%= habit.working_time %>
-          </p>
-        <% end %>
-        <% if habit.period_for_effect.present? %>
-          <p class="card-item">効果が出始める頃:</p>
-          <p class="card-content">
-            <%= habit.period_for_effect %>
-          </p>
-        <% end %>
-        <%= render 'shared/habits/favorite_habit', habit: habit %>
-        <% if habit.user_id == current_user.id %>
-          <%= link_to '編集', edit_habit_path(habit.id), class: "edit-habit" %>
-        <% end %>
-      </div>
-    <% end %>
+    <%= render 'shared/habits/card', habits: @related_habits %>
   <% else %>
     <p>現在そのような習慣はございません。</p>
   <% end %>
