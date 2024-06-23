@@ -43,7 +43,7 @@
   <% end %>
 </div>
 <div class="related-habits">
-  <h3>関連する習慣<%= %></h3>
+  <h3 class="center-text">関連する習慣</h3>
   <div class="related-habits-container">
     <% if @related_habits.present? %>
       <% if @related_habits.count != 1 %>
@@ -68,7 +68,6 @@
 </div>
 
 <script>
-
   let displayed_card_index = 0;
   let card_num = <%= @related_habits.count %>;
   let right_shift_num = 1;

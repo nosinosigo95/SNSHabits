@@ -14,7 +14,7 @@
     <%= f.label :created, '自身が作成したもの' %>
     <%= f.check_box :created %>
   </div>
-  <%= f.select :sort, [["最近作成されたもの", "created_at"], ["最近更新されたもの", "updated_at"], ["最近見られたもの", "recently_viewed_time"], ], {include_blank: "並べる順を選択して下さい" }, {class: "block-input-parts-after-inline text-center"} %>
+  <%= f.select :sort, [["最近作成されたもの", "created_at"], ["最近更新されたもの", "updated_at"], ["最近見られたもの", "recently_viewed_time"], ], {include_blank: "並べる順を選択して下さい" }, {class: "block-input-parts-after-inline center-text"} %>
 
   <%= f.submit "検索", class: "submit-button" %>
 <% end %>
