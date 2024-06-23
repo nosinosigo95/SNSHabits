@@ -31,7 +31,7 @@ class UsersController < ApplicationController
   end
 
   def index
-    if params[:search].empty?
+    if params[:search].nil?
       @users = User.all.page(params[:page])
     else
       @users = User.where('name = ?', params[:search][:name]).page(params[:page])

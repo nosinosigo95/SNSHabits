@@ -1,6 +1,14 @@
 <div>
-  <p><%= @user.name %></p>
+  <% if current_user.id == @user.id %>
+    <%= link_to '編集', edit_user_registration_path %>
+  <% end %>
   <p><%= image_tag get_user_icon(@user) %></p>
+  <p><%= @user.name %></p>
+  <% if current_user.id == @user.id %>
+    <p>メールアドレス：<%= @user.email %></p>
+  <% end %>
+  <p>自己紹介:</p>
+  <p><%= @user.introduction %></p>
   <p><%= link_to "フォローする#{@user.followers.count}", user_followers_path(@user.id) %></p>
   <p><%= link_to "フォローされた#{@user.followings.count}", user_followings_path(@user.id) %></p>
   <div class="edit-follow">
