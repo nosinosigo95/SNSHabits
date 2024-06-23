@@ -35,6 +35,7 @@ class HabitsController < ApplicationController
     # キャッシュを今回訪問したhabit_idにする。
 
     if RelatedHabit.find_by(now_habit_id: @habit.id).present?
+      binding.pry
       @related_habits = @habit.related_habits
     end
   end

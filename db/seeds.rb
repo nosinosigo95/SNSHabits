@@ -74,6 +74,8 @@ Habit.all.each do |habit|
   end
 end
 
+RelatedHabit.create!(old_habit_id: 2, now_habit_id: 1)
+
 # sources
 Habit.all.each do |habit|
   habit.sources.create!(url: "https://www.youtube.com/")
@@ -111,4 +113,4 @@ User.all.each do |user|
   user.favorite_habits.create!(
     habit_id: (habit_id + increase_sft) % Habit.count + start_id
   )
-end 
+end
