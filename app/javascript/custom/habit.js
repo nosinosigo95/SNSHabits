@@ -20,6 +20,7 @@ $(document).ready(function(){
   $('.right-arrow').click("turbo:load", function(event){
     event.preventDefault();
   });
+  /*修正 */
   $('.card').hide();
   $('.card').first().show();
 });

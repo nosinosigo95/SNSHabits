@@ -1,0 +1,7 @@
+<!--ユーザ検索-->
+<%= form_with url: people_path, method: :get do %>
+  <%= label :search, :name, 'ユーザー名', class: "block-label" %>
+  <%= text_field :search, :name, class: "block-input-parts" %>
+  <%= submit_tag '検索する', class: "submit-button" %>
+<% end %>
+<!--ユーザ一覧-->

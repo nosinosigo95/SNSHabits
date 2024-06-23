@@ -14,7 +14,7 @@ Rails.application.routes.draw do
     get 'followings', to: 'people#followings', as: 'followings'
     get 'followers', to: 'people#followers', as: "followers"
   end
-
+  get 'people', to: 'people#index', as: "people"
   root 'home#index'
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
 end
