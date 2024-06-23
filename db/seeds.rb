@@ -93,14 +93,14 @@ User.all.each do |user|
     user.diaries.create!(
       description: "今日の進捗は〇〇でした。\n明日は、〇〇します。",
       action_date: "2024/6/23",
-      doing_time: "0#{i}:00",
+      doing_time: "01:00",
       private: i % 2 == 1,
       habit_id: habit_id
     )
     user.diaries.create!(
       description: "今日の進捗は〇〇でした。\n明日は、〇〇します。",
       action_date: "2024/6/22",
-      doing_time: "0#{i}:00",
+      doing_time: "00:01",
       private: i % 2 == 1,
       habit_id: habit_id
     )
