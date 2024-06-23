@@ -14,12 +14,20 @@ class UsersController < ApplicationController
 
   def followings
     @user = User.find(params[:user_id])
-    @users = @user.followings
+    @followings = @user.followings
+    if @followings.empty?
+      flash[:searched_result] = "フォローされているユーザーはいません"
+    end
+    redirect_to request.referer
   end
 
   def followers
     @user = User.find(params[:user_id])
-    @users = @user.followers
+    @followers = @user.followers
+    if @followers.empty?
+      flash[:searched_result] = "フォローしているユーザーはいません"
+    end
+    redirect_to request.referer
   end
 
   def index
@@ -34,6 +42,7 @@ class UsersController < ApplicationController
     end
   end
   def show
-
+    @user = User.find(params[:id])
+    @diaries = @user.diaries.page(params[:page])
   end
 end
