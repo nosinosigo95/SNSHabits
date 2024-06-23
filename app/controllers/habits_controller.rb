@@ -2,7 +2,7 @@ class HabitsController < ApplicationController
   before_action :set_habit, only: [:edit, :update, :destroy]
   before_action :authenticate_user!
 
-  related_habits_number = 4
+  RELATED_HABITS_NUMBER = 4
 
   def new
     @form = HabitForm.new(user: current_user)
@@ -37,7 +37,7 @@ class HabitsController < ApplicationController
     set_related_habit_table(@habit)
     set_cache_habit_id(@habit)
 
-    @related_habits = @habit.related_habits.order(:updated_at :desc).limit(related_habits_number)
+    @related_habits = @habit.related_habits.order(updated_at: :desc).limit(RELATED_HABITS_NUMBER)
   end
 
   def index
