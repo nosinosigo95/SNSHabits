@@ -20,7 +20,7 @@ $(document).ready(function(){
   $('.right-arrow').click("turbo:load", function(event){
     event.preventDefault();
   });
-  /*修正 */
+
   $('.related-habits .card').hide();
   $('.related-habits .card').first().show();
 });

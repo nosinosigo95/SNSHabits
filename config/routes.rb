@@ -11,10 +11,10 @@ Rails.application.routes.draw do
   resources :users, only: [:show] do
     post 'follow', to: 'follows#create', as: 'create_follow'
     delete 'follow', to: 'follows#destroy', as: 'destroy_follow'
-    get 'followings', to: 'people#followings', as: 'followings'
-    get 'followers', to: 'people#followers', as: "followers"
+    get 'followings', to: 'users#followings', as: 'followings'
+    get 'followers', to: 'users#followers', as: "followers"
   end
-  get 'people', to: 'people#index', as: "people"
+  get 'people', to: 'users#index', as: "people"
   root 'home#index'
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
 end

@@ -1,4 +1,4 @@
-class PeopleController < ApplicationController
+class UsersController < ApplicationController
   before_action :authenticate_user!
   def create
     followed_user = User.find(params[:user_id])
@@ -32,5 +32,8 @@ class PeopleController < ApplicationController
         flash[:notice] = "ユーザーを見つけられませんでした"
       end
     end
+  end
+  def show
+
   end
 end
