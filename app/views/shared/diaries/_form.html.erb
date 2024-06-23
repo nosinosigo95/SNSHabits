@@ -1,16 +1,20 @@
 <%= form_with model: diary, url: url do |f| %>
   <%= render 'shared/form/error_messages', object: f.object %>
-  <%= f.label :action_date %>
-  <%= f.date_field :action_date, value: diary.action_date %>
-  <%= f.label :description %>
-  <%= f.text_area :description, placeholder: "今日は、1km散歩しました。" %>
-  <%= f.label :doing_time %>
-  <%= f.time_field :doing_time, value: diary.doing_time %>
-  <p>非公開にしますか?</p>
+  <%= f.label :action_date, class: "required block-label" %>
+  <%= f.date_field :action_date, value: diary.action_date, class: "block-input-parts" %>
+  <%= f.label :description, class: "required block-label" do %>
+    <%= p "自由記述(600字以内)"%>
+  <% end %>
+  <%= f.text_area :description, placeholder: "今日は、1km散歩しました。", class: "block-input-parts text-area" %>
+  <%= f.label :doing_time, class: "block-label required" do %>
+    <%= p "実行時間(時:分)" %>
+  <% end %>
+  <%= f.time_field :doing_time, value: diary.doing_time, class: "block-input-parts" %>
+  <p class="block-label required">非公開にしますか?</p>
   <%= f.radio_button :private, true , value: true %>
-  <%= f.label :private, 'はい', value: true %>
-  <%= f.radio_button :private, false, value: false %>
+  <%= f.label :private, 'はい', value: true, class: "radio" %>
+  <%= f.radio_button :private, false, value: false, class: "radio" %>
   <%= f.label :private, 'いいえ', value: false%>
   <%= f.hidden_field :habit_id %>
-  <%= f.submit '記録する' %>
+  <%= f.submit '記録する', class: "submit-button" %>
 <% end %>

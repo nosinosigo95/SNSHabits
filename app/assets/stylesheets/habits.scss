@@ -1,21 +1,5 @@
 @import "var";
 
-$favorite-height: 30px;
-$star-size: 15px;
-$card-content-left-padding: 10px;
-
-.card-habit{
-  border: solid 6px $cornflower;
-  width: 360px;
-  margin: 20px 10px;
-  padding: 20px 10px;
-  box-sizing: border-box;
-}
-.search-result-habits{
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: space-around;
-}
 .card-title{
   display: block;
   text-align: center;
@@ -29,16 +13,6 @@ $card-content-left-padding: 10px;
   a:visited{
     color: blue;
   }
-}
-
-.card-item{
-  display: block;
-  box-sizing: border-box;
-  border-left: 4px solid $green;
-}
-.card-content{
-  display: block;
-  padding-left: $card-content-left-padding;
 }
 
 .common-favorite-habit{
@@ -87,13 +61,4 @@ $card-content-left-padding: 10px;
   &:visited{
     color: blue;
   }
-}
-
-.one-card-item{
-  font-size: 18px;
-}
-.one-card-content{
-  font-size: 16px;
-  padding-left:$card-content-left-padding * 2;
-  margin: 30px 0;
 }

@@ -45,11 +45,17 @@ RSpec.describe Diary, type: :model do
   end
   it "作業時間のフォーマットが合っていれば、モデルが有効になること" do
     diary = FactoryBot.build(:diary, private: true)
-    valid_doing_times = %w(01:00 00:00 1:0)
+    valid_doing_times = %w(01:00 1:0)
     valid_doing_times.each do |valid_doing_time|
       diary.doing_time = valid_doing_time
       expect(diary).to be_valid
     end
+  end
+  it "実行時間が00:00であるならば、モデルが無効になること" do
+    diary = FactoryBot.build(:diary, private: true)
+    diary.doing_time = "00:00"
+    diary.valid?
+    expect(diary.errors[:doing_time]).to include("は1分以上にしてください")
   end
 
   it "プライベートがなければ、モデルは無効になること" do

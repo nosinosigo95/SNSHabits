@@ -3,6 +3,7 @@ ja:
     models:
       habit: '習慣'
       effect: '効果'
+      diary: '日記'
     attributes:
       habit:
         name: '習慣名'
@@ -15,3 +16,8 @@ ja:
         recently_viewed_time: '直近の閲覧時'
       effect:
         effect_item: '効果名'
+      diary:
+        description: '自由記述'
+        doing_time: '実行時間'
+        action_date: '実行日'
+        private: 'プライベート'

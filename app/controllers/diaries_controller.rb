@@ -39,12 +39,12 @@ class DiariesController < ApplicationController
     if params[:continuation].present?
       continuation_habit_id = /\A[0-9]+\z/.match(params[:continuation][:habit_id])
       if continuation_habit_id[0].present?
-        @diaries = current_user.diaries.where("habit_id = ?", continuation_habit_id[0])
+        @diaries = current_user.diaries.where("habit_id = ?", continuation_habit_id[0]).page(params[:page])
       else
-        @diaries = current_user.diaries
+        @diaries = current_user.diaries.page(params[:page])
       end
     else
-      @diaries = current_user.diaries
+      @diaries = current_user.diaries.page(params[:page])
     end
   end
   def destroy

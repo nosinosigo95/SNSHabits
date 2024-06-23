@@ -49,7 +49,7 @@ User.all.each do |user|
     summary: "この習慣は、〇〇をします。",
     scheme: "この習慣は、〇〇をします。<br/>手順は以下のように行います。<br/> 手順1: \n手順2:",
     period_for_effect: "4週間",
-    working_time: "1:00",
+    working_time: "01:00",
     challenge: "true",
     commit: "false"
   )
@@ -58,7 +58,7 @@ User.all.each do |user|
     summary: "この習慣は、〇〇をします。",
     scheme: "この習慣は、〇〇をします。<br/>手順は以下のように行います。<br/> 手順1: \n手順2:",
     period_for_effect: "2ヶ月",
-    working_time: "2:00",
+    working_time: "02:00",
     challenge: "true",
     commit: "false"
   )
@@ -92,8 +92,15 @@ User.all.each do |user|
   diary_num.times.each do |i|
     user.diaries.create!(
       description: "今日の進捗は〇〇でした。\n明日は、〇〇します。",
-      action_date: "2024/6/1",
-      doing_time: "#{i}:00",
+      action_date: "2024/6/23",
+      doing_time: "01:00",
+      private: i % 2 == 1,
+      habit_id: habit_id
+    )
+    user.diaries.create!(
+      description: "今日の進捗は〇〇でした。\n明日は、〇〇します。",
+      action_date: "2024/6/22",
+      doing_time: "00:01",
       private: i % 2 == 1,
       habit_id: habit_id
     )
