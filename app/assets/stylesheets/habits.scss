@@ -62,3 +62,34 @@
     color: blue;
   }
 }
+.related-habits-container{
+  position: relative;
+  width: 100%;
+  height: fit-content;
+}
+.related-habits-container-inner{
+  margin: 0 auto;
+  width: fit-content;
+}
+.left-arrow, .right-arrow{
+  display: block;
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  img{
+    display: block;
+    width: 30px;
+    height: 30px;
+  }
+}
+.left-arrow{
+  left: 30px;
+}
+.right-arrow{
+  right: 30px;
+}
+.related-habits-cards{
+  display: inline-block;
+  height: fit-content;
+  width: fit-content;
+}

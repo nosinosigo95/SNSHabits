@@ -1,6 +1,9 @@
 class HabitsController < ApplicationController
   before_action :set_habit, only: [:edit, :update, :destroy]
   before_action :authenticate_user!
+
+  RELATED_HABITS_NUMBER = 4
+
   def new
     @form = HabitForm.new(user: current_user)
   end
@@ -30,6 +33,11 @@ class HabitsController < ApplicationController
   def show
     @habit = Habit.find(params[:id])
     @habit.update(recently_viewed_time: Time.now)
+
+    set_related_habit_table(@habit)
+    set_cache_habit_id(@habit)
+
+    @related_habits = @habit.related_habits.order(updated_at: :desc).limit(RELATED_HABITS_NUMBER)
   end
 
   def index
@@ -67,6 +75,27 @@ class HabitsController < ApplicationController
     else
       nil
     end
+  end
+
+  def set_cache_habit_id(habit)
+    cookies.signed[:forward_habit_id] = { value: habit.id, expires: 7.days.from_now }
+  end
+
+  def set_related_habit_table(now_habit)
+    old_habit_id = cookies.signed[:forward_habit_id]
+    if old_habit_id.nil?
+      return
+    end
+    if old_habit_id == now_habit.id
+      return
+    end
+    related_habits = RelatedHabit.where(old_habit_id: old_habit_id, now_habit_id: now_habit.id)
+    if related_habits.present?
+      related_habits.each do |related_habit|
+        related_habit.updated_at = Time.zone.now
+      end
+    end
+    RelatedHabit.create(old_habit_id: old_habit_id, now_habit_id: now_habit.id)
   end
 
   def set_habit
