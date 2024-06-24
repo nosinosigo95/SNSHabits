@@ -1,0 +1,29 @@
+<%= content_for(:page_title, "アカウントページ") %>
+<%= render 'shared/users/user_info', user: @user %>
+<% if flash[:searched_result].present? %>
+  <p><%= flash[:searched_result] %></p>
+<% end%>
+<% if @followers.nil? && @followings.nil? %>
+  <h3 class="center-text">日記一覧(公開)</h3>
+  <div class="search-result">
+    <div class="top-pagination">
+      <%= paginate @diaries %>
+    </div>
+  <% @diaries.each do |diary| %>
+    <% if !diary.private %>
+      <div class="card">
+        <p class="card-item">実行日：<%= diary.action_date %></p>
+        <p class="card-item">習慣名</p>
+        <p class="card-content"><%= diary.habit.name %></p>
+        <p class="card-item">内容</p>
+        <p class="card-content"><%= diary.description %></p>
+        <p class="card-item">実行時間</p>
+        <p class="card-content"><%= diary.doing_time %></p>
+      </div>
+    <% end %>
+  <% end %>
+    <div class="bottom-pagination">
+      <%= paginate @diaries %>
+    </div>
+  </div>
+<% end %>

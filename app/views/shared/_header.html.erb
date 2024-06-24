@@ -25,6 +25,15 @@
           日記
         <% end %>
       </li>
+      <div class="height-border">
+        <div class="height-border-inner"></div>
+      </div>
+      <li class="nav-item">
+        <%= link_to people_path do %>
+          <%= image_tag 'people-fill.svg', class: "header-icon" %>
+          交流
+        <% end %>
+      </li>
     </ul>
     <div class="header-right">
       <!--ハンバーガーメニュ-->
@@ -37,7 +46,7 @@
       <ul class="header-right-inner">
         <% if user_signed_in? %>
           <li class="nav-item">
-            <%= link_to 'アカウント', user_show_path %>
+            <%= link_to 'アカウント', user_path(current_user.id) %>
           </li>
           <div class="height-border">
             <div class="height-border-inner"></div>
@@ -60,7 +69,7 @@
             <div class="height-border-inner"></div>
           </div>
           <li class="nav-item">
-            <%= link_to 'ゲストログイン', user_log_in_guest_path %>
+            <%= link_to 'ゲストログイン', log_in_guest_path %>
           </li>
         <% end %>
       </ul>

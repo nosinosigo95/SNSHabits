@@ -20,6 +20,7 @@ $(document).ready(function(){
   $('.right-arrow').click("turbo:load", function(event){
     event.preventDefault();
   });
-  $('.card').hide();
-  $('.card').first().show();
+
+  $('.related-habits .card').hide();
+  $('.related-habits .card').first().show();
 });
