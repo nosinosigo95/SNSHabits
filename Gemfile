@@ -31,6 +31,7 @@ gem 'dotenv-rails'
 
 gem 'kaminari'
 
+gem 'ruby-openai'
 # Use Active Storage variant
 # gem 'image_processing', '~> 1.2'
 
