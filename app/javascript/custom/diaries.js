@@ -12,6 +12,7 @@ $(document).ready(function(){
       let data_stringify = JSON.stringify(data);
       let data_json = JSON.parse(data_stringify);
       let answer_for_consult = data_json["response"];
+      $('.ai-answer-container').show();
       $('#result-for-consult').text(answer_for_consult);
     })
     .fail((data) => {

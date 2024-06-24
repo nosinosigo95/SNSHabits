@@ -18,9 +18,20 @@
   width: 100%;
 }
 .diary-form-button{
-  display:block;
+  display: block;
 }
 .diary-habit-name{
   margin-top: 50px;
   margin-bottom: 0;
+}
+.ai-answer-container{
+  display: none;
+  margin: 0 auto;
+  width: 600px;
+  margin-bottom: 100px;
+}
+@media screen and (max-width: 768px){
+  .ai-answer-container {
+    width: 300px;
+  }
 }
