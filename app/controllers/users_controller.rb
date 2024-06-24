@@ -30,7 +30,8 @@ class UsersController < ApplicationController
       @users = User.where('name like ?', params[:search][:name] + '%').page(params[:page])
       if @users.empty?
         @users = User.all.page(params[:page])
-        flash[:notice] = "ユーザーを見つけられませんでした"
+        flash[:notice] = "ユーザーを見つけられませんでした.
+        "
       end
     end
   end

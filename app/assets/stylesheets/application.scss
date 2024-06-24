@@ -61,3 +61,15 @@ main{
   display: block;
   text-align: center;
 }
+
+.notice, .alert{
+  padding-left: 20px;
+  border-radius: 10px;
+  margin: 10px 10px;
+}
+.notice{
+  border: 1px solid $cornflower;
+}
+.alert{
+  border: 1px solid red;
+}
