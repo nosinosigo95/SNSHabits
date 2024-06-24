@@ -1,0 +1,8 @@
+<%= content_for(:page_title, "アカウントページ") %>
+<%= render 'shared/users/user_info', user: @user %>
+<h3 class="center-text">あなたがフォローしたユーザー</h3>
+<% if @followers.present? %>
+  <%= render 'shared/users/users_list', users: @followers %>
+<% else %>
+  <p>あなたがフォローしたユーザーはいません。</p>
+<% end %>

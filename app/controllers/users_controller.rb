@@ -14,20 +14,13 @@ class UsersController < ApplicationController
 
   def followings
     @user = User.find(params[:user_id])
-    @followings = @user.followings
-    if @followings.empty?
-      flash[:searched_result] = "フォローされているユーザーはいません"
-    end
-    redirect_to request.referer
+    @followings = @user.followings.page(params[:page])
+
   end
 
   def followers
     @user = User.find(params[:user_id])
-    @followers = @user.followers
-    if @followers.empty?
-      flash[:searched_result] = "フォローしているユーザーはいません"
-    end
-    redirect_to request.referer
+    @followers = @user.followers.page(params[:page])
   end
 
   def index

@@ -1,35 +1,9 @@
-<div>
-  <% if current_user.id == @user.id %>
-    <%= link_to '編集', edit_user_registration_path %>
-  <% end %>
-  <p><%= image_tag get_user_icon(@user) %></p>
-  <p><%= @user.name %></p>
-  <% if current_user.id == @user.id %>
-    <p>メールアドレス：<%= @user.email %></p>
-  <% end %>
-  <p>自己紹介:</p>
-  <p><%= @user.introduction %></p>
-  <p><%= link_to "フォローする#{@user.followers.count}", user_followers_path(@user.id) %></p>
-  <p><%= link_to "フォローされた#{@user.followings.count}", user_followings_path(@user.id) %></p>
-  <div class="edit-follow">
-    <% if current_user != @user %>
-      <%= render 'shared/follows/btn', followed_user: @user %>
-    <% end %>
-  </div>
-</div>
-<% if @followers.present? %>
-  <h3 class="center-text">フォローしたユーザー</h3>
-  <%= render 'shared/users/index', users: @followers, displayed_user: @user %>
-<% end %>
-<% if @followings.present? %>
-  <h3 class="center-text">フォローされたユーザー</h3>
-  <%= render 'shared/users/index', users: @followings, displayed_user: @user %>
-<% end %>
-
+<%= content_for(:page_title, "アカウントページ") %>
+<%= render 'shared/users/user_info', user: @user %>
 <% if flash[:searched_result].present? %>
   <p><%= flash[:searched_result] %></p>
 <% end%>
-<% if @followers.empty? && @followings.empty? %>
+<% if @followers.nil? && @followings.nil? %>
   <h3 class="center-text">日記一覧(公開)</h3>
   <div class="search-result">
     <div class="top-pagination">

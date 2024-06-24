@@ -1,4 +1,7 @@
-<div class="">
+<div class="search-result">
+  <div class="top-pagination">
+    <%= paginate users %>
+  </div>
   <% users.each do |user| %>
       <ul>
         <li><%= user.name %></li>
@@ -6,4 +9,7 @@
         <li><%= render 'shared/follows/btn', followed_user: user %></li>
       </ul>
   <% end %>
+  <div class="bottom-pagination">
+    <%= paginate users %>
+  </div>
 </div>
