@@ -32,7 +32,7 @@ class DiariesController < ApplicationController
     if params[:habit].present?
       favorite_id = /\A[0-9]+\z/.match(params[:habit][:favorite_id])
       if favorite_id[0].present?
-        redirect_to new_diary_url("habit_id = ?", favorite_id[0])
+        redirect_to new_diary_url(favorite_id[0])
       end
     end
 
