@@ -1,0 +1,47 @@
+@import "var";
+$icon-large-size: 50px;
+$account-menu-padding-size: 5px;
+.user-info-container{
+  width: fit-content;
+  margin: 0 auto;
+}
+.user-icon-large{
+  display: inline;
+  width: $icon-large-size;
+  height: $icon-large-size;
+  vertical-align: middle;
+}
+.user-name-icon{
+  height: $icon-large-size;
+  width: 100%;
+}
+.user-info-container{
+  .user-name{
+    display: inline;
+    font-size: 20px;
+    vertical-align: middle;
+  }
+  .user-edition{
+    display: inline-block;
+    vertical-align: middle;
+    margin-left: 100px;
+  }
+}
+.account-link{
+  display: inline-block;
+  border: 1px solid $cornflower;
+  padding:  $account-menu-padding-size;
+  border-radius: 5px;
+}
+.follow-link{
+  display: inline-block;
+  border: 1px solid $cornflower;
+  padding: $account-menu-padding-size;
+  border-radius: 5px;
+}
+.following-link{
+  display: inline-block;
+  border: 1px solid $cornflower;
+  border-radius: 5px;
+  padding: $account-menu-padding-size;
+}
