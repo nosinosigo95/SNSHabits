@@ -1,6 +1,7 @@
 @import "var";
 $icon-large-size: 50px;
 $account-menu-padding-size: 5px;
+$icon-small-size: 20px;
 .user-info-container{
   width: fit-content;
   margin: 0 auto;
@@ -10,6 +11,10 @@ $account-menu-padding-size: 5px;
   width: $icon-large-size;
   height: $icon-large-size;
   vertical-align: middle;
+}
+.user-icon-small{
+  width: $icon-small-size;
+  height: $icon-small-size;
 }
 .user-name-icon{
   height: $icon-large-size;
@@ -44,4 +49,22 @@ $account-menu-padding-size: 5px;
   border: 1px solid $cornflower;
   border-radius: 5px;
   padding: $account-menu-padding-size;
+}
+.follower-following-user-card{
+  ul{
+    box-sizing: border-box;
+    width: 100%;
+    list-style-type: none;
+    padding-left: 0;
+  }
+  border: solid 6px $cornflower;
+  width: 360px;
+  margin: 5px 5px;
+  padding: 10px;
+  box-sizing: border-box;
+}
+@media screen and (max-width: 890px) {
+  .follower-following-user-card {
+    margin: 10px auto;
+  }
 }
