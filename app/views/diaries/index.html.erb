@@ -13,7 +13,7 @@
 <% end %>
 <%= form_with do %>
   <span class="diary-form-title">AIに相談：</span>
-  <%= text_area :search, :name, class: "block-input-parts", id: "consult-content" %>
+  <%= text_area :search, :name, class: "block-input-parts text-area", id: "consult-content" %>
   <%= submit_tag '相談する', class: "diary-form-button", id: "consult-button" %>
 <% end %>
 <div class="ai-answer-container">
