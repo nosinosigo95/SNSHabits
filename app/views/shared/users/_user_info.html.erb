@@ -9,9 +9,8 @@
   </div>
 
   <% if current_user.id == user.id %>
-    <p>メールアドレス：<%= user.email %></p>
+    <p><%= user.email %></p>
   <% end %>
-  <p>自己紹介:</p>
   <p><%= user.introduction %></p>
   <%= link_to '日記', user_path(user.id) , class: "account-link" %>
   <%= link_to "フォローする#{user.followers.count}", user_followers_path(user.id), class: "follow-link"%>
