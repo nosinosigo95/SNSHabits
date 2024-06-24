@@ -1,5 +1,6 @@
 <% content_for(:page_title, "習慣検索")%>
 <%= render 'shared/habits/index', habit_index: @habit_index %>
+<%= link_to '習慣を作成する', new_habit_path, class: "habit-creation-link" %>
 <h3 class="center-text">検索結果</h3>
 <div class="top-pagination">
   <%= paginate @habits %>
