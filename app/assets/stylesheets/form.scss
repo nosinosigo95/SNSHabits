@@ -114,3 +114,9 @@ form {
 .hidden-button, .hidden-url-input-parts{
   display: none;
 }
+@media screen and (max-width: 768px){
+  form{
+    padding: 10px;
+  }
+}
+
