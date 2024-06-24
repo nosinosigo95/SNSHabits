@@ -155,3 +155,11 @@ header a:visited{
     margin: 0 auto;
   }
 }
+@media screen and (max-width: 768px) {
+  .header-left{
+    padding-left: 0px;
+  }
+  .header-size li a{
+    padding-left: 0px;
+  }
+}
