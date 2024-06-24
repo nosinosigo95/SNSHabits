@@ -44,9 +44,8 @@ class UsersController < ApplicationController
     @user = User.find_by(name: "guest")
     if @user.present?
       sign_in(@user)
+      flash[:notice] = "ようこそ！あなたはログインに成功しました。"
     end
-    # ログイン後に処理する
-    flash[:notice] = "Welcome! You have signed up successfully."
     redirect_to root_path
   end
 end
