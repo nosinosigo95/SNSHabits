@@ -9,3 +9,21 @@ ja:
       previous: "&lsaquo; 前"
       next: "次 &rsaquo;"
       truncate: "..."
+  activemodel:
+    attributes:
+      habit_form:
+        name: "習慣名"
+        scheme: "説明・工夫"
+        period_for_effect: "効果が出始める頃"
+        effects: "効果"
+        working_time: "作業時間"
+        urls: "URL"
+        summary: "概要"
+        circumstance: "状況"
+      habit_index_form:
+        name: "習慣名"
+        effects_item: "効果"
+        period_for_effect: "効果が出始める頃"
+        created: "自身が作成したもの"
+        sort: "並べる順"
+
