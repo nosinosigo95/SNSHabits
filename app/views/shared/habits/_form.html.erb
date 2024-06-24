@@ -33,7 +33,10 @@
 
   <%= f.label :period_for_effect, class: "block-label" %>
   <%= f.text_field :period_for_effect, placeholder: "例)2ヶ月", class: "block-input-parts" %>
-
+  <%= f.label :doing_time, class: "block-label" do %>
+    <%= p "実行時間(時:分)" %>
+  <% end %>
+  <%= f.time_field :working_time, value: form.working_time, class: "block-input-parts" %>
   
   <%= f.radio_button :circumstance, "commit", class: "radio" %>
   <%= f.label :circumstance, "結果済", value: "commit", class: "radio" %>
