@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  get 'chat/create'
   resources :habits
   get 'favorites_habit/:habit_id', to: 'favorite_habits#add', as: 'add_favorite_habit'
   delete 'favorites_habit/:habit_id', to: 'favorite_habits#delete', as: 'delete_favorite_habit'
