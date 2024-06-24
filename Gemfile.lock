@@ -1634,11 +1634,18 @@ GEM
       dotenv (= 3.1.2)
       railties (>= 6.1)
     erubi (1.12.0)
+    event_stream_parser (1.0.0)
     factory_bot (6.4.6)
       activesupport (>= 5.0.0)
     factory_bot_rails (6.4.3)
       factory_bot (~> 6.4)
       railties (>= 5.0.0)
+    faraday (2.9.2)
+      faraday-net_http (>= 2.0, < 3.2)
+    faraday-multipart (1.0.4)
+      multipart-post (~> 2)
+    faraday-net_http (3.1.0)
+      net-http
     ffi (1.16.3)
     globalid (1.2.1)
       activesupport (>= 6.1)
@@ -1679,6 +1686,9 @@ GEM
     mini_portile2 (2.8.6)
     minitest (5.23.1)
     msgpack (1.7.2)
+    multipart-post (2.4.1)
+    net-http (0.4.1)
+      uri
     net-imap (0.4.11)
       date
       net-protocol
@@ -1812,6 +1822,10 @@ GEM
     rubocop-rspec (2.0.1)
       rubocop (~> 1.0)
       rubocop-ast (>= 1.1.0)
+    ruby-openai (7.1.0)
+      event_stream_parser (>= 0.3.0, < 2.0.0)
+      faraday (>= 1)
+      faraday-multipart (>= 1)
     ruby-progressbar (1.13.0)
     rubyzip (2.3.2)
     sass-rails (6.0.0)
@@ -1848,6 +1862,7 @@ GEM
     tzinfo (2.0.6)
       concurrent-ruby (~> 1.0)
     unicode-display_width (2.5.0)
+    uri (0.13.0)
     warden (1.2.9)
       rack (>= 2.0.9)
     web-console (4.2.1)
@@ -1903,6 +1918,7 @@ DEPENDENCIES
   rspec-rails
   rubocop
   rubocop-airbnb
+  ruby-openai
   sass-rails (>= 6)
   selenium-webdriver (>= 4.0.0.rc1)
   spring
