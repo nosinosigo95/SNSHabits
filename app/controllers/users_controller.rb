@@ -30,7 +30,8 @@ class UsersController < ApplicationController
       @users = User.where('name like ?', params[:search][:name] + '%').page(params[:page])
       if @users.empty?
         @users = User.all.page(params[:page])
-        flash[:notice] = "ユーザーを見つけられませんでした"
+        flash[:notice] = "ユーザーを見つけられませんでした.
+        "
       end
     end
   end
@@ -44,9 +45,8 @@ class UsersController < ApplicationController
     @user = User.find_by(name: "guest")
     if @user.present?
       sign_in(@user)
+      flash[:notice] = "ようこそ！あなたはログインに成功しました。"
     end
-    # ログイン後に処理する
-    flash[:notice] = "Welcome! You have signed up successfully."
     redirect_to root_path
   end
 end
