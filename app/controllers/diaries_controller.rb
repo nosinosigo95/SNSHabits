@@ -6,8 +6,8 @@ class DiariesController < ApplicationController
     end
 
   def create
-    diary = Diary.create(diary_params)
-    if diary.save
+    @diary = Diary.new(diary_params)
+    if @diary.save
       redirect_to root_url
     else
       render :new
@@ -19,8 +19,8 @@ class DiariesController < ApplicationController
   end
 
   def update
-    diary = Diary.find(params[:id])
-    if diary.update(diary_params)
+    @diary = Diary.find(params[:id])
+    if @diary.update(diary_params)
       redirect_to root_url
     else
       render :edit
@@ -32,7 +32,7 @@ class DiariesController < ApplicationController
     if params[:habit].present?
       favorite_id = /\A[0-9]+\z/.match(params[:habit][:favorite_id])
       if favorite_id[0].present?
-        redirect_to new_diary_url("habit_id = ?", favorite_id[0])
+        redirect_to new_diary_url(favorite_id[0])
       end
     end
 
@@ -58,6 +58,6 @@ class DiariesController < ApplicationController
 
   def diary_params
     params.require(:diary).permit(:description, :doing_time, :private,
-      :action_date).merge(user_id: current_user.id)
+      :action_date, :habit_id).merge(user_id: current_user.id)
   end
 end
