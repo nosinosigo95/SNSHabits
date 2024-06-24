@@ -23,4 +23,8 @@ $(document).ready(function(){
 
   $('.related-habits .card').hide();
   $('.related-habits .card').first().show();
+
+  $('#consult-button').click("turbo:load", function(event){
+    event.preventDefault();
+  });
 });

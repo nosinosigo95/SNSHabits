@@ -16,6 +16,7 @@
   <%= text_area :search, :name, class: "block-input-parts", id: "consult-content" %>
   <%= submit_tag '相談する', class: "diary-form-button", id: "consult-button" %>
 <% end %>
+<p id="result-for-consult"></p>
 <h3 class="center-text">検索結果</h3>
 <div class="search-result">
   <div class="top-pagination">
@@ -75,6 +76,7 @@
         }
       }
     });
+
   });
 
 </script>
