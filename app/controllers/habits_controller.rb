@@ -31,7 +31,7 @@ class HabitsController < ApplicationController
   end
 
   def show
-    @habit = Habit.find(params[:id])
+    @habit = Habit.includes(:effect_habits, :effects, :sources, :user, :related_habits, :favorite_habits).find(params[:id])
     @habit.update(recently_viewed_time: Time.now)
 
     set_related_habit_table(@habit)
