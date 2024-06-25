@@ -1,25 +1,11 @@
 <% content_for(:page_title, "日記") %>
 
-<%= form_with url: diaries_path, method: :get  do %> 
-  <span class="diary-form-title">お気に入り:</span>
-  <%= select(:habit, :favorite_id, get_favorite_habit(@user_favorites), {}, {class: "diary-select"}) %>
-  <%= submit_tag '日記を作成する', class: "diary-form-button" %>
-<% end %>
-
 <%= form_with url: diaries_path, method: :get do %> 
     <span class="diary-form-title">取り組み中：</span>
     <%= select(:continuation, :habit_id, get_continuation_habit(@user_continuations), {}, {class: "diary-select"}) %>
     <%= submit_tag '日記を検索する', class: "diary-form-button" %>
 <% end %>
-<%= form_with do %>
-  <span class="diary-form-title">AIに相談：</span>
-  <%= text_area :search, :name, class: "block-input-parts text-area", id: "consult-content" %>
-  <%= submit_tag '相談する', class: "diary-form-button", id: "consult-button" %>
-<% end %>
-<div class="ai-answer-container">
-  <p>AIの回答:</p>
-  <p id="result-for-consult"></p>
-</div>
+
 <h3 class="center-text">検索結果</h3>
 <div class="search-result">
   <div class="top-pagination">
@@ -51,6 +37,22 @@
   <% sorted_diaries = sort_diaris(@diaries) %>
   <% doing_times = doing_times_before_days(sorted_diaries) %>
 </canvas>
+
+<%= form_with url: diaries_path, method: :get  do %> 
+  <span class="diary-form-title">お気に入り:</span>
+  <%= select(:habit, :favorite_id, get_favorite_habit(@user_favorites), {}, {class: "diary-select"}) %>
+  <%= submit_tag '日記を作成する', class: "diary-form-button" %>
+<% end %>
+
+<%= form_with do %>
+  <span class="diary-form-title">AIに相談：</span>
+  <%= text_area :search, :name, class: "block-input-parts text-area", id: "consult-content" %>
+  <%= submit_tag '相談する', class: "diary-form-button", id: "consult-button" %>
+<% end %>
+<div class="ai-answer-container">
+  <p>AIの回答:</p>
+  <p id="result-for-consult"></p>
+</div>
 
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 <script>
