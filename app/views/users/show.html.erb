@@ -16,7 +16,7 @@
         <p class="card-item">習慣名</p>
         <p class="card-content"><%= diary.habit.name %></p>
         <p class="card-item">内容</p>
-        <p class="card-content"><%= diary.description %></p>
+        <p class="card-content"><%= simple_format(diary.description) %></p>
         <p class="card-item">実行時間</p>
         <p class="card-content"><%= diary.doing_time %></p>
       </div>

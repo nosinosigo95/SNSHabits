@@ -8,7 +8,7 @@
   </div>
   <div class="scheme-display one-card-item">
     <p class="card-item one-card-item">工夫・方法:</p>
-    <p class="card-content one-card-content"><%= @habit.scheme %></p>
+    <p class="card-content one-card-content"><%= simple_format(@habit.scheme) %></p>
   </div>
 
   <% if @habit.period_for_effect.present? %>
