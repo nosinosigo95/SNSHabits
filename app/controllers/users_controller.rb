@@ -25,11 +25,11 @@ class UsersController < ApplicationController
 
   def index
     if params[:search].nil?
-      @users = User.all.page(params[:page])
+      @users = User.includes(:icon_attachment).all.page(params[:page])
     else
-      @users = User.where('name like ?', params[:search][:name] + '%').page(params[:page])
+      @users = User.includes(:icon_attachment).where('name like ?', params[:search][:name] + '%').page(params[:page])
       if @users.empty?
-        @users = User.all.page(params[:page])
+        @users = User.includes(:icon_attachment).all.page(params[:page])
         flash[:notice] = "ユーザーを見つけられませんでした.
         "
       end
@@ -37,8 +37,8 @@ class UsersController < ApplicationController
   end
 
   def show
-    @user = User.find(params[:id])
-    @diaries = @user.diaries.page(params[:page])
+    @user = User.includes(:diaries).find(params[:id])
+    @diaries = @user.diaries.includes(:habit).page(params[:page])
   end
 
   def log_in_guest
