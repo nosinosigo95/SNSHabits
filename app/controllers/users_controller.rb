@@ -37,8 +37,8 @@ class UsersController < ApplicationController
   end
 
   def show
-    @user = User.find(params[:id])
-    @diaries = @user.diaries.page(params[:page])
+    @user = User.includes(:diaries).find(params[:id])
+    @diaries = @user.diaries.includes(:habit).page(params[:page])
   end
 
   def log_in_guest
