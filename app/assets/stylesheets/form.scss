@@ -51,6 +51,15 @@ form {
   border-radius: $border-radius;
   margin-left: 10px;
 }
+
+.required-for-radio{
+  background-color: orange;
+  width: fit-content;
+  margin-top: $big-space-between-form-parts;
+  margin-bottom: $small-spece-between-form-parts;
+  color: white;
+  border-radius: $border-radius;
+}
 .submit-button, .cancel-link{
   display: block;
   margin: $big-space-between-form-parts auto;

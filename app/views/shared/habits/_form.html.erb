@@ -4,11 +4,15 @@
   <%= f.label :name, class: "required block-label" %>
   <%= f.text_field :name, placeholder: "例)ヨガ", class: "block-input-parts" %>
 
-  <%= f.label :effects, class: "required block-label" %>
+  <%= f.label :effects, class: "required block-label" do %>
+    <%= p "効果(キーワード5つ以内)"%>
+  <% end %>
   <%= f.text_field :effects, placeholder: "例)肩こり,体全体", class: "block-input-parts" %>
   <%= f.hidden_field :effects_ids %>
 
-  <%= f.label :summary, class: "required block-label" %>
+  <%= f.label :summary, class: "required block-label" do %>
+    <%= p "概要(200字以内)"%>
+  <% end %>
   <%= f.text_field :summary, placeholder: "例)体の動き", class: "block-input-parts" %>
 
   <%= f.label :scheme, class: "required block-label" %>
@@ -16,7 +20,7 @@
 
 
   <%= f.label :urls, class: "block-label" do %>
-    <%= "URL" %>
+    <%= p "URL(3つ以内)" %>
     <%= link_to "追加",'#',class: "button-addition button-link" %>
   <% end %>
   <% get_url_max.times do |i| %>
@@ -37,7 +41,7 @@
     <%= p "実行時間(時:分)" %>
   <% end %>
   <%= f.time_field :working_time, value: form.working_time, class: "block-input-parts" %>
-  
+  <p class="required-for-radio">必須</p>
   <%= f.radio_button :circumstance, "commit", class: "radio" %>
   <%= f.label :circumstance, "結果済", value: "commit", class: "radio" %>
   <%= f.radio_button :circumstance, "challenge", class: "radio" %>
