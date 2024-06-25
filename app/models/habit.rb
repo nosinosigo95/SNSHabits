@@ -22,15 +22,15 @@ class Habit < ApplicationRecord
       end
     else
       if sort.blank?
-        includes(:sources, :effects, :favorite_habits).where(search_attr)
+        includes(:sources, :effects, :favorite_habits).where(search_attr).where(commit: true)
       else
-        includes(:sources, :effects, :favorite_habits).where(search_attr).order(sort)
+        includes(:sources, :effects, :favorite_habits).where(search_attr).where(commit: true).order(sort)
       end
     end
   end
 
   def self.search_all
-    all.includes(:sources, :effects, :favorite_habits)
+    all.includes(:sources, :effects, :favorite_habits).where(commit: true)
   end
 
   def self.get_search_attr(habit_index, user)
