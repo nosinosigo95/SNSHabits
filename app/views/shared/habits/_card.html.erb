@@ -21,6 +21,10 @@
         <%= habit.period_for_effect %>
       </p>
     <% end %>
+    <p class="card-item">作成者：</p>
+    <p class="card-content">
+      <%= link_to habit.user.name, user_path(habit.user.id) %>
+    </p>
     <%= render 'shared/habits/favorite_habit', habit: habit %>
     <% if habit.user_id == current_user.id %>
       <%= link_to '編集', edit_habit_path(habit.id), class: "edit-habit" %>
