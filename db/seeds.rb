@@ -59,8 +59,8 @@ User.all.each do |user|
     scheme: "この習慣は、〇〇をします。<br/>手順は以下のように行います。<br/> 手順1: \n手順2:",
     period_for_effect: "2ヶ月",
     working_time: "02:00",
-    challenge: "true",
-    commit: "false"
+    challenge: "false",
+    commit: "true"
   )
 end
 
