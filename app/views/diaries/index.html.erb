@@ -2,7 +2,7 @@
 
 <%= form_with url: diaries_path, method: :get  do %> 
   <span class="diary-form-title">お気に入り:</span>
-  <%= select(:habit, :favorite_id, get_favorite_habit, {}, {class: "diary-select"}) %>
+  <%= select(:habit, :favorite_id, get_favorite_habit(@user_favorites), {}, {class: "diary-select"}) %>
   <%= submit_tag '日記を作成する', class: "diary-form-button" %>
 <% end %>
 

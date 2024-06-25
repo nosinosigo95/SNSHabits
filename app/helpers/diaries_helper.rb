@@ -1,7 +1,8 @@
 module DiariesHelper
-  def get_favorite_habit
+  def get_favorite_habit(favorites)
     favorite_habit = {}
-    current_user.favorites.each do |habit|
+    favorites.each do |favorite|
+      habit = favorite.habit
       favorite_habit[habit.name] = habit.id
     end
     favorite_habit
