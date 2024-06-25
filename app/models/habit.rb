@@ -22,9 +22,9 @@ class Habit < ApplicationRecord
       end
     else
       if sort.blank?
-        includes(:sources, :effects).where(search_attr)
+        includes(:sources, :effects, :favorite_habits).where(search_attr)
       else
-        includes(:sources, :effects).where(search_attr).order(sort)
+        includes(:sources, :effects, :favorite_habits).where(search_attr).order(sort)
       end
     end
   end
