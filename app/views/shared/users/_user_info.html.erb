@@ -13,8 +13,8 @@
   <% end %>
   <p><%= user.introduction %></p>
   <%= link_to '日記', user_path(user.id) , class: "account-link" %>
-  <%= link_to "フォローする#{user.followers.count}", user_followers_path(user.id), class: "follow-link"%>
-  <%= link_to "フォローされた#{user.followings.count}", user_followings_path(user.id), class: "following-link"%>
+  <%= link_to "follower#{user.followers.count}", user_followers_path(user.id), class: "follow-link"%>
+  <%= link_to "following#{user.followings.count}", user_followings_path(user.id), class: "following-link"%>
   <div class="edit-follow">
     <% if current_user != user %>
       <%= render 'shared/follows/btn', followed_user: user %>
