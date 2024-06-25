@@ -114,6 +114,10 @@ form {
 .hidden-button, .hidden-url-input-parts{
   display: none;
 }
+.field_with_errors:has(.radio){
+  display:inline-block;
+}
+
 @media screen and (max-width: 768px){
   form{
     padding: 10px;
