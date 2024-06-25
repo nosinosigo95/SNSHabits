@@ -11,7 +11,8 @@ class HabitsController < ApplicationController
   def create
     @form = HabitForm.new(attributes: habit_params, user: current_user)
     if @form.save
-      redirect_to root_path
+      flash[:notice] = "習慣を作成しました"
+      redirect_to habit_url(@form.id)
     else
       render :new
     end
@@ -22,9 +23,10 @@ class HabitsController < ApplicationController
   end
 
   def update
-    form = HabitForm.new(attributes: habit_params, habit: @habit, user: current_user)
-    if form.update
-      redirect_to habit
+    @form = HabitForm.new(attributes: habit_params, habit: @habit, user: current_user)
+    if @form.update
+      flash[:notice] = "習慣を更新しました"
+      redirect_to habit_url(@form.id)
     else
       render :edit
     end
@@ -99,8 +101,8 @@ class HabitsController < ApplicationController
   end
 
   def set_habit
-    @habit = current_user.habits.where('id = ?', params[:id])
-    if @habit.empty?
+    @habit = Habit.find(params[:id])
+    if @habit.nil? || @habit.user_id != current_user.id
       flash[:alert] = "そのようなページはありません"
       redirect_to habits_url
     end
