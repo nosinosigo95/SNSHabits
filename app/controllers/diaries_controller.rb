@@ -42,10 +42,10 @@ class DiariesController < ApplicationController
       if continuation_habit_id[0].present?
         @diaries = Diary.continuous_habits(continuation_habit_id[0], current_user.id).includes(:habit).page(params[:page])
       else
-        @diaries = Diary.index_for_user.includes(:habit).page(params[:page])
+        @diaries = Diary.index_for_user(current_user.id).includes(:habit).page(params[:page])
       end
     else
-      @diaries = Diary.index_for_user.includes(:habit).page(params[:page])
+      @diaries = Diary.index_for_user(current_user.id).includes(:habit).page(params[:page])
     end
   end
   def destroy
