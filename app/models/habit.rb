@@ -5,7 +5,7 @@ class Habit < ApplicationRecord
   has_many :favorite_habits, dependent: :restrict_with_error
   has_many :users, through: :favorite_habits
   belongs_to :user
-  has_one :diary
+  has_one :diary, dependent: :restrict_with_error
   has_many :forward_habit_relationships, class_name: "RelatedHabit", foreign_key: "old_habit_id", dependent: :destroy
   has_many :current_habit_relationships, class_name: "RelatedHabit", foreign_key: "now_habit_id", dependent: :destroy
   has_many :related_habits, through: :current_habit_relationships, source: :old_habit
