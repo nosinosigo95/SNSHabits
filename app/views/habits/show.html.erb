@@ -33,6 +33,10 @@
       </ul>
     </div>
   <% end %>
+  <p class="card-item one-card-item">作成者：</p>
+    <p class="card-content one-card-content">
+      <%= link_to @habit.user.name, user_path(@habit.user.id) %>
+    </p>
   <div class="circumstance-display">
     <p class="card-item one-card-item">この習慣の状況</p>
     <p  class="card-content one-card-content"><%= get_circumstance(@habit) %></p>
