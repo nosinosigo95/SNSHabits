@@ -47,7 +47,7 @@ User.all.each do |user|
   user.habits.create!(
     name: "習慣#{user.id}",
     summary: "この習慣は、〇〇をします。",
-    scheme: "この習慣は、〇〇をします。<br/>手順は以下のように行います。<br/> 手順1: \n手順2:",
+    scheme: "この習慣は、〇〇をします。\n手順は以下のように行います。<br/> 手順1: \n手順2:",
     period_for_effect: "4週間",
     working_time: "01:00",
     challenge: "true",
@@ -56,7 +56,7 @@ User.all.each do |user|
   user.habits.create!(
     name: "習慣#{user.id + increase_sft}",
     summary: "この習慣は、〇〇をします。",
-    scheme: "この習慣は、〇〇をします。<br/>手順は以下のように行います。<br/> 手順1: \n手順2:",
+    scheme: "この習慣は、〇〇をします。\n手順は以下のように行います。<br/> 手順1: \n手順2:",
     period_for_effect: "2ヶ月",
     working_time: "02:00",
     challenge: "false",
