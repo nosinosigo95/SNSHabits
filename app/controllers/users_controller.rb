@@ -13,14 +13,13 @@ class UsersController < ApplicationController
   end
 
   def followings
-    @user = User.find(params[:user_id])
-    @followings = @user.followings.page(params[:page])
-
+    @user = User.includes(:followings).find(params[:user_id])
+    @followings = @user.followings.includes(:icon_attachment).page(params[:page])
   end
 
   def followers
-    @user = User.find(params[:user_id])
-    @followers = @user.followers.page(params[:page])
+    @user = User.includes(:followings).find(params[:user_id])
+    @followers = @user.followers.includes(:icon_attachment).page(params[:page])
   end
 
   def index
