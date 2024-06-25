@@ -35,7 +35,4 @@ class Diary < ApplicationRecord
   scope :index_for_user, -> (user_id) {
     where("user_id = ?", user_id)
   }
-
-
-  scope :doing_time_day_ago, -> (n) { where(action_date: n.day.ago.strftime('%Y-%m-%d'))}
 end

@@ -39,7 +39,6 @@ module DiariesHelper
 
     before_days_i = 0
     diaries.each do |diary|
-      # before_days[before_days_i]がdiary.action_dateに一致しなければ、一致するものを探す。もし、探している時に、before_days_iがbefore_days.count以上になれば、処理を終了する
       while before_days_i < before_days.count
         if(diary.action_date.strftime('%Y-%m-%d') == before_days[before_days_i])
           break
@@ -48,13 +47,12 @@ module DiariesHelper
       end
       break if before_days_i >= before_days.count
 
-      # before_daysの一つがdiary.action_dateに一致すれば、doing_times[before_days_i]に入れる
       doing_times[before_days_i] = doing_times[before_days_i].to_f + change_doing_time_to_hour(diary.doing_time)
     end
     doing_times
   end
 
-  # new_doing_time: "時：分"
+  # doing_time: "時：分"
   def change_doing_time_to_hour(doing_time)
     doing_time_match = /\A(\d{1,2}):(\d{1,2})\z/.match(doing_time)
     hours = doing_time_match[0].to_i
