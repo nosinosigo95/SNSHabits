@@ -19,7 +19,7 @@
       <p class="card-item">習慣名</p>
       <p class="card-content"><%= link_to diary.habit.name, habit_path(diary.habit.id) %></p>
       <p class="card-item">内容</p>
-      <p class="card-content"><%= diary.description %></p>
+      <p class="card-content"><%= simple_format(diary.description) %></p>
       <p class="card-item">実行時間</p>
       <p class="card-content"><%= diary.doing_time %></p>
       <p class="card-item">作成日</p>
