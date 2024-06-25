@@ -14,7 +14,7 @@ $(document).ready(function(){
     $('.inline-block-input-parts').eq(index).removeClass('displayed-url-input-parts');
     $('.button-removal').eq(index).addClass('hidden-button');
   });
-  $('.left-arrow').click("turbo:load",function(event){
+  $('.left-arrow').click("turbo:load", function(event){
     event.preventDefault();
   });
   $('.right-arrow').click("turbo:load", function(event){

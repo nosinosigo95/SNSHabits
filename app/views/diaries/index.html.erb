@@ -1,25 +1,13 @@
 <% content_for(:page_title, "日記") %>
 
-<%= form_with url: diaries_path, method: :get  do %> 
-  <span class="diary-form-title">お気に入り:</span>
-  <%= select(:habit, :favorite_id, get_favorite_habit(@user_favorites), {}, {class: "diary-select"}) %>
-  <%= submit_tag '日記を作成する', class: "diary-form-button" %>
-<% end %>
-
 <%= form_with url: diaries_path, method: :get do %> 
     <span class="diary-form-title">取り組み中：</span>
     <%= select(:continuation, :habit_id, get_continuation_habit(@user_continuations), {}, {class: "diary-select"}) %>
     <%= submit_tag '日記を検索する', class: "diary-form-button" %>
 <% end %>
-<%= form_with do %>
-  <span class="diary-form-title">AIに相談：</span>
-  <%= text_area :search, :name, class: "block-input-parts text-area", id: "consult-content" %>
-  <%= submit_tag '相談する', class: "diary-form-button", id: "consult-button" %>
-<% end %>
-<div class="ai-answer-container">
-  <p>AIの回答:</p>
-  <p id="result-for-consult"></p>
-</div>
+<p class="diary-creation-link">日記作成は<%= link_to 'こちらへ', '#diary-creation' %></p>
+
+<p class="AI-consult-link">AI相談は<%= link_to 'こちらへ', '#AI-consult' %></p>
 <h3 class="center-text">検索結果</h3>
 <div class="search-result">
   <div class="top-pagination">
@@ -52,6 +40,24 @@
   <% doing_times = doing_times_before_days(sorted_diaries) %>
 </canvas>
 
+<h3 id="diary-creation" class="diary-creation-title">日記作成<h3>
+<%= form_with url: diaries_path, method: :get  do %> 
+  <span class="diary-form-title">お気に入り:</span>
+  <%= select(:habit, :favorite_id, get_favorite_habit(@user_favorites), {}, {class: "diary-select"}) %>
+  <%= submit_tag '日記を作成する', class: "diary-form-button" %>
+<% end %>
+
+<h3 id="AI-consult" class="ai-answer-title">AI相談<h3>
+<%= form_with do %>
+  <span class="diary-form-title">AIに相談：</span>
+  <%= text_area :search, :name, class: "block-input-parts text-area", id: "consult-content" %>
+  <%= submit_tag '相談する', class: "diary-form-button", id: "consult-button" %>
+<% end %>
+<div class="ai-answer-container">
+  <p>AIの回答:</p>
+  <p id="result-for-consult"></p>
+</div>
+
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 <script>
   $(document).on('turbolinks:load', function(){
@@ -82,7 +88,18 @@
         }
       }
     });
+    $('a[href="#diary-creation"]').click("turbo:load", function(event){
+      event.preventDefault();
+      let position = $('#diary-creation').offset().top;
+      console.log(position);
+      $('body,html').animate({scrollTop: position}, 400, 'swing');
+    });
 
+    $('a[href="#AI-consult"]').click("turbo:load", function(event){
+      event.preventDefault();
+      let position = $('#AI-consult').offset().top;
+      console.log(position);
+      $('body,html').animate({scrollTop: position}, 400, 'swing');
+    });
   });
-
 </script>
