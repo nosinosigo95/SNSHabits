@@ -11,26 +11,26 @@ class Habit < ApplicationRecord
   has_many :current_habit_relationships, class_name: "RelatedHabit", foreign_key: "now_habit_id", dependent: :destroy
   has_many :related_habits, through: :current_habit_relationships, source: :old_habit
 
-  def self.search_attr(habit_index, page, sort, user)
+  def self.search_attr(habit_index, sort, user)
     search_attr = get_search_attr(habit_index, user)
 
     if search_attr.nil?
       if sort.blank?
-        search_all(page)
+        search_all
       else
-        search_all(page).order(sort)
+        search_all.order(sort)
       end
     else
       if sort.blank?
-        includes(:sources, :effects).where(search_attr).page(page)
+        includes(:sources, :effects).where(search_attr)
       else
-        includes(:sources, :effects).where(search_attr).order(sort).page(page)
+        includes(:sources, :effects).where(search_attr).order(sort)
       end
     end
   end
 
-  def self.search_all(page)
-    all.includes(:sources, :effects).page(page)
+  def self.search_all
+    all.includes(:sources, :effects)
   end
 
   def self.get_search_attr(habit_index, user)
@@ -47,5 +47,6 @@ class Habit < ApplicationRecord
     atr['user_id'] = user.id if habit_index.created == '1'
     atr
   end
+
 end
 Habit.private_class_method(:get_search_attr)
