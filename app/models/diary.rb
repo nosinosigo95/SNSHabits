@@ -14,7 +14,7 @@ class Diary < ApplicationRecord
   validate :do_not_nothing
   validates(
     :private,
-    inclusion: { in: [true, false], message: "選択してください" },
+    inclusion: { in: [true, false], message: "を選択してください" },
   )
 
   def is_action_date_after_today

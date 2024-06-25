@@ -1,7 +1,7 @@
 FactoryBot.define do
   factory :user do
-    name { "sample" }
-    email { "sample@example.com" }
+    sequence(:name) { |n| "sample#{n}" }
+    sequence(:email) { |n| "sample#{n}@example.com" }
     password { "123456" }
     after(:build) do |user|
       user.icon.attach({
