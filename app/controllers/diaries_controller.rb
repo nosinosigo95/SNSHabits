@@ -28,7 +28,6 @@ class DiariesController < ApplicationController
   end
 
   def index
-    # current_user.includes(:continuation_habits)
     if params[:habit].present?
       favorite_id = /\A[0-9]+\z/.match(params[:habit][:favorite_id])
       if favorite_id[0].present?
@@ -36,15 +35,17 @@ class DiariesController < ApplicationController
       end
     end
 
+    @user_continuations = Continuation.where(user_id: current_user.id).includes(:habit)
+    @user_favorites = FavoriteHabit.where(user_id: current_user.id).includes(:habit)
     if params[:continuation].present?
       continuation_habit_id = /\A[0-9]+\z/.match(params[:continuation][:habit_id])
       if continuation_habit_id[0].present?
-        @diaries = current_user.diaries.where("habit_id = ?", continuation_habit_id[0]).page(params[:page])
+        @diaries = Diary.continuous_habits(continuation_habit_id[0], current_user.id).includes(:habit).page(params[:page])
       else
-        @diaries = current_user.diaries.page(params[:page])
+        @diaries = Diary.index_for_user(current_user.id).includes(:habit).page(params[:page])
       end
     else
-      @diaries = current_user.diaries.page(params[:page])
+      @diaries = Diary.index_for_user(current_user.id).includes(:habit).page(params[:page])
     end
   end
   def destroy

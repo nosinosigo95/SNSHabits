@@ -31,7 +31,7 @@ class HabitsController < ApplicationController
   end
 
   def show
-    @habit = Habit.find(params[:id])
+    @habit = Habit.includes(:effect_habits, :effects, :sources, :user, :related_habits, :favorite_habits).find(params[:id])
     @habit.update(recently_viewed_time: Time.now)
 
     set_related_habit_table(@habit)
@@ -45,9 +45,9 @@ class HabitsController < ApplicationController
     @habit_index.valid?
     if params[:habit_index_form]
       sort = nil if @habit_index.sort.blank?
-      @habits = Habit.search_attr(@habit_index, params[:page], sort, current_user)
+      @habits = Habit.search_attr(@habit_index, sort, current_user).page(params[:page])
     else
-      @habits = Habit.search_all(params[:page])
+      @habits = Habit.search_all.page(params[:page])
     end
   end
 

@@ -29,5 +29,10 @@ class Diary < ApplicationRecord
       errors.add(:doing_time, "は1分以上にしてください")
     end
   end
-  scope :doing_time_day_ago, -> (n) { where(action_date: n.day.ago.strftime('%Y-%m-%d'))}
+  scope :continuous_habits, -> (habit_id, user_id) {
+    where(["habit_id = ? AND user_id = ?", habit_id, user_id])
+  }
+  scope :index_for_user, -> (user_id) {
+    where("user_id = ?", user_id)
+  }
 end

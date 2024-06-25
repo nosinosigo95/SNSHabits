@@ -2,13 +2,13 @@
 
 <%= form_with url: diaries_path, method: :get  do %> 
   <span class="diary-form-title">お気に入り:</span>
-  <%= select(:habit, :favorite_id, get_favorite_habit, {}, {class: "diary-select"}) %>
+  <%= select(:habit, :favorite_id, get_favorite_habit(@user_favorites), {}, {class: "diary-select"}) %>
   <%= submit_tag '日記を作成する', class: "diary-form-button" %>
 <% end %>
 
 <%= form_with url: diaries_path, method: :get do %> 
     <span class="diary-form-title">取り組み中：</span>
-    <%= select(:continuation, :habit_id, get_continuation_habit, {}, {class: "diary-select"}) %>
+    <%= select(:continuation, :habit_id, get_continuation_habit(@user_continuations), {}, {class: "diary-select"}) %>
     <%= submit_tag '日記を検索する', class: "diary-form-button" %>
 <% end %>
 <%= form_with do %>
@@ -47,7 +47,10 @@
   </div>
 </div>
 <h4 class="doing-time-title">実行時間グラフ</h4>
-<canvas id="doing_time_chart"></canvas>
+<canvas id="doing_time_chart">
+  <% sorted_diaries = sort_diaris(@diaries) %>
+  <% doing_times = doing_times_before_days(sorted_diaries) %>
+</canvas>
 
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 <script>
@@ -61,13 +64,13 @@
           {
             label: '実行時間',
             data: [
-              <%= sum_doing_time(@diaries.doing_time_day_ago(6)) %>,
-              <%= sum_doing_time(@diaries.doing_time_day_ago(5)) %>,
-              <%= sum_doing_time(@diaries.doing_time_day_ago(4)) %>,
-              <%= sum_doing_time(@diaries.doing_time_day_ago(3)) %>,
-              <%= sum_doing_time(@diaries.doing_time_day_ago(2)) %>,
-              <%= sum_doing_time(@diaries.doing_time_day_ago(1)) %>,
-              <%= sum_doing_time(@diaries.doing_time_day_ago(0)) %>
+              <%= doing_times[6] %>,
+              <%= doing_times[5] %>,
+              <%= doing_times[4] %>,
+              <%= doing_times[3] %>,
+              <%= doing_times[2] %>,
+              <%= doing_times[1] %>,
+              <%= doing_times[0] %>
             ]
           }
         ]
