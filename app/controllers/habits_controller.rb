@@ -31,13 +31,13 @@ class HabitsController < ApplicationController
   end
 
   def show
-    @habit = Habit.includes(:effect_habits, :effects, :sources, :user, :related_habits, :favorite_habits).find(params[:id])
+    @habit = Habit.includes(:effect_habits, :effects, :sources, :related_habits, :favorite_habits).find(params[:id])
     @habit.update(recently_viewed_time: Time.now)
 
     set_related_habit_table(@habit)
     set_cache_habit_id(@habit)
 
-    @related_habits = @habit.related_habits.order(updated_at: :desc).limit(RELATED_HABITS_NUMBER)
+    @related_habits = @habit.related_habits.includes(:user, :effects).order(updated_at: :desc).limit(RELATED_HABITS_NUMBER)
   end
 
   def index
