@@ -17,7 +17,7 @@
     <div class="card">
       <p class="card-item">実行日：<%= diary.action_date %></p>
       <p class="card-item">習慣名</p>
-      <p class="card-content"><%= diary.habit.name %></p>
+      <p class="card-content"><%= link_to diary.habit.name, habit_path(diary.habit.id) %></p>
       <p class="card-item">内容</p>
       <p class="card-content"><%= diary.description %></p>
       <p class="card-item">実行時間</p>
