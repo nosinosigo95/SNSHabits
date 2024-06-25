@@ -3,7 +3,6 @@ class User < ApplicationRecord
   has_many :habits
   has_many :favorite_habits
   has_many :favorites, through: :favorite_habits, source: :habit
-
   has_many :continuations
   has_many :continuation_habits, through: :continuations, source: :habit
   has_many :diaries
@@ -22,10 +21,10 @@ class User < ApplicationRecord
   # 簡潔に取得
   has_many :followers, through: :follower_relations, source: :followed
   has_many :followings, through: :followed_relations, source: :follower
-
-  INTRO_MAX = 400
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable
+
+  INTRO_MAX = 400
   validates :name, presence: true, uniqueness: true
   validates :introduction, length: { maximum: INTRO_MAX }
   has_one_attached :icon

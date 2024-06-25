@@ -2,7 +2,6 @@ class FavoriteHabitsController < ApplicationController
   def add
     if Habit.where('id = ?', params[:habit_id]).present?
       favorite_habit = FavoriteHabit.where(habit_id: params[:habit_id], user_id:current_user.id)
-      binding.pry
       if favorite_habit.empty?
         favorite_habit = FavoriteHabit.new(habit_id: params[:habit_id], user_id:current_user.id)
         favorite_habit.save
