@@ -28,7 +28,7 @@ class DiariesController < ApplicationController
   end
 
   def index
-    # current_user.includes(:continuation_habits)
+    @user_continuations = Continuation.where(user_id: current_user.id).includes(:habit)
     if params[:habit].present?
       favorite_id = /\A[0-9]+\z/.match(params[:habit][:favorite_id])
       if favorite_id[0].present?

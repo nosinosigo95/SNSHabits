@@ -8,7 +8,7 @@
 
 <%= form_with url: diaries_path, method: :get do %> 
     <span class="diary-form-title">取り組み中：</span>
-    <%= select(:continuation, :habit_id, get_continuation_habit, {}, {class: "diary-select"}) %>
+    <%= select(:continuation, :habit_id, get_continuation_habit(@user_continuations), {}, {class: "diary-select"}) %>
     <%= submit_tag '日記を検索する', class: "diary-form-button" %>
 <% end %>
 <%= form_with do %>
