@@ -30,7 +30,7 @@ class Habit < ApplicationRecord
   end
 
   def self.search_all
-    all.includes(:sources, :effects)
+    all.includes(:sources, :effects, :favorite_habits)
   end
 
   def self.get_search_attr(habit_index, user)
