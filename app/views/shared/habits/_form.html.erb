@@ -1,7 +1,9 @@
 <%= form_with model: form, url: moved_path do |f| %>
   <%= render 'shared/error_messages', object: f.object %>
 
-  <%= f.label :name, class: "required block-label" %>
+  <%= f.label :name, class: "required block-label" do %>
+    <%= p "習慣名(20字以内)"%>
+  <% end %>
   <%= f.text_field :name, placeholder: "例)ヨガ", class: "block-input-parts" %>
 
   <%= f.label :effects, class: "required block-label" do %>
