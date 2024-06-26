@@ -6,6 +6,7 @@ RSpec.describe "Habits", type: :system do
   before do
     sign_in(user)
   end
+
   describe "検索ページ" do
     before do
       @habit_index = HabitIndexForm.new
