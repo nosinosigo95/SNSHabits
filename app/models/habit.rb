@@ -10,6 +10,7 @@ class Habit < ApplicationRecord
   has_many :current_habit_relationships, class_name: "RelatedHabit", foreign_key: "now_habit_id", dependent: :destroy
   has_many :related_habits, through: :current_habit_relationships, source: :old_habit
 
+  # habit_indexはHabitIndexFormの変数です
   def self.search_attr(habit_index, sort, user)
     search_attr = get_search_attr(habit_index, user)
 
@@ -17,13 +18,13 @@ class Habit < ApplicationRecord
       if sort.blank?
         search_all
       else
-        search_all.order(sort)
+        search_all.order(sort + " DESC")
       end
     else
       if sort.blank?
         includes(:sources, :effects, :favorite_habits).where(search_attr).where(commit: true)
       else
-        includes(:sources, :effects, :favorite_habits).where(search_attr).where(commit: true).order(sort)
+        includes(:sources, :effects, :favorite_habits).where(search_attr).where(commit: true).order(sort + " DESC")
       end
     end
   end
@@ -32,6 +33,7 @@ class Habit < ApplicationRecord
     all.includes(:sources, :effects, :favorite_habits).where(commit: true)
   end
 
+  # habit_indexはHabitIndexFormの変数です
   def self.get_search_attr(habit_index, user)
     atr = {}
 
