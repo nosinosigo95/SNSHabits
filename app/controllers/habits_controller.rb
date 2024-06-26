@@ -46,7 +46,11 @@ class HabitsController < ApplicationController
     @habit_index = HabitIndexForm.new(attributes: habit_index_params)
     @habit_index.valid?
     if params[:habit_index_form]
-      sort = nil if @habit_index.sort.blank?
+      if @habit_index.sort.blank?
+        sort = nil
+      else
+        sort = @habit_index.sort
+      end
       @habits = Habit.search_attr(@habit_index, sort, current_user).page(params[:page])
     else
       @habits = Habit.search_all.page(params[:page])

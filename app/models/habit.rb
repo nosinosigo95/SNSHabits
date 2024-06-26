@@ -12,20 +12,10 @@ class Habit < ApplicationRecord
 
   # habit_indexはHabitIndexFormの変数です
   def self.search_attr(habit_index, sort, user)
-    search_attr = get_search_attr(habit_index, user)
-
-    if search_attr.nil?
-      if sort.blank?
-        search_all
-      else
-        search_all.order(sort + " DESC")
-      end
+    if sort.blank?
+      includes(:sources, :effects, :favorite_habits).all.return_where_for_habit_index_form(habit_index, user)
     else
-      if sort.blank?
-        includes(:sources, :effects, :favorite_habits).where(search_attr).where(commit: true)
-      else
-        includes(:sources, :effects, :favorite_habits).where(search_attr).where(commit: true).order(sort + " DESC")
-      end
+      includes(:sources, :effects, :favorite_habits).all.return_where_for_habit_index_form(habit_index, user).order("habits."+sort + " DESC")
     end
   end
 
@@ -33,21 +23,33 @@ class Habit < ApplicationRecord
     all.includes(:sources, :effects, :favorite_habits).where(commit: true)
   end
 
+  scope :search_name, -> (name) {
+    if name.present?
+      where("name LIKE ?", "%" + name + "%")
+    end
+  }
+  scope :search_effect, -> (effect) {
+    if effect.present?
+      binding.pry
+      references(:effects).where("effects.effect_item LIKE ?", "%" + effect + "%")
+    end
+  }
+  scope :search_period_for_effect, -> (period_for_effect) {
+    if period_for_effect.present?
+      where("period_for_effect = ?", period_for_effect)
+    end
+  }
+  scope :search_using_user, -> (using_user, created) {
+    if created == "1"
+      where("user_id = ?", using_user.id)
+    end
+  }
   # habit_indexはHabitIndexFormの変数です
-  def self.get_search_attr(habit_index, user)
-    atr = {}
-
-    atr['name'] = habit_index.name if habit_index.name.present?
-    if habit_index.effect_item.present?
-      atr['effects'] = {}
-      atr['effects']['effect_item'] = habit_index.effect_item
-    end
-    if habit_index.period_for_effect.present?
-      atr['period_for_effect'] = habit_index.period_for_effect
-    end
-    atr['user_id'] = user.id if habit_index.created == '1'
-    atr
+  def self.return_where_for_habit_index_form(habit_index, user)
+    name = habit_index.name
+    effect = habit_index.effect_item
+    period_for_effect = habit_index.period_for_effect
+    created = habit_index.created
+    search_name(name).search_effect(effect).search_period_for_effect(period_for_effect).search_using_user(user, created).where(commit: true)
   end
-
 end
-Habit.private_class_method(:get_search_attr)
