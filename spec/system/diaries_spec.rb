@@ -14,4 +14,17 @@ RSpec.describe "Diaries", type: :system do
       end
     end
   end
+  describe '日記作成ページ' do
+    it "すべての項目を入力すれば、日記が作成されること" do
+      habit = FactoryBot.create(:habit, user: user)
+      visit new_diary_path(habit.id)
+      fill_in '実行日', with: '2024/6/24'
+      fill_in '自由記述(600字以内)', with: '自由'
+      fill_in '実行時間(時:分)', with: '01:00'
+      choose 'はい'
+      click_on '記録する'
+      expect(page).to have_content("日記を作成しました")
+    end
+  end
+
 end
