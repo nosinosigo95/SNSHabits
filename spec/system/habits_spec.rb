@@ -37,5 +37,56 @@ RSpec.describe "Habits", type: :system do
       click_on '検索'
       expect(page).to have_content("sample")
     end
+    it '習慣作成リンクをクリックすると、そのページを表示すること'
+  end
+  describe '習慣作成ページ' do
+    before do
+      visit new_habit_url
+    end
+    it '習慣名と効果、概要、説明・工夫、状況を入力すれば、登録が完了すること' do
+      fill_in '習慣名', with: "habit"
+      fill_in '効果(キーワード5つ以内)', with: '効果'
+      fill_in '概要', with: '概要'
+      fill_in '説明・工夫', with: 'sample sample'
+      choose '挑戦中'
+      click_on '保存する'
+
+      expect(page).to have_content('習慣を作成しました')
+    end
+  end
+  describe '習慣編集ページ' do
+    it '習慣名と効果、概要、説明・工夫、状況を入力すれば、登録が更新すること' do
+      visit new_habit_url
+      fill_in '習慣名', with: "habit"
+      fill_in '効果(キーワード5つ以内)', with: '効果'
+      fill_in '概要', with: '概要'
+      fill_in '説明・工夫', with: 'sample sample'
+      choose '挑戦中'
+      click_on '保存する'
+      within '.habit-display' do
+        click_on '編集'
+      end
+      fill_in '習慣名', with: "habit"
+      fill_in '効果(キーワード5つ以内)', with: '効果'
+      fill_in '概要', with: '概要'
+      fill_in '説明・工夫', with: 'sample sample'
+      choose '挑戦中'
+      click_on '保存する'
+      expect(page).to have_content('習慣を更新しました')
+    end
+  end
+  describe '習慣詳細ページ' do
+    it 'お気に入りをクリックすると、習慣はお気に入りになること' do
+      visit new_habit_url
+      fill_in '習慣名', with: "habit"
+      fill_in '効果(キーワード5つ以内)', with: '効果'
+      fill_in '概要', with: '概要'
+      fill_in '説明・工夫', with: 'sample sample'
+      choose '挑戦中'
+      click_on '保存する'
+
+      click_on 'お気に入り'
+      expect(page).to have_content('お気に入りに入れました')
+    end
   end
 end

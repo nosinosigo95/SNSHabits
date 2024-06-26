@@ -54,6 +54,7 @@ header a:visited{
 .fix-top {
   position: fixed;
   top: 0px;
+  z-index: 50;
 }
 .nav-height {
   height: $nav-height;

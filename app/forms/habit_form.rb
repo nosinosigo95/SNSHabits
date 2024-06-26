@@ -13,7 +13,7 @@ class HabitForm
   validates :scheme, presence: true
   validates :period_for_effect, length: { maximum: PERIOD_FOR_EFFECT_TEXT_MAX }
   validate :check_commit_or_challenge
-  validates :working_time, format: { with: /\A(\d{1,2}:\d{1,2})\z/ }, allow_nil: true
+  validates :working_time, format: { with: /(|\A(\d{1,2}:\d{1,2}))\z/ }, allow_nil: true
   # Effectモデル
   validates :effects, presence: true
   validate :check_effects
@@ -31,7 +31,7 @@ class HabitForm
 
   def save
     return false if invalid?
-
+    saved_habit = nil
     ActiveRecord::Base.transaction do
       circumstance_map = get_commit_and_challenge
       saved_habit = Habit.create!({
@@ -40,23 +40,18 @@ class HabitForm
         commit: circumstance_map[:commit], challenge: circumstance_map[:challenge],
       })
 
-      count = 0
-      effects_max = 5
       effects.split(',').map do |effect_item|
-        if count >= effects_max
-          break
-        end
         effect_obj = Effect.find_by(effect_item: effect_item)
         if effect_obj.nil?
           effect_obj = Effect.create!(effect_item: effect_item)
         end
         EffectHabit.create(habit_id: saved_habit.id, effect_id: effect_obj.id)
-        count += 1
       end
       urls.map do |url|
         Source.create!(url: url, habit_id: saved_habit.id) if url.present?
       end
     end
+    saved_habit.id
   rescue ActiveRecord::RecordInvalid
     false
   end
@@ -71,24 +66,18 @@ class HabitForm
         commit: circumstance_map[:commit], challenge: circumstance_map[:challenge],
       })
 
-      count = 0
-      effects_max = 5
+      get_effects_items_and_ids.each do |effect_item, effect_id|
+        effect_habits = EffectHabit.where(habit_id: habit.id, effect_id: effect_id)
+        effect_habits.each do |effect_habit|
+          effect_habit.destroy
+        end
+      end
       get_effects_items_and_ids.each do |effect_item, id|
-        if count >= effects_max
-          break
+        effect_obj = Effect.find_by(effect_item: effect_item)
+        if effect_obj.nil?
+          effect_obj = Effect.create!(effect_item: effect_item)
         end
-        if id.nil?
-          effect_obj = Effect.find_by(effect_item: effect_item)
-          if effect_obj.nil?
-            effect_obj = Effect.create!(effect_item: effect_item)
-          end
-          EffectHabit.create(habit_id: saved_habit.id, effect_id: effect_obj.id)
-        else
-          effect_obj = Effect.find(id)
-          effect_obj.update!(effect_item: effect_item)
-          EffectHabit.create(habit_id: habit.id, effect_id: effect_obj.id)
-        end
-        count += 1
+        EffectHabit.create(habit_id: habit.id, effect_id: effect_obj.id)
       end
 
       get_urls_and_ids.each do |url, id|

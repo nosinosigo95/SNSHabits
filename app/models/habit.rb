@@ -30,7 +30,6 @@ class Habit < ApplicationRecord
   }
   scope :search_effect, -> (effect) {
     if effect.present?
-      binding.pry
       references(:effects).where("effects.effect_item LIKE ?", "%" + effect + "%")
     end
   }
