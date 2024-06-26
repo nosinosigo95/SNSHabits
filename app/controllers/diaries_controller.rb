@@ -1,5 +1,6 @@
 class DiariesController < ApplicationController
   before_action :authenticate_user!
+  before_action :is_created_by_current_user, only: [:edit, :update]
   def new
     @diary = Diary.new
     @diary.habit_id = params[:habit_id]
@@ -51,12 +52,20 @@ class DiariesController < ApplicationController
     end
   end
   def destroy
+
     diary = Diary.find(params[:id])
     diary.destroy
     flash[:notice] = "日記を削除しました"
     redirect_to diaries_url
   end
 
+  def is_created_by_current_user
+    diary = Diary.find_by(id: params[:id])
+    if diary.nil? || diary.user_id != current_user.id
+      flash[:alert] = "そのようなページはありません"
+      redirect_to diaries_url
+    end
+  end
   private
 
   def diary_params
