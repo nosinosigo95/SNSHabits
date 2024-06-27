@@ -1,0 +1,5 @@
+<% if is_continued(habit) %>
+  <%= link_to '取り組まない',delete_continuation_path(habit), method: :delete, class: "continuation-active common-continuation" %>
+<% else %>
+  <%= link_to '取り組む', add_continuation_path(habit), class: "continuation-border common-continuation" %>
+<% end %>
