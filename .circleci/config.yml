@@ -18,6 +18,12 @@ jobs:
           name: データベースのセットアップ
           command: docker-compose -f compose.yml exec web bundle exec rails db:migrate RAILS_ENV=test
       - run:
+          name: webpackerのインストール
+          command: docker-compose run web bundle exec rails webpacker:install
+      - run:
+          name: webpackerのコンパイル
+          command: docker-compose run web bundle exec rails webpacker:compile
+      - run:
           name: rspecの実行
           command: docker-compose run --rm web bundle exec rspec
       - run:
