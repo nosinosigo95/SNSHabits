@@ -2,6 +2,8 @@ require 'rails_helper'
 
 RSpec.describe "Habits", type: :system do
   let(:user){ FactoryBot.create(:user) }
+  let(:habits) { FactoryBot.create_list(:habit, 10) }
+  let(:habit) { FactoryBot.create(:habit, commit: true) }
 
   before do
     sign_in(user)
@@ -23,7 +25,7 @@ RSpec.describe "Habits", type: :system do
       end
     end
     it "検索フォームに最近作成されたものを選択すると、その習慣が表示されること" do
-      habits = FactoryBot.create_list(:habit, 10)
+      habits
       select "最近作成されたもの", from: "habit_index_form_sort"
       click_on '検索'
       habits.each do |habit|
@@ -33,11 +35,10 @@ RSpec.describe "Habits", type: :system do
       end
     end
     it "検索フォームに習慣名を入力すると、その習慣が表示されること" do
-      sample_habit = FactoryBot.create(:habit, name: "sample")
-      fill_in "習慣名", with: "sample"
+      fill_in "習慣名", with: habit.name
       select "最近作成されたもの", from: "habit_index_form_sort"
       click_on '検索'
-      expect(page).to have_content("sample")
+      expect(page).to have_content(habit.name)
     end
   end
 
