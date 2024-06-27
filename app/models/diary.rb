@@ -33,6 +33,6 @@ class Diary < ApplicationRecord
     where(["habit_id = ? AND user_id = ?", habit_id, user_id])
   }
   scope :index_for_user, -> (user_id) {
-    where("user_id = ?", user_id)
+    where(user_id: user_id)
   }
 end

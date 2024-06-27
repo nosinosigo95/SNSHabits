@@ -3,8 +3,8 @@ require 'date'
 
 RSpec.describe Diary, type: :model do
   let(:description_max) { 600 }
-  let(:user_id) { 2 }
-  let(:habit_id) { 1 }
+  let(:user) { FactoryBot.create(:user) }
+  let(:habit) { FactoryBot.create(:habit) }
 
   it "記述と作業時間、プライベートを入力すれば、モデルは有効になること" do
     expect(FactoryBot.build(:diary, private: true)).to be_valid
@@ -65,20 +65,22 @@ RSpec.describe Diary, type: :model do
   end
 
   it "レシーバがhabitとuserのidに合うデータを受けること" do
-    FactoryBot.create(:diary, habit_id: habit_id, user_id: user_id)
+
+    FactoryBot.create(:diary, habit_id: habit.id, user_id: user.id)
     FactoryBot.create_list(:diary, 10)
-    diaries = Diary.continuous_habits(habit_id, user_id)
+    diaries = Diary.continuous_habits(habit.id, user.id)
     diaries.each do |diary|
-      expect(diary.habit_id).to eq habit_id
-      expect(diary.user_id).to eq user_id
+      expect(diary.habit_id).to eq habit.id
+      expect(diary.user_id).to eq user.id
     end
   end
   it "レシーバがuserのidに合うデータを受けること" do
-    FactoryBot.create(:diary, user_id: user_id)
+
+    FactoryBot.create(:diary, user_id: user.id)
     FactoryBot.create_list(:diary, 10)
-    diaries = Diary.index_for_user(user_id)
+    diaries = Diary.index_for_user(user.id)
     diaries.each do |diary|
-      expect(diary.user_id).to eq user_id
+      expect(diary.user_id).to eq user.id
     end
   end
 end

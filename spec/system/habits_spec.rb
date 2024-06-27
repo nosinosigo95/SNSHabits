@@ -33,7 +33,7 @@ RSpec.describe "Habits", type: :system do
       end
     end
     it "検索フォームに習慣名を入力すると、その習慣が表示されること" do
-      habit = FactoryBot.create(:habit, name:"sample")
+      sample_habit = FactoryBot.create(:habit, name: "sample")
       fill_in "習慣名", with: "sample"
       select "最近作成されたもの", from: "habit_index_form_sort"
       click_on '検索'

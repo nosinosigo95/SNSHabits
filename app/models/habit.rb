@@ -6,16 +6,28 @@ class Habit < ApplicationRecord
   has_many :users, through: :favorite_habits
   belongs_to :user
   has_one :diary, dependent: :restrict_with_error
-  has_many :forward_habit_relationships, class_name: "RelatedHabit", foreign_key: "old_habit_id", dependent: :destroy
-  has_many :current_habit_relationships, class_name: "RelatedHabit", foreign_key: "now_habit_id", dependent: :destroy
-  has_many :related_habits, through: :current_habit_relationships, source: :old_habit
+  has_many(
+    :forward_habit_relationships,
+    class_name: "RelatedHabit",
+    foreign_key: "old_habit_id",
+    dependent: :destroy
+  )
+  has_many(
+    :current_habit_relationships,
+    class_name: "RelatedHabit",
+    foreign_key: "now_habit_id",
+    dependent: :destroy
+  )
+  has_many(:related_habits, through: :current_habit_relationships, source: :old_habit)
 
   # habit_indexはHabitIndexFormの変数です
   def self.search_attr(habit_index, sort, user)
     if sort.blank?
-      includes(:sources, :effects, :favorite_habits).all.return_where_for_habit_index_form(habit_index, user)
+      includes(:sources, :effects, :favorite_habits).all.
+        return_where_for_habit_index_form(habit_index, user)
     else
-      includes(:sources, :effects, :favorite_habits).all.return_where_for_habit_index_form(habit_index, user).order("habits."+sort + " DESC")
+      includes(:sources, :effects, :favorite_habits).all.
+        return_where_for_habit_index_form(habit_index, user).order({ "habits.#{sort}" => "DESC" })
     end
   end
 
@@ -35,12 +47,12 @@ class Habit < ApplicationRecord
   }
   scope :search_period_for_effect, -> (period_for_effect) {
     if period_for_effect.present?
-      where("period_for_effect = ?", period_for_effect)
+      where(period_for_effect: period_for_effect)
     end
   }
   scope :search_using_user, -> (using_user, created) {
     if created == "1"
-      where("user_id = ?", using_user.id)
+      where(user_id: using_user.id)
     end
   }
   # habit_indexはHabitIndexFormの変数です
@@ -49,6 +61,8 @@ class Habit < ApplicationRecord
     effect = habit_index.effect_item
     period_for_effect = habit_index.period_for_effect
     created = habit_index.created
-    search_name(name).search_effect(effect).search_period_for_effect(period_for_effect).search_using_user(user, created).where(commit: true)
+    search_name(name).search_effect(effect).
+      search_period_for_effect(period_for_effect).
+      search_using_user(user, created).where(commit: true)
   end
 end

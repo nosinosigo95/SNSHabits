@@ -10,7 +10,8 @@ class HabitsController < ApplicationController
 
   def create
     @form = HabitForm.new(attributes: habit_params, user: current_user)
-    if habit_id = @form.save
+    habit_id = @form.save
+    if habit_id.present?
       flash[:notice] = "習慣を作成しました"
       redirect_to habit_url(habit_id)
     else
@@ -33,13 +34,15 @@ class HabitsController < ApplicationController
   end
 
   def show
-    @habit = Habit.includes(:effect_habits, :effects, :sources, :related_habits, :favorite_habits).find(params[:id])
+    @habit = Habit.includes(:effect_habits, :effects,
+    :sources, :related_habits, :favorite_habits).find(params[:id])
     @habit.update(recently_viewed_time: Time.now)
 
     set_related_habit_table(@habit)
     set_cache_habit_id(@habit)
 
-    @related_habits = @habit.related_habits.includes(:user, :effects).order(updated_at: :desc).limit(RELATED_HABITS_NUMBER)
+    @related_habits = @habit.related_habits.includes(:user,
+    :effects).order(updated_at: :desc).limit(RELATED_HABITS_NUMBER)
   end
 
   def index
@@ -71,7 +74,7 @@ class HabitsController < ApplicationController
   def habit_params
     params.require(:habit).permit(:name, :scheme,
     :period_for_effect, :working_time, :viewed_count,
-    :effects, :effects_ids, :circumstance, :summary,urls: [], urls_ids: [])
+    :effects, :effects_ids, :circumstance, :summary, urls: [], urls_ids: [])
   end
 
   def habit_index_params

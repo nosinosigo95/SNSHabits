@@ -117,9 +117,9 @@ class HabitForm
   end
 
   def get_circumstance
-    if(habit.commit)
+    if habit.commit
       "commit"
-    elsif(habit.challenge)
+    elsif habit.challenge
       "challenge"
     else
       circumstance
