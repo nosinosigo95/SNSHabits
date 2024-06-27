@@ -17,7 +17,7 @@ jobs:
       - run:
           name: データベースのセットアップ
           command: docker-compose -f compose.yml exec web bundle exec rails db:migrate RAILS_ENV=test
-      -run:
+      - run:
           name: yarnのインストール
           command: docker-compose run web yarn install
       - run:
