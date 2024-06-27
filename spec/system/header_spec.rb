@@ -21,7 +21,9 @@ RSpec.describe "header", type: :system do
     visit new_user_session_path
     fill_in 'メールアドレス', with: user.email
     fill_in 'パスワード', with: user.password
-    click_on 'Log in'
+    within '.actions' do
+      click_on 'ログイン'
+    end
     expect(page).to have_link 'アカウント'
     expect(page).to have_link 'ログアウト'
   end
