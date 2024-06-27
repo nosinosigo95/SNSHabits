@@ -5,10 +5,6 @@
 
 @import "var";
 
-//余白
-$padding-bottom: 30px;
-$padding-top: 10px;
-
 html, body{
   margin: 0;
 }
@@ -28,12 +24,6 @@ a{
   }
 }
 
-.content-padding{
-  padding: $padding-top 0 $padding-bottom;
-}
-.content-border-bottom{
-  border-bottom: solid 1px black;
-}
 main{
   width: 90%;
   background-repeat: repeat;

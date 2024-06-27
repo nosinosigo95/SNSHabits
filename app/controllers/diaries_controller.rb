@@ -1,6 +1,6 @@
 class DiariesController < ApplicationController
   before_action :authenticate_user!
-  before_action :is_created_by_current_user, only: [:edit, :update]
+  before_action :is_created_by_current_user, only: [:edit, :update, :destroy]
   def new
     @diary = Diary.new
     @diary.habit_id = params[:habit_id]
