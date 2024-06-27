@@ -1,57 +1,24 @@
 version: 2.1
 
-orbs:
-  ruby: circleci/ruby@3.0.4
-  node: circleci/node
-
-commands:
-  setup:
-    steps:
-      - checkout
-      - ruby/install-deps
-      - node/install-packages:
-        pkg-manager: yarn
-        chache-key: "yarn.lock"
-
+version: 2
 jobs:
   build:
-    docker:
-      - image: circleci/ruby:3.0.4-node
+    machine:
+      image: circleci/classic:edge
     steps:
-      - setup
-  test:
-    docker:
-      - image: circleci/ruby:3.0.4-node
-      - image: circleci/postgres:11.6-alpine
-        name: "db"
-        environment:
-          POSTGRES_DB: postgres
-          POSTGRES_USER: postgres
-          POSTGRES_PASSWORD: password
-    environment:
-      BUNDLE_JOBS: "4"
-      BUNDLE_RETRY: "3"
-      PGHOST: 127.0.0.1
-      PGUSER: postgres
-      PGPASSWORD: password
-      RAILS_ENV: test
-    steps:
-      - setup
+      - checkout
       - run:
-          name: rails db:migrate
-          command: bundle exec rails db:migrate
+          name: Dockerコンテナのビルド
+          command: docker-compose -f docker-compose.yml build
       - run:
-          name: Database setup
-          command: bundle exec rails db:schema:load --trace
+          name: Dockerコンテナの起動
+          command: docker-compose -f docker-compose.yml up -d
       - run:
-          name: Rspec
-          command: bundle exec rspec
-
-workflows:
-  version: 2
-  test_and_deploy:
-    jobs:
-      - build
-      - test:
-          requires:
-            - build
+          name: db接続を待機
+          command: sleep 10
+      - run:
+          name: データベースのセットアップ
+          command: docker-compose -f docker-compose.yml exec web bundle exec rails db:migrate RAILS_ENV=test
+      - run:
+          name: Dockerコンテナの停止
+          command: docker-compose -f docker-compose.yml down
