@@ -2,9 +2,11 @@ require 'rails_helper'
 
 RSpec.describe "Diaries", type: :system do
   let(:user) { FactoryBot.create(:user) }
+
   before do
     sign_in(user)
   end
+
   describe '日記一覧ページ' do
     it '作成した日記がページに表示されていること' do
       diaries = FactoryBot.create_list(:diary, 10, user: user)
@@ -14,6 +16,7 @@ RSpec.describe "Diaries", type: :system do
       end
     end
   end
+
   describe '日記作成ページ' do
     it "すべての項目を入力すれば、日記が作成されること" do
       habit = FactoryBot.create(:habit, user: user)
@@ -26,6 +29,7 @@ RSpec.describe "Diaries", type: :system do
       expect(page).to have_content("日記を作成しました")
     end
   end
+
   describe '日記編集ページ' do
     it "すべての項目を入力すれば、日記が更新されること" do
       habit = FactoryBot.create(:habit, user: user)
@@ -39,5 +43,4 @@ RSpec.describe "Diaries", type: :system do
       expect(page).to have_content("日記を更新しました")
     end
   end
-
 end

@@ -4,6 +4,7 @@ RSpec.describe "header", type: :system do
   before do
     visit root_url
   end
+
   it "Homeや習慣、日記、交流のリンクが表示されていること" do
     expect(page).to have_link 'Home'
     expect(page).to have_link '習慣'

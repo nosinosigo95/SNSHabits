@@ -2,9 +2,11 @@ require 'rails_helper'
 
 RSpec.describe "People", type: :system do
   let(:user) { FactoryBot.create(:user) }
+
   before do
     sign_in(user)
   end
+
   describe 'ユーザー検索ページ' do
     before do
       visit people_path
@@ -22,6 +24,7 @@ RSpec.describe "People", type: :system do
       expect(page).to have_content(user.name)
     end
   end
+
   describe 'ユーザー詳細ページ' do
     before do
       visit people_path

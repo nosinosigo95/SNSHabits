@@ -13,6 +13,7 @@ RSpec.describe "Habits", type: :system do
       FactoryBot.create_list(:habit, 10)
       visit habits_url
     end
+
     it "検索フォームが表示されていること" do
       within '.search-form' do
         expect(page).to have_content('習慣名')
@@ -39,10 +40,12 @@ RSpec.describe "Habits", type: :system do
       expect(page).to have_content("sample")
     end
   end
+
   describe '習慣作成ページ' do
     before do
       visit new_habit_url
     end
+
     it '習慣名と効果、概要、説明・工夫、状況を入力すれば、登録が完了すること' do
       fill_in '習慣名', with: "habit"
       fill_in '効果(キーワード5つ以内)', with: '効果'
