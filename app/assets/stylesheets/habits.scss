@@ -15,7 +15,7 @@
   }
 }
 
-.common-favorite-habit{
+.common-favorite-habit, .common-continuation{
   display: block;
   width: fit-content;
   height: $favorite-height;
@@ -32,6 +32,9 @@
     color: blue;
   }
 }
+.continuation-border {
+  border: 2px solid rgb(255, 204, 51);
+}
 .favorite-habit{
   border: 2px solid rgb(255, 204, 51);
   .star{
@@ -44,6 +47,11 @@
     background-image: url("star-fill.svg");
   }
 }
+
+.continuation-active{
+  background-color: rgb(255, 204, 51);
+}
+
 .favorite-text{
   display: inline-block;
 }
