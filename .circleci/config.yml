@@ -30,5 +30,8 @@ jobs:
           name: rspecの実行
           command: docker-compose run --rm web bundle exec rspec
       - run:
+          name: rubocopの実行
+          command: docker-compose run --rm web bundle exec rubocop
+      - run:
           name: Dockerコンテナの停止
           command: docker-compose -f compose.yml down
