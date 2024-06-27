@@ -3,7 +3,8 @@ Rails.application.routes.draw do
   resources :habits
   get 'favorites_habit/:habit_id', to: 'favorite_habits#add', as: 'add_favorite_habit'
   delete 'favorites_habit/:habit_id', to: 'favorite_habits#delete', as: 'delete_favorite_habit'
-
+  get 'continuation_habit/:habit_id', to: 'continuation#add', as: 'add_continuation'
+  delete 'continuation_habit/:habit_id', to: 'continuation#delete', as: 'delete_continuation'
   get '/diaries/new/:habit_id', to: 'diaries#new', as: 'new_diary'
   resources :diaries, except: [:show, :new]
   get 'user/log_in_guest', to: 'users#log_in_guest', as: 'log_in_guest'
