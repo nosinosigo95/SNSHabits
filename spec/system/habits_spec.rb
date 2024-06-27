@@ -38,7 +38,6 @@ RSpec.describe "Habits", type: :system do
       click_on '検索'
       expect(page).to have_content("sample")
     end
-    it '習慣作成リンクをクリックすると、そのページを表示すること'
   end
   describe '習慣作成ページ' do
     before do
