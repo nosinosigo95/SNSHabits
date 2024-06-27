@@ -3,7 +3,6 @@ jobs:
   build:
     machine:
       image: ubuntu-2404:2024.05.1
-    working_directory: ~/docker_rails
     steps:
       - checkout
       - run:
