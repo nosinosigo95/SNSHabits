@@ -1,5 +1,5 @@
 FactoryBot.define do
   factory :effect do
-    effect_item { "effect" }
+    sequence(:effect_item) { |n| "effect#{n}" }
   end
 end

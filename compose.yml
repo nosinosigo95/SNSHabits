@@ -13,11 +13,21 @@ services:
     tty: true
     build: .
     command: /bin/sh -c "rm -f /tmp/pids/server.pid && bundle exec rails s -p 3000 -b '0.0.0.0'"
-    depends_on:
-      - db
     ports:
       - "3000:3000"
     volumes:
       - .:/docker_rails
+    environment:
+      SELENIUM_REMOTE_URL: http://chrome:4444/wd/hub
+    depends_on:
+      - db
+      - chrome
+
+  chrome:
+    image: seleniarm/standalone-chromium
+    platform: linux/amd64
+    ports:
+      - 4444:4444
+
 volumes:
   db-store:

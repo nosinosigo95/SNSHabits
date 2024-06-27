@@ -18,7 +18,7 @@ class Diary < ApplicationRecord
   )
 
   def is_action_date_after_today
-    if action_date.present? && action_date > Date.current
+    if action_date.present? && action_date > Time.now
       errors.add(:action_date, 'は、今日以前を指定してください')
     end
   end

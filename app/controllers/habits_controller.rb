@@ -10,9 +10,9 @@ class HabitsController < ApplicationController
 
   def create
     @form = HabitForm.new(attributes: habit_params, user: current_user)
-    if @form.save
+    if habit_id = @form.save
       flash[:notice] = "習慣を作成しました"
-      redirect_to habit_url(@form.id)
+      redirect_to habit_url(habit_id)
     else
       render :new
     end
@@ -26,7 +26,7 @@ class HabitsController < ApplicationController
     @form = HabitForm.new(attributes: habit_params, habit: @habit, user: current_user)
     if @form.update
       flash[:notice] = "習慣を更新しました"
-      redirect_to habit_url(@form.id)
+      redirect_to habit_url(@habit.id)
     else
       render :edit
     end
@@ -46,7 +46,11 @@ class HabitsController < ApplicationController
     @habit_index = HabitIndexForm.new(attributes: habit_index_params)
     @habit_index.valid?
     if params[:habit_index_form]
-      sort = nil if @habit_index.sort.blank?
+      if @habit_index.sort.blank?
+        sort = nil
+      else
+        sort = @habit_index.sort
+      end
       @habits = Habit.search_attr(@habit_index, sort, current_user).page(params[:page])
     else
       @habits = Habit.search_all.page(params[:page])
