@@ -4,7 +4,7 @@ class DiariesController < ApplicationController
   def new
     @diary = Diary.new
     @diary.habit_id = params[:habit_id]
-    end
+  end
 
   def create
     @diary = Diary.new(diary_params)
@@ -43,7 +43,8 @@ class DiariesController < ApplicationController
     if params[:continuation].present?
       continuation_habit_id = /\A[0-9]+\z/.match(params[:continuation][:habit_id])
       if continuation_habit_id[0].present?
-        @diaries = Diary.continuous_habits(continuation_habit_id[0], current_user.id).includes(:habit).page(params[:page])
+        @diaries = Diary.continuous_habits(continuation_habit_id[0],
+         current_user.id).includes(:habit).page(params[:page])
       else
         @diaries = Diary.index_for_user(current_user.id).includes(:habit).page(params[:page])
       end
@@ -51,8 +52,8 @@ class DiariesController < ApplicationController
       @diaries = Diary.index_for_user(current_user.id).includes(:habit).page(params[:page])
     end
   end
-  def destroy
 
+  def destroy
     diary = Diary.find(params[:id])
     diary.destroy
     flash[:notice] = "日記を削除しました"
@@ -66,6 +67,7 @@ class DiariesController < ApplicationController
       redirect_to diaries_url
     end
   end
+
   private
 
   def diary_params

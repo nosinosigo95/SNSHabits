@@ -26,7 +26,8 @@ class UsersController < ApplicationController
     if params[:search].nil?
       @users = User.includes(:icon_attachment).all.page(params[:page])
     else
-      @users = User.includes(:icon_attachment).where('name like ?', params[:search][:name] + '%').page(params[:page])
+      @users = User.includes(:icon_attachment).where('name like ?',
+      params[:search][:name] + '%').page(params[:page])
       if @users.empty?
         @users = User.includes(:icon_attachment).all.page(params[:page])
         flash[:notice] = "ユーザーを見つけられませんでした."

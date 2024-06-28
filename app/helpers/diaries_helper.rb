@@ -18,11 +18,13 @@ module DiariesHelper
     end
     continuation_habits
   end
+
   def sort_diaris(diaries)
     diaries.sort do |a, b|
       b.action_date <=> a.action_date
     end
   end
+
   # [0日前, 1日前, 2日前, 3日前, 4日前, 5日前, 6日前]
   def doing_times_before_days(diaries)
     day_week = 7
@@ -40,14 +42,15 @@ module DiariesHelper
     before_days_i = 0
     diaries.each do |diary|
       while before_days_i < before_days.count
-        if(diary.action_date.strftime('%Y-%m-%d') == before_days[before_days_i])
+        if diary.action_date.strftime('%Y-%m-%d') == before_days[before_days_i]
           break
         end
         before_days_i += 1
       end
       break if before_days_i >= before_days.count
 
-      doing_times[before_days_i] = doing_times[before_days_i].to_f + change_doing_time_to_hour(diary.doing_time)
+      doing_times[before_days_i] =
+        doing_times[before_days_i].to_f + change_doing_time_to_hour(diary.doing_time)
     end
     doing_times
   end

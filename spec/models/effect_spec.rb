@@ -11,8 +11,8 @@ RSpec.describe Effect, type: :model do
     expect(FactoryBot.build(:effect, effect_item: nil)).to be_invalid
   end
   it "効果名が重複していたならば、モデルは無効であること" do
-    FactoryBot.create(:effect)
-    effect = FactoryBot.build(:effect)
+    FactoryBot.create(:effect, effect_item: "効果効果")
+    effect = FactoryBot.build(:effect, effect_item: "効果効果")
     effect.valid?
     expect(effect.errors[:effect_item]).to include("はすでに存在します")
   end
