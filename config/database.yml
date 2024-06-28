@@ -85,5 +85,6 @@ test:
 production:
   <<: *default
   database: SNSHABITS_DATABASE
-  url: <%= ENV['DATABASE_URL'] %>
-
+  host: <%= ENV['DATABASE_IPADDRESS'] %>
+  username: <%= ENV['DATABESE_USERNAME'] %>
+  password: <%= ENV['DATABESE_PASSWORD'] %>
