@@ -59,6 +59,7 @@ group :development do
   gem 'spring'
   gem 'rubocop', require: false
   gem 'rubocop-airbnb'
+  gem 'rails-erd'
 end
 
 group :test do
