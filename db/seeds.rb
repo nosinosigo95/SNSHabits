@@ -46,8 +46,8 @@ end
 User.all.each do |user|
   user.habits.create!(
     name: "習慣#{user.id}",
-    summary: "この習慣は、〇〇をします。",
-    scheme: "この習慣は、〇〇をします。\n手順は以下のように行います。\n 手順1: \n手順2:",
+    summary: "習慣#{user.id}は、〇〇をします。",
+    scheme: "習慣#{user.id}は、〇〇をします。\n手順は以下のように行います。\n 手順1: \n手順2:",
     period_for_effect: "4週間",
     working_time: "01:00",
     challenge: "true",
@@ -57,8 +57,8 @@ end
 User.all.each do |user|
   user.habits.create!(
     name: "習慣#{user.id + User.count}",
-    summary: "この習慣は、〇〇をします。",
-    scheme: "この習慣は、〇〇をします。\n手順は以下のように行います。\n 手順1: \n手順2:",
+    summary: "習慣#{user.id + User.count}は、〇〇をします。",
+    scheme: "習慣#{user.id + User.count}は、〇〇をします。\n手順は以下のように行います。\n 手順1: \n手順2:",
     period_for_effect: "2ヶ月",
     working_time: "02:00",
     challenge: "false",
@@ -75,8 +75,14 @@ Habit.all.each do |habit|
     )
   end
 end
-
-RelatedHabit.create!(old_habit_id: 2, now_habit_id: 1)
+habit_count = Habit.count
+for i in (1..habit_count - 1)
+  for j in (1..habit_count - 1)
+    if i > j
+      RelatedHabit.create!(old_habit_id: i, now_habit_id: j)
+    end
+  end
+end
 
 # sources
 Habit.all.each do |habit|
@@ -102,7 +108,7 @@ User.all.each do |user|
       habit_id: habit_id
     )
     user.diaries.create!(
-      description: "今日の進捗は〇〇でした。\n明日は、〇〇します。",
+      description: "今日の進捗は〇〇でした。",
       action_date: "2024/6/22",
       doing_time: "00:01",
       private: i % 2 == 1,
