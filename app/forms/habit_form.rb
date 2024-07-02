@@ -35,7 +35,7 @@ class HabitForm
     ActiveRecord::Base.transaction do
       circumstance_map = get_commit_and_challenge
       saved_habit = Habit.create!({
-        name: name, scheme: scheme, period_for_effect: period_for_effect,
+        name: name, summary: summary, scheme: scheme, period_for_effect: period_for_effect,
         working_time: working_time, user_id: user.id,
         commit: circumstance_map[:commit], challenge: circumstance_map[:challenge],
       })
@@ -61,7 +61,7 @@ class HabitForm
     ActiveRecord::Base.transaction do
       circumstance_map = get_commit_and_challenge
       habit.update!({
-        name: name, scheme: scheme, period_for_effect: period_for_effect,
+        name: name, summary: summary, scheme: scheme, period_for_effect: period_for_effect,
         working_time: working_time, user_id: user.id,
         commit: circumstance_map[:commit], challenge: circumstance_map[:challenge],
       })
