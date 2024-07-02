@@ -77,4 +77,8 @@ module DiariesHelper
     doing_time_match = /\A\d{1,2}:(\d{1,2})\z/.match(doing_time)
     doing_time_match[1].to_f
   end
+
+  def initialize_doing_time(diary)
+    diary.doing_time = "00:00" if diary.doing_time.nil?
+  end
 end
