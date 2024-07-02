@@ -32,24 +32,13 @@ $icon-small-size: 20px;
     margin-left: 100px;
   }
 }
-.account-link{
+.account-link, .follow-link, .following-link, .favorite-habit-link{
   display: inline-block;
   border: 1px solid $cornflower;
   padding:  $account-menu-padding-size;
   border-radius: 5px;
 }
-.follow-link{
-  display: inline-block;
-  border: 1px solid $cornflower;
-  padding: $account-menu-padding-size;
-  border-radius: 5px;
-}
-.following-link{
-  display: inline-block;
-  border: 1px solid $cornflower;
-  border-radius: 5px;
-  padding: $account-menu-padding-size;
-}
+
 .follower-following-user-card{
   ul{
     box-sizing: border-box;
