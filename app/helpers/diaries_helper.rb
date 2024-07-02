@@ -61,7 +61,7 @@ module DiariesHelper
     doing_times = [0.0] * day_week
     i = 0
     hours.zip(minutes) do |hour, minute|
-      doing_times[i] +=  (hour + minute / 60.to_f)
+      doing_times[i] += (hour + minute / 60.to_f)
       i += 1
     end
     doing_times
@@ -72,15 +72,9 @@ module DiariesHelper
     doing_time_match = /\A(\d{1,2}):\d{1,2}\z/.match(doing_time)
     doing_time_match[1].to_f
   end
+
   def choose_minute_of_doing_time(doing_time)
     doing_time_match = /\A\d{1,2}:(\d{1,2})\z/.match(doing_time)
     doing_time_match[1].to_f
-  end
-
-  def change_doing_time_to_hour(doing_time)
-    doing_time_match = /\A(\d{1,2}):(\d{1,2})\z/.match(doing_time)
-    hours = doing_time_match[1].to_f
-    minutes =  doing_time_match[2].to_f
-    hours + minutes / 60.to_f
   end
 end
