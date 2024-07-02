@@ -42,8 +42,11 @@ class UsersController < ApplicationController
 
   def show_favorite_habits
     @user = User.find(params[:user_id])
-    @habits = FavoriteHabit.where(user_id: params[:user_id]).map(&:habit)
-    binding.pry
+    favorite_habits = FavoriteHabit.where(user_id: params[:user_id])
+
+    @habits = favorite_habits.map do |favorite_habit|
+      Habit.includes(:effects, :sources, :favorite_habits).find(favorite_habit.habit_id)
+    end
   end
 
   def log_in_guest
