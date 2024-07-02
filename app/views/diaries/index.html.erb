@@ -60,7 +60,7 @@
 
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 <script>
-  $(document).on('turbolinks:request-end', function(){
+  $(document).on('turbolinks:render', function(){
     let canvas = document.getElementById('doing_time_chart');
     let doing_time_chart = new Chart(canvas, {
       type: 'bar',
