@@ -33,7 +33,7 @@ class DiariesController < ApplicationController
   def index
     if params[:habit].present?
       favorite_id = /\A[0-9]+\z/.match(params[:habit][:favorite_id])
-      if favorite_id.nil? || favorite_id.empty?
+      if favorite_id.blank?
         flash[:alert] = "そのようなお気に入りはありません。"
       elsif favorite_id[0].present?
         redirect_to new_diary_url(favorite_id[0])
@@ -47,7 +47,7 @@ class DiariesController < ApplicationController
       if continuation_habit_id.nil?
         flash[:alert] = "そのような取り組み中はありません。"
       end
-      if continuation_habit_id.nil? || continuation_habit_id.empty? || continuation_habit_id[0].nil?
+      if continuation_habit_id.blank? || continuation_habit_id[0].nil?
         flash[:alert] = "そのような取り組み中はありません。"
         @diaries = Diary.index_for_user(current_user.id).includes(:habit).page(params[:page])
       elsif continuation_habit_id[0].present?
