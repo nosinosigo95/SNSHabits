@@ -33,7 +33,9 @@ class DiariesController < ApplicationController
   def index
     if params[:habit].present?
       favorite_id = /\A[0-9]+\z/.match(params[:habit][:favorite_id])
-      if favorite_id[0].present?
+      if favorite_id.nil? || favorite_id.empty?
+        flash[:alert] = "そのようなお気に入りはありません。"
+      elsif favorite_id[0].present?
         redirect_to new_diary_url(favorite_id[0])
       end
     end
