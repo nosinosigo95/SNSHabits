@@ -29,7 +29,9 @@
       <p class="card-item one-card-item">URL</p>
       <ul>
       <% @habit.sources.each do |source| %>
-        <li class="card-content one-card-content"><%= source.url %></li>
+        <li class="card-content one-card-content">
+          <%= link_to source.url, source.url %>
+        </li>
       <% end %>
       </ul>
     </div>
