@@ -41,12 +41,9 @@ class UsersController < ApplicationController
   end
 
   def show_favorite_habits
-    @user = User.find(params[:user_id])
-    favorite_habits = FavoriteHabit.where(user_id: params[:user_id])
-
-    @habits = favorite_habits.map do |favorite_habit|
-      Habit.includes(:effects, :sources, :favorite_habits).find(favorite_habit.habit_id)
-    end
+    @user = User.includes(:favorite_habits).find(params[:user_id])
+    @favorite_habits = User.find(params[:user_id]).favorite_habits.page(params[:page])
+    @habits = User.find(params[:user_id]).habits.includes(:effects, :sources)
   end
 
   def log_in_guest
