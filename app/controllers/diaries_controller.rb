@@ -41,7 +41,6 @@ class DiariesController < ApplicationController
     end
 
     @user_continuations = Continuation.where(user_id: current_user.id).includes(:habit)
-    @user_favorites = FavoriteHabit.where(user_id: current_user.id).includes(:habit)
     if params[:continuation].present?
       continuation_habit_id = /\A[0-9]+\z/.match(params[:continuation][:habit_id])
       if continuation_habit_id.nil?
