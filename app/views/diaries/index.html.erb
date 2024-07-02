@@ -36,8 +36,7 @@
 </div>
 <h4 class="doing-time-title">実行時間グラフ</h4>
 <canvas id="doing_time_chart">
-  <% sorted_diaries = sort_diaris(@diaries) %>
-  <% doing_times = doing_times_before_days(sorted_diaries) %>
+
 </canvas>
 
 <h3 id="diary-creation" class="diary-creation-title">日記作成<h3>
@@ -61,6 +60,8 @@
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 <script>
   $(document).on('turbolinks:load', function(){
+    <% sorted_diaries = sort_diaris(@diaries) %>
+    <% doing_times = doing_times_before_days(sorted_diaries) %>
     let canvas = document.getElementById('doing_time_chart');
     let doing_time_chart = new Chart(canvas, {
       type: 'bar',
