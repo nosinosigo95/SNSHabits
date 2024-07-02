@@ -1,4 +1,4 @@
-$(document).ready(function(){
+$(document).on("turbolinks:load", function(){
   $('.button-link').click(function(event){
     event.preventDefault();
   });
@@ -20,17 +20,12 @@ $(document).ready(function(){
     $('.inline-block-input-parts').eq(index).removeClass('displayed-url-input-parts');
     $('.button-removal').eq(index).addClass('hidden-button');
   });
-  $('.left-arrow').click("turbo:load", function(event){
-    event.preventDefault();
-  });
-  $('.right-arrow').click("turbo:load", function(event){
-    event.preventDefault();
-  });
 
   $('.related-habits .card').hide();
   $('.related-habits .card').first().show();
 
-  $('#consult-button').click("turbo:load", function(event){
+  $('#consult-button').click("turbolinks:click", function(event){
     event.preventDefault();
   });
 });
+
