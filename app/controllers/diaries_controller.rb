@@ -51,7 +51,7 @@ class DiariesController < ApplicationController
         @diaries = Diary.index_for_user(current_user.id).includes(:habit).
           order(updated_at: :desc).page(params[:page])
       elsif continuation_habit_id[0].present?
-        @diaries = Diary.continuous_habits(continuation_habit_id[0],current_user.id).
+        @diaries = Diary.continuous_habits(continuation_habit_id[0], current_user.id).
           includes(:habit).order(updated_at: :desc).page(params[:page])
       end
     else
