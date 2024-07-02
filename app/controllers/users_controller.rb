@@ -47,6 +47,7 @@ class UsersController < ApplicationController
     @habits = favorite_habits.map do |favorite_habit|
       Habit.includes(:effects, :sources, :favorite_habits).find(favorite_habit.habit_id)
     end
+    @user = User.includes(:continuations, :favorite_habits).find(current_user.id)
   end
 
   def log_in_guest

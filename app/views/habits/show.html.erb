@@ -58,7 +58,7 @@
       <% end %>
       <div class="related-habits-container-inner">
         <div class="related-habits-cards">
-          <%= render 'shared/habits/card', habits: @related_habits %>
+          <%= render 'shared/habits/card', habits: @related_habits, user: @user %>
         </div>
       </div>
       <% if @related_habits.count != 1 %>

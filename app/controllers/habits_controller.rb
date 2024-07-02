@@ -43,6 +43,7 @@ class HabitsController < ApplicationController
 
     @related_habits = @habit.related_habits.includes(:user,
     :effects).order(updated_at: :desc).limit(RELATED_HABITS_NUMBER)
+    @user = User.includes(:continuations, :favorite_habits).find(current_user.id)
   end
 
   def index
@@ -58,6 +59,7 @@ class HabitsController < ApplicationController
     else
       @habits = Habit.search_all.page(params[:page])
     end
+    @user = User.includes(:continuations, :favorite_habits).find(current_user.id)
   end
 
   def destroy

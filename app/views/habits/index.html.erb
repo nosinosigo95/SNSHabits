@@ -6,7 +6,7 @@
   <%= paginate @habits %>
 </div>
 <div class="search-result">
-  <%= render 'shared/habits/card', habits: @habits %>
+  <%= render 'shared/habits/card', habits: @habits, user: @user %>
 </div>
 <div class="bottom-pagination">
   <%= paginate @habits %>
