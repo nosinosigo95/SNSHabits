@@ -42,8 +42,8 @@
 
 <h3 id="diary-creation" class="diary-creation-title">日記作成<h3>
 <%= form_with url: diaries_path, method: :get  do %> 
-  <span class="diary-form-title">お気に入り:</span>
-  <%= select(:habit, :favorite_id, get_favorite_habit(@user_favorites), {prompt: "選択してください"}, {class: "diary-select"}) %>
+  <span class="diary-form-title">取り組み中:</span>
+  <%= select(:diary, :habit_id, get_continuation_habit(@user_continuations), {prompt: "選択してください"}, {class: "diary-select"}) %>
   <%= submit_tag '日記を作成する', class: "diary-form-button" %>
 <% end %>
 
@@ -60,7 +60,7 @@
 
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 <script>
-  $(document).on('turbolinks:load', function(){
+  $(document).on('turbolinks:render', function(){
     let canvas = document.getElementById('doing_time_chart');
     let doing_time_chart = new Chart(canvas, {
       type: 'bar',

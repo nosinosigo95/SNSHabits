@@ -31,12 +31,12 @@ class DiariesController < ApplicationController
   end
 
   def index
-    if params[:habit].present?
-      favorite_id = /\A[0-9]+\z/.match(params[:habit][:favorite_id])
-      if favorite_id.blank?
+    if params[:diary].present?
+      habit_id = /\A[0-9]+\z/.match(params[:diary][:habit_id])
+      if habit_id.blank?
         flash[:alert] = "そのようなお気に入りはありません。"
-      elsif favorite_id[0].present?
-        redirect_to new_diary_url(favorite_id[0])
+      elsif habit_id[0].present?
+        redirect_to new_diary_url(habit_id[0])
       end
     end
 

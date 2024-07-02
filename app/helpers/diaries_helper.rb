@@ -1,13 +1,4 @@
 module DiariesHelper
-  def get_favorite_habit(favorites)
-    favorite_habit = {}
-    favorites.each do |favorite|
-      habit = favorite.habit
-      favorite_habit[habit.name] = habit.id
-    end
-    favorite_habit
-  end
-
   def get_continuation_habit(continuations)
     continuation_habits = {}
     continuations.each do |continuation|
