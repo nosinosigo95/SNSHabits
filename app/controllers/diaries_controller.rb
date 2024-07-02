@@ -44,11 +44,15 @@ class DiariesController < ApplicationController
     @user_favorites = FavoriteHabit.where(user_id: current_user.id).includes(:habit)
     if params[:continuation].present?
       continuation_habit_id = /\A[0-9]+\z/.match(params[:continuation][:habit_id])
-      if continuation_habit_id[0].present?
+      if continuation_habit_id.nil?
+        flash[:alert] = "そのような取り組み中はありません。"
+      end
+      if continuation_habit_id.nil? || continuation_habit_id.empty? || continuation_habit_id[0].nil?
+        flash[:alert] = "そのような取り組み中はありません。"
+        @diaries = Diary.index_for_user(current_user.id).includes(:habit).page(params[:page])
+      elsif continuation_habit_id[0].present?
         @diaries = Diary.continuous_habits(continuation_habit_id[0],
          current_user.id).includes(:habit).page(params[:page])
-      else
-        @diaries = Diary.index_for_user(current_user.id).includes(:habit).page(params[:page])
       end
     else
       @diaries = Diary.index_for_user(current_user.id).includes(:habit).page(params[:page])
