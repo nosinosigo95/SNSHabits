@@ -9,6 +9,7 @@
   <%= f.label :doing_time, class: "block-label required" do %>
     <%= p "実行時間(時:分)" %>
   <% end %>
+  <% initialize_doing_time(diary) %>
   <%= f.time_field :doing_time, value: diary.doing_time, class: "block-input-parts" %>
   <p class="block-label required">非公開にしますか?</p>
   <%= f.radio_button :private, true , value: true %>
