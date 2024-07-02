@@ -77,14 +77,18 @@
   let card_num = <%= @related_habits.count %>;
   let right_shift_num = 1;
   $(document).on("turbolinks:load", function(){
-    $('.left-arrow').click("turbolinks:click", function(event){
+    $('.left-arrow').click("turbolinks:request-end", function(event){
       event.preventDefault();
+    });
+    $('.left-arrow').click("turbolinks:click", function(event){
       $('.card').eq(displayed_card_index).hide();
       displayed_card_index = (displayed_card_index + card_num - 1) % card_num;
       $('.card').eq(displayed_card_index).show();
     });
-    $('.right-arrow').click("turbolinks:click", function(event){
+    $('.right-arrow').click("turbolinks:request-end", function(event){
       event.preventDefault();
+    });
+    $('.right-arrow').click("turbolinks:click", function(event){
       $('.card').eq(displayed_card_index).hide();
       displayed_card_index = (displayed_card_index + right_shift_num) % card_num;
       $('.card').eq(displayed_card_index).show();
