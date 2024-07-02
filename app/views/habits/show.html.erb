@@ -1,6 +1,6 @@
 <%= content_for(:page_title, @habit.name) %>
-<%= render 'shared/habits/favorite_habit', habit: @habit %>
-<%= render 'shared/habits/continuation', habit: @habit %>
+<%= render 'shared/habits/favorite_habit', habit: @habit, user: @user %>
+<%= render 'shared/habits/continuation', habit: @habit, user: @user %>
 
 <div class="habit-display">
   <div class="effect-display">
