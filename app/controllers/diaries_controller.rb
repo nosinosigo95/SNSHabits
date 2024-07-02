@@ -48,13 +48,15 @@ class DiariesController < ApplicationController
       end
       if continuation_habit_id.blank? || continuation_habit_id[0].nil?
         flash[:alert] = "そのような取り組み中はありません。"
-        @diaries = Diary.index_for_user(current_user.id).includes(:habit).page(params[:page])
+        @diaries = Diary.index_for_user(current_user.id).includes(:habit).
+          order(updated_at: :desc).page(params[:page])
       elsif continuation_habit_id[0].present?
-        @diaries = Diary.continuous_habits(continuation_habit_id[0],
-         current_user.id).includes(:habit).page(params[:page])
+        @diaries = Diary.continuous_habits(continuation_habit_id[0], current_user.id).
+          includes(:habit).order(updated_at: :desc).page(params[:page])
       end
     else
-      @diaries = Diary.index_for_user(current_user.id).includes(:habit).page(params[:page])
+      @diaries = Diary.index_for_user(current_user.id).includes(:habit).
+        order(updated_at: :desc).page(params[:page])
     end
   end
 
