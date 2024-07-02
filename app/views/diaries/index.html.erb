@@ -2,7 +2,7 @@
 
 <%= form_with url: diaries_path, method: :get do %> 
     <span class="diary-form-title">取り組み中：</span>
-    <%= select(:continuation, :habit_id, get_continuation_habit(@user_continuations), {}, {class: "diary-select"}) %>
+    <%= select(:continuation, :habit_id, get_continuation_habit(@user_continuations), {prompt: "選択してください"}, {class: "diary-select"}) %>
     <%= submit_tag '日記を検索する', class: "diary-form-button" %>
 <% end %>
 <p class="diary-creation-link">日記作成は<%= link_to 'こちらへ', '#diary-creation' %></p>
@@ -43,7 +43,7 @@
 <h3 id="diary-creation" class="diary-creation-title">日記作成<h3>
 <%= form_with url: diaries_path, method: :get  do %> 
   <span class="diary-form-title">お気に入り:</span>
-  <%= select(:habit, :favorite_id, get_favorite_habit(@user_favorites), {}, {class: "diary-select"}) %>
+  <%= select(:habit, :favorite_id, get_favorite_habit(@user_favorites), {prompt: "選択してください"}, {class: "diary-select"}) %>
   <%= submit_tag '日記を作成する', class: "diary-form-button" %>
 <% end %>
 
