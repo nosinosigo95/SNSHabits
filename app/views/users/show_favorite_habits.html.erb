@@ -1,0 +1,6 @@
+<%= content_for(:page_title, "アカウントページ") %>
+<%= render 'shared/users/user_info', user: @user %>
+
+<div class="search-result">
+  <%= render 'shared/habits/card', habits: @habits %>
+</div>

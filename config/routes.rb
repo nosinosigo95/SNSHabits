@@ -14,6 +14,7 @@ Rails.application.routes.draw do
     delete 'follow', to: 'follows#destroy', as: 'destroy_follow'
     get 'followings', to: 'users#followings', as: 'followings'
     get 'followers', to: 'users#followers', as: "followers"
+    get 'favorite', to: 'users#show_favorite_habits', as: "show_favorite"
   end
   get 'people', to: 'users#index', as: "people"
   root 'home#index'

@@ -40,6 +40,15 @@ class UsersController < ApplicationController
     @diaries = @user.diaries.includes(:habit).page(params[:page])
   end
 
+  def show_favorite_habits
+    @user = User.find(params[:user_id])
+    favorite_habits = FavoriteHabit.where(user_id: params[:user_id])
+
+    @habits = favorite_habits.map do |favorite_habit|
+      Habit.includes(:effects, :sources, :favorite_habits).find(favorite_habit.habit_id)
+    end
+  end
+
   def log_in_guest
     @user = User.find_by(name: "guest")
     if @user.present?
