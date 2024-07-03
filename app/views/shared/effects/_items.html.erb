@@ -1,0 +1,5 @@
+<% effect_habits.each do |effect_habit| %>
+  <% effect = effect_habit.effect %>
+  <%= link_to effect.effect_item, show_effects_path(effect.id) %>
+  <%= p " " %>
+<% end %>

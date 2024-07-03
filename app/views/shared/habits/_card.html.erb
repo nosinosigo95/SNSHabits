@@ -7,7 +7,7 @@
     </p>
     <p class="card-item">効果</p>
     <p class="card-content">
-      <%= habit.effect_habits.map(&:effect).pluck(:effect_item).join(',') %>
+      <%= render 'shared/effects/items', effect_habits: habit.effect_habits %>
     </p>
     <% if habit.working_time.present? %>
       <p class="card-item">作業時間：</p>
