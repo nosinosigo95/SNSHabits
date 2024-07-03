@@ -7,7 +7,7 @@ module HabitsHelper
     if habit.nil?
       nil
     elsif habit.commit?
-      "結果済み"
+      "結果を約束する"
     elsif habit.challenge?
       "挑戦中"
     end
