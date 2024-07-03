@@ -10,8 +10,8 @@ Rails.application.routes.draw do
   get 'user/log_in_guest', to: 'users#log_in_guest', as: 'log_in_guest'
   devise_for :users
   resources :users, only: [:show] do
-    post 'follow', to: 'follows#create', as: 'create_follow'
-    delete 'follow', to: 'follows#destroy', as: 'destroy_follow'
+    post 'follow', to: 'users#create', as: 'create_follow'
+    delete 'follow', to: 'users#destroy', as: 'destroy_follow'
     get 'followings', to: 'users#followings', as: 'followings'
     get 'followers', to: 'users#followers', as: "followers"
     get 'favorite', to: 'users#show_favorite_habits', as: "show_favorite"
