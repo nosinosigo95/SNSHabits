@@ -52,7 +52,7 @@ RSpec.describe "Habits", type: :system do
       fill_in '効果(キーワード5つ以内)', with: '効果'
       fill_in '概要', with: '概要'
       fill_in '説明・工夫', with: 'sample sample'
-      choose '挑戦中'
+      choose '挑戦する'
       click_on '保存する'
 
       expect(page).to have_content('習慣を作成しました')
@@ -65,7 +65,7 @@ RSpec.describe "Habits", type: :system do
       fill_in '効果(キーワード5つ以内)', with: '効果'
       fill_in '概要', with: '概要'
       fill_in '説明・工夫', with: 'sample sample'
-      choose '挑戦中'
+      choose '挑戦する'
       click_on '保存する'
       within '.habit-display' do
         click_on '編集'
@@ -74,7 +74,7 @@ RSpec.describe "Habits", type: :system do
       fill_in '効果(キーワード5つ以内)', with: '効果'
       fill_in '概要', with: '概要'
       fill_in '説明・工夫', with: 'sample sample'
-      choose '挑戦中'
+      choose '挑戦する'
       click_on '保存する'
       expect(page).to have_content('習慣を更新しました')
     end
@@ -86,7 +86,7 @@ RSpec.describe "Habits", type: :system do
       fill_in '効果(キーワード5つ以内)', with: '効果'
       fill_in '概要', with: '概要'
       fill_in '説明・工夫', with: 'sample sample'
-      choose '挑戦中'
+      choose '挑戦する'
       click_on '保存する'
 
       click_on 'お気に入り'
