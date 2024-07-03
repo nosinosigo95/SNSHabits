@@ -1,12 +1,18 @@
 <div class="comments">
   <h3 class="center-text">コメント</h3>
-  
-  <% @comments.each do |comment| %>
-    <p><%= comment.comment %></p>
-    <p><%= comment.user.name %>より</p>
-  <% end %>
-  <%= form_with url: habit_path(habit.id), method: :get do %>
-    <%= text_area :comment, :content %>
-    <%= submit_tag "コメントする" %>
-  <% end %>
+  <div class="comments-items">
+    <% @comments.each do |comment| %>
+      <ul class="comment">
+        <% user = comment.user %>
+        <li class="comment-user"><%= link_to comment.user.name, user_path(comment.user.id)%></li>
+        <li class="comment-content"><%= comment.comment %></li>
+      </ul>
+    <% end %>
+  </div>
+  <div class="comment-form">
+    <%= form_with url: habit_path(habit.id), method: :get do %>
+      <%= text_area :comment, :content, class: "comment-text-area" %>
+      <%= submit_tag "コメント作成" %>
+    <% end %>
+  </div>
 </div>
