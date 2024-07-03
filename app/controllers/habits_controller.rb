@@ -42,9 +42,11 @@ class HabitsController < ApplicationController
       set_related_habit_table(@habit)
       set_cache_habit_id(@habit)
     else
-      if params[:comment].present? && params[:comment][:comment].present?
-        Comment.create(comment: params[:comment][:comment],
+      if params[:comment].present? && params[:comment][:content].present?
+        Comment.create(comment: params[:comment][:content],
                        habit_id: @habit.id, user_id: current_user.id)
+        flash[:notice] = "コメントを作成しました。"
+        redirect_to habit_path(@habit.id)
       end
       @comments = @habit.comments
     end
