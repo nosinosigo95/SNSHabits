@@ -1,5 +1,11 @@
 <div class="comments">
   <h3 class="center-text">コメント</h3>
+  <div class="comment-form">
+    <%= form_with url: habit_path(habit.id), method: :get do %>
+      <%= text_area :comment, :content, class: "comment-text-area" %>
+      <%= submit_tag "コメント作成" %>
+    <% end %>
+  </div>
   <div class="comments-items">
     <div class="top-pagination">
       <%= paginate comments %>
@@ -19,11 +25,5 @@
     <div class="bottom-pagination">
       <%= paginate comments %>
     </div>
-  </div>
-  <div class="comment-form">
-    <%= form_with url: habit_path(habit.id), method: :get do %>
-      <%= text_area :comment, :content, class: "comment-text-area" %>
-      <%= submit_tag "コメント作成" %>
-    <% end %>
   </div>
 </div>
