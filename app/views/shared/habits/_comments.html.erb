@@ -4,8 +4,13 @@
     <% @comments.each do |comment| %>
       <ul class="comment">
         <% user = comment.user %>
-        <li class="comment-user"><%= link_to comment.user.name, user_path(comment.user.id)%></li>
+        <li class="comment-user"><%= link_to user.name, user_path(user.id)%></li>
         <li class="comment-content"><%= comment.comment %></li>
+        <% if current_user.id == user.id %>
+          <li class="delete-comment">
+            <%= link_to '削除', comment_path(comment.id), method: :delete, class: "delete-comment" %>
+          </li>
+        <% end %>
       </ul>
     <% end %>
   </div>
