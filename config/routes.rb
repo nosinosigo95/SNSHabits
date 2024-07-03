@@ -22,7 +22,7 @@ Rails.application.routes.draw do
   end
   get 'people', to: 'users#index', as: "people"
   root 'home#index'
-
+  resources :comments, only: [:destroy]
   resources :chat, only: [:create]
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
 end

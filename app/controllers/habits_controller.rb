@@ -35,11 +35,21 @@ class HabitsController < ApplicationController
 
   def show
     @habit = Habit.includes(:effect_habits, :effects,
-    :sources, :related_habits, :favorite_habits).find(params[:id])
+    :sources, :related_habits, :favorite_habits, :users, :comments).find(params[:id])
     @habit.update(recently_viewed_time: Time.now)
 
-    set_related_habit_table(@habit)
-    set_cache_habit_id(@habit)
+    if @habit.commit?
+      set_related_habit_table(@habit)
+      set_cache_habit_id(@habit)
+    else
+      if params[:comment].present? && params[:comment][:content].present?
+        Comment.create(comment: params[:comment][:content],
+                       habit_id: @habit.id, user_id: current_user.id)
+        flash[:notice] = "コメントを作成しました。"
+        redirect_to habit_path(@habit.id)
+      end
+      @comments = @habit.comments.order(created_at: :desc).page(params[:page])
+    end
 
     @related_habits = @habit.related_habits.includes(:user,
     :effects).order(updated_at: :desc).limit(RELATED_HABITS_NUMBER)

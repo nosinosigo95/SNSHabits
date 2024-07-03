@@ -107,6 +107,35 @@
   width: fit-content;
 }
 
+.comment-form{
+  width: 600px;
+  margin: 20px auto 10px;
+}
+
+.comment{
+  list-style-type: none;
+  padding: 0;
+  margin: 20px auto 10px;
+  width: 600px;
+  border: 1px solid black;
+}
+.comment-user{
+  margin-left: 10px;
+}
+.comment-content{
+  margin-left: 30px;
+}
+.comment-text-area{
+  display: block;
+  width: 100%;
+}
+.delete-comment{
+  display: block;
+  margin-right: 10px;
+  margin-left: auto;
+  width: fit-content;
+  font-size: 12px;
+}
 .ai-answer-title, .diary-creation-title{
   margin-top: 80px;
   margin-bottom: 0;
@@ -121,5 +150,11 @@
   }
   .right-arrow {
     right: 0px;
+  }
+  .comment{
+    width: 100%;
+  }
+  .comment-form{
+    width: 90%;
   }
 }
