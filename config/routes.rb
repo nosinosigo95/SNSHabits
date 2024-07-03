@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  get 'effects/:id/show', to: 'effects#show', as: 'show_effects'
   get 'chat/create'
   resources :habits
   get 'favorites_habit/:habit_id', to: 'favorite_habits#add', as: 'add_favorite_habit'
