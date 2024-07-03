@@ -22,10 +22,6 @@
       <p class="card-content"><%= simple_format(diary.description) %></p>
       <p class="card-item">実行時間</p>
       <p class="card-content"><%= diary.doing_time %></p>
-      <p class="card-item">作成日</p>
-      <p class="card-content"><%= l diary.created_at %></p>
-      <p class="card-item">更新日</p>
-      <p class="card-content"><%= l diary.updated_at %></p>
       <p><%= link_to "編集", edit_diary_path(diary.id), class: "diary-edition" %></p>
       <p><%= link_to "削除", diary_path(diary.id), method: :delete, data: {confirm: "削除しますか?"}, class: "diary-delete"%></p>
     </div>
