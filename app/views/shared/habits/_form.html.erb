@@ -45,9 +45,9 @@
   <%= f.time_field :working_time, value: form.working_time, class: "block-input-parts" %>
   <p class="required-for-radio">必須</p>
   <%= f.radio_button :circumstance, "commit", class: "radio" %>
-  <%= f.label :circumstance, "結果済", value: "commit", class: "radio" %>
+  <%= f.label :circumstance, "結果を約束する", value: "commit", class: "radio" %>
   <%= f.radio_button :circumstance, "challenge", class: "radio" %>
-  <%= f.label :circumstance, "挑戦中", value: "challenge", class: "radio" %>
+  <%= f.label :circumstance, "挑戦する", value: "challenge", class: "radio" %>
 
   <%= f.submit '保存する', class: "submit-button"%>
   <%= link_to 'キャンセル', '#', class: "cancel-link" %>
