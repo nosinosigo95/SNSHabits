@@ -48,7 +48,7 @@ class HabitsController < ApplicationController
         flash[:notice] = "コメントを作成しました。"
         redirect_to habit_path(@habit.id)
       end
-      @comments = @habit.comments
+      @comments = @habit.comments.order(created_at: :desc).page(params[:page])
     end
 
     @related_habits = @habit.related_habits.includes(:user,

@@ -1,11 +1,14 @@
 <div class="comments">
   <h3 class="center-text">コメント</h3>
   <div class="comments-items">
-    <% @comments.each do |comment| %>
+    <div class="top-pagination">
+      <%= paginate comments %>
+    </div>
+    <% comments.each do |comment| %>
       <ul class="comment">
         <% user = comment.user %>
         <li class="comment-user"><%= link_to user.name, user_path(user.id)%></li>
-        <li class="comment-content"><%= comment.comment %></li>
+        <li class="comment-content"><%= simple_format(comment.comment) %></li>
         <% if current_user.id == user.id %>
           <li class="delete-comment">
             <%= link_to '削除', comment_path(comment.id), method: :delete, class: "delete-comment" %>
@@ -13,6 +16,9 @@
         <% end %>
       </ul>
     <% end %>
+    <div class="bottom-pagination">
+      <%= paginate comments %>
+    </div>
   </div>
   <div class="comment-form">
     <%= form_with url: habit_path(habit.id), method: :get do %>
