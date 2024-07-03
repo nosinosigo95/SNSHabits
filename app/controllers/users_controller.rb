@@ -51,7 +51,10 @@ class UsersController < ApplicationController
     if @user.present?
       sign_in(@user)
       flash[:notice] = "ようこそ！あなたはログインに成功しました。"
+      redirect_to(controller: "habits", action: "index",
+                  habit_index_form: { created: '1' })
+    else
+      redirect_to root_url
     end
-    redirect_to root_path
   end
 end
