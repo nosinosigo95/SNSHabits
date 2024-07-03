@@ -1,3 +1,12 @@
 <div class="comments">
   <h3 class="center-text">コメント</h3>
+  
+  <% @comments.each do |comment| %>
+    <p><%= comment.comment %></p>
+    <p><%= comment.user.name %>より</p>
+  <% end %>
+  <%= form_with url: habit_path(habit.id), method: :get do %>
+    <%= text_area :comment, :content %>
+    <%= submit_tag "コメントする" %>
+  <% end %>
 </div>

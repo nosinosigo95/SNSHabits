@@ -35,12 +35,18 @@ class HabitsController < ApplicationController
 
   def show
     @habit = Habit.includes(:effect_habits, :effects,
-    :sources, :related_habits, :favorite_habits).find(params[:id])
+    :sources, :related_habits, :favorite_habits, :users, :comments).find(params[:id])
     @habit.update(recently_viewed_time: Time.now)
 
     if @habit.commit?
       set_related_habit_table(@habit)
       set_cache_habit_id(@habit)
+    else
+      if params[:comment].present? && params[:comment][:comment].present?
+        Comment.create(comment: params[:comment][:comment],
+                       habit_id: @habit.id, user_id: current_user.id)
+      end
+      @comments = @habit.comments
     end
 
     @related_habits = @habit.related_habits.includes(:user,

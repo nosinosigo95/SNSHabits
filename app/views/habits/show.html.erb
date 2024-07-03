@@ -54,7 +54,7 @@
 <% if @habit.commit? %>
   <%= render 'shared/habits/related_habits', related_habits: @related_habits, user: @user %>
 <% else %>
-  <%= render 'shared/habits/comments'%>
+  <%= render 'shared/habits/comments', habit: @habit, comments: @comments %>
 <% end %>
 
 <script>
