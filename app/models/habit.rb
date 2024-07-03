@@ -4,6 +4,7 @@ class Habit < ApplicationRecord
   has_many :sources, dependent: :destroy
   has_many :favorite_habits, dependent: :restrict_with_error
   has_many :users, through: :favorite_habits
+  has_many :comments
   belongs_to :user
   has_one :diary, dependent: :restrict_with_error
   has_many(

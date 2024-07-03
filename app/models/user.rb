@@ -1,5 +1,6 @@
 class User < ApplicationRecord
   # 関連付け
+  has_many :comments, dependent: :destroy
   has_many :habits
   has_many :favorite_habits, dependent: :destroy
   has_many :favorites, through: :favorite_habits, source: :habit
