@@ -38,8 +38,10 @@ class HabitsController < ApplicationController
     :sources, :related_habits, :favorite_habits).find(params[:id])
     @habit.update(recently_viewed_time: Time.now)
 
-    set_related_habit_table(@habit)
-    set_cache_habit_id(@habit)
+    if @habit.commit?
+      set_related_habit_table(@habit)
+      set_cache_habit_id(@habit)
+    end
 
     @related_habits = @habit.related_habits.includes(:user,
     :effects).order(updated_at: :desc).limit(RELATED_HABITS_NUMBER)

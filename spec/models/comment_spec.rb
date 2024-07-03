@@ -8,7 +8,6 @@ RSpec.describe Comment, type: :model do
   it "コメントがない場合、モデルが無効になること" do
     expect(FactoryBot.build(:comment, comment: nil)).to be_invalid
   end
-
   it "コメントが空白文字だけの場合、モデルが無効になること" do
     expect(FactoryBot.build(:comment, comment: " ")).to be_invalid
   end
