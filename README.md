@@ -161,7 +161,7 @@ APIは、ユーザーが相談した文章をOpenAIに送り、受け取った�
 
 JQueryのAjax機能がそのAPIを利用して、OpenAIの回答を表示します。
 
-![AI相談](./README-image/AI_consult.png)
+![AI相談](./README-image/AI_answer.png)
 
 ## 今後の課題
 
