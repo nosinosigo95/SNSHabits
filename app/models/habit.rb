@@ -56,12 +56,12 @@ class Habit < ApplicationRecord
       where(user_id: using_user.id)
     end
   }
-  scope :search_commit, -> (circumstance){
+  scope :search_commit, -> (circumstance) {
     if circumstance == "commit"
       where(commit: true)
     end
   }
-  scope :search_challenge, -> (circumstance){
+  scope :search_challenge, -> (circumstance) {
     if circumstance == "challenge"
       where(challenge: true)
     end
