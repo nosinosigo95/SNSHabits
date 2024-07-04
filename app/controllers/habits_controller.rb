@@ -34,6 +34,7 @@ class HabitsController < ApplicationController
   end
 
   def show
+
     @habit = Habit.includes(:effect_habits, :effects,
     :sources, :related_habits, :favorite_habits, :users, :comments).find(params[:id])
     @habit.update(recently_viewed_time: Time.now)
@@ -48,7 +49,8 @@ class HabitsController < ApplicationController
         flash[:notice] = "コメントを作成しました。"
         redirect_to habit_path(@habit.id)
       end
-      @comments = @habit.comments.order(created_at: :desc).page(params[:page])
+      comments_output_num = 5
+      @comments = @habit.comments.order(created_at: :desc).page(params[:page]).per(comments_output_num)
     end
 
     @related_habits = @habit.related_habits.includes(:user,
