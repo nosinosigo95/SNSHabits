@@ -52,6 +52,11 @@ $icon-small-size: 20px;
   padding: 10px;
   box-sizing: border-box;
 }
+.index-user-icon{
+  display: block;
+  width: 30px;
+  height: 30px;
+}
 @media screen and (max-width: 890px) {
   .follower-following-user-card {
     margin: 10px auto;
