@@ -54,7 +54,7 @@
 
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 <script>
-  $(document).on('turbolinks:load', function(){
+  document.addEventListener("turbolinks:load", function() {
     <% sorted_diaries = sort_diaris(@diaries) %>
     <% doing_times = doing_times_before_days(sorted_diaries) %>
     let canvas = document.getElementById('doing_time_chart');

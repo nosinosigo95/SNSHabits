@@ -1,5 +1,6 @@
-$(document).ready(function(){
-  $('#consult-button').on('click', function(){
+document.addEventListener("turbolinks:load", function() {
+  $('#consult-button').on('click', function(event){
+    event.preventDefault();
     $('.ai-answer-container').show();
     $('#result-for-consult').text("しばらくお待ちください。");
     $.ajax({
