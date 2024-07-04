@@ -9,10 +9,10 @@
 
 <p class="AI-consult-link">AI相談は<%= link_to 'こちらへ', '#AI-consult' %></p>
 <h3 class="center-text">検索結果</h3>
+<div class="top-pagination">
+  <%= paginate @diaries %>
+</div>
 <div class="search-result">
-  <div class="top-pagination">
-    <%= paginate @diaries %>
-  </div>
   <% @diaries.each do |diary| %>
     <div class="card">
       <p class="card-item">実行日：<%= diary.action_date %></p>
@@ -26,9 +26,9 @@
       <p><%= link_to "削除", diary_path(diary.id), method: :delete, data: {confirm: "削除しますか?"}, class: "diary-delete"%></p>
     </div>
   <% end %>
-  <div class="bottom-pagination">
-    <%= paginate @diaries %>
-  </div>
+</div>
+<div class="bottom-pagination">
+  <%= paginate @diaries %>
 </div>
 <h4 class="doing-time-title">実行時間グラフ</h4>
 <canvas id="doing_time_chart" class="chart" width="600" height="300">
