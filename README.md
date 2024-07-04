@@ -124,7 +124,8 @@ SNSは、ユーザーが投稿を共有して、素早く情報を伝えます�
 - Docker
 - AWS EC2
 - AWS VPC
-- AWS　Route53
+- AWS Route53
+- AWS S3
 
 ## システム構成
 
