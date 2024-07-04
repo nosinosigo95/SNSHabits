@@ -1,4 +1,4 @@
-$(document).on("turbolinks:load", function(){
+document.addEventListener("turbolinks:load", function() {
   $('.button-link').click(function(event){
     event.preventDefault();
   });
@@ -23,9 +23,5 @@ $(document).on("turbolinks:load", function(){
 
   $('.related-habits .card').hide();
   $('.related-habits .card').first().show();
-
-  $('#consult-button').click("turbolinks:click", function(event){
-    event.preventDefault();
-  });
 });
 
