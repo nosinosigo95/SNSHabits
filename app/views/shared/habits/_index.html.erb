@@ -11,6 +11,13 @@
   <%= f.text_field :period_for_effect, placeholder: "2ヶ月", class: "block-input-parts" %>
 
   <div class="inline-div">
+    <%= f.radio_button :circumstance, 'commit' %>
+    <%= f.label :circumstance, '結果を約束する', value: 'commit' %>
+
+    <%= f.radio_button :circumstance, 'challenge' %>
+    <%= f.label :circumstance, '挑戦中', value: 'challenge' %>
+  </div>
+  <div class="inline-div">
     <%= f.label :created, '自身が作成したもの' %>
     <%= f.check_box :created %>
   </div>

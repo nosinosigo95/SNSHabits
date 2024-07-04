@@ -56,14 +56,27 @@ class Habit < ApplicationRecord
       where(user_id: using_user.id)
     end
   }
+  scope :search_commit, -> (circumstance){
+    if circumstance == "commit"
+      where(commit: true)
+    end
+  }
+  scope :search_challenge, -> (circumstance){
+    if circumstance == "challenge"
+      where(challenge: true)
+    end
+  }
   # habit_indexはHabitIndexFormの変数です
   def self.return_where_for_habit_index_form(habit_index, user)
     name = habit_index.name
     effect = habit_index.effect_item
     period_for_effect = habit_index.period_for_effect
     created = habit_index.created
+    circumstance = habit_index.circumstance
     search_name(name).search_effect(effect).
       search_period_for_effect(period_for_effect).
-      search_using_user(user, created).where(commit: true)
+      search_using_user(user, created).
+      search_commit(circumstance).
+      search_challenge(circumstance)
   end
 end
