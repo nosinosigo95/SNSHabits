@@ -23,7 +23,7 @@ $page-line-size: 30px;
       text-decoration: none;
     }
   }
-  .page a{
+  .page a, .current{
     margin: $page-link-margin;
     width: $page-line-size;
     height: $page-line-size;

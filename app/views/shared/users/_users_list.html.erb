@@ -1,7 +1,7 @@
+<div class="top-pagination">
+  <%= paginate users %>
+</div>
 <div class="search-result">
-  <div class="top-pagination">
-    <%= paginate users %>
-  </div>
   <% users.each do |user| %>
     <div class="follower-following-user-card">
       <ul>
@@ -12,7 +12,7 @@
       </ul>
     </div>
   <% end %>
-  <div class="bottom-pagination">
-    <%= paginate users %>
-  </div>
+</div>
+<div class="bottom-pagination">
+  <%= paginate users %>
 </div>

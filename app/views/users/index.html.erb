@@ -6,20 +6,20 @@
 <% end %>
 
 <h3 class="center-text">検索結果</h3>
+<div class="top-pagination">
+  <%= paginate @users %>
+</div>
 <div class="search-result">
-  <div class="top-pagination">
-    <%= paginate @users %>
-  </div>
-  <% @users.each do |user| %>
-      <div class="card">
-        <p><%= image_tag get_user_icon(user), class: "index-user-icon" %></p>
-        <p class="card-item">ユーザー名:</p>
-        <p class="card-content"><%= link_to user.name, user_path(user.id) %></p>
-        <p class="card-item">自己紹介</p>
-        <p class="card-content"><%= user.introduction %></p>
-      </div>
-  <% end %>
-  <div class="bottom-pagination">
-    <%= paginate @users %>
-  </div>
+    <% @users.each do |user| %>
+        <div class="card">
+          <p><%= image_tag get_user_icon(user), class: "index-user-icon" %></p>
+          <p class="card-item">ユーザー名:</p>
+          <p class="card-content"><%= link_to user.name, user_path(user.id) %></p>
+          <p class="card-item">自己紹介</p>
+          <p class="card-content"><%= user.introduction %></p>
+        </div>
+    <% end %>
+</div>
+<div class="bottom-pagination">
+  <%= paginate @users %>
 </div>

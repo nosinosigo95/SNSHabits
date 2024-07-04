@@ -1,8 +1,9 @@
 require 'rails_helper'
 
 RSpec.describe "Habits", type: :system do
+  let(:habits_num) { 9 }
   let(:user){ FactoryBot.create(:user) }
-  let(:habits) { FactoryBot.create_list(:habit, 10) }
+  let(:habits) { FactoryBot.create_list(:habit, habits_num) }
   let(:habit) { FactoryBot.create(:habit, commit: true) }
 
   before do

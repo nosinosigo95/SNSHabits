@@ -2,10 +2,11 @@
 require 'rails_helper'
 
 RSpec.describe "Diaries", type: :system do
+  let(:diaries_num) { 9 }
   let(:user) { FactoryBot.create(:user) }
   let(:habit) { FactoryBot.create(:habit, user: user) }
   let(:diary) { FactoryBot.create(:diary, user: user, habit: habit) }
-  let(:diaries) { FactoryBot.create_list(:diary, 10, user: user) }
+  let(:diaries) { FactoryBot.create_list(:diary, diaries_num, user: user) }
 
   before do
     sign_in(user)
