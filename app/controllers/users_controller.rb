@@ -13,12 +13,12 @@ class UsersController < ApplicationController
   end
 
   def followings
-    @user = User.includes(:followings).find(params[:user_id])
+    @user = User.includes(:followings, :followers).find(params[:user_id])
     @followings = @user.followings.includes(:icon_attachment).page(params[:page])
   end
 
   def followers
-    @user = User.includes(:followings).find(params[:user_id])
+    @user = User.includes(:followings, :followers).find(params[:user_id])
     @followers = @user.followers.includes(:icon_attachment).page(params[:page])
   end
 
@@ -41,9 +41,8 @@ class UsersController < ApplicationController
   end
 
   def show_favorite_habits
-    @user = User.includes(:favorite_habits).find(params[:user_id])
-    @favorite_habits = User.find(params[:user_id]).favorite_habits.page(params[:page])
-    @habits = User.find(params[:user_id]).habits.includes(:effects, :sources)
+    @user = User.includes(:followings, :followers).find(params[:user_id])
+    @habits = User.includes(:favorites).find(params[:user_id]).favorites.page(params[:page])
   end
 
   def log_in_guest
