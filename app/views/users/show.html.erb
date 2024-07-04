@@ -5,10 +5,10 @@
 <% end%>
 <% if @followers.nil? && @followings.nil? %>
   <h3 class="center-text">日記一覧(公開)</h3>
+  <div class="top-pagination">
+    <%= paginate @diaries %>
+  </div>
   <div class="search-result">
-    <div class="top-pagination">
-      <%= paginate @diaries %>
-    </div>
   <% @diaries.each do |diary| %>
     <% if !diary.private %>
       <div class="card">
@@ -22,8 +22,8 @@
       </div>
     <% end %>
   <% end %>
-    <div class="bottom-pagination">
-      <%= paginate @diaries %>
-    </div>
+  </div>
+  <div class="bottom-pagination">
+    <%= paginate @diaries %>
   </div>
 <% end %>
