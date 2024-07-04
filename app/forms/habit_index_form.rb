@@ -1,7 +1,7 @@
 class HabitIndexForm
   include ActiveModel::Model
 
-  attr_accessor :name, :effect_item, :period_for_effect, :created, :sort
+  attr_accessor :name, :effect_item, :period_for_effect, :created, :sort, :circumstance
 
   validates :created, inclusion: { in: ['1', '0'] }, allow_nil: true
 
@@ -19,6 +19,7 @@ class HabitIndexForm
       period_for_effect: period_for_effect,
       created: created,
       sort: sort,
+      circumstance: circumstance,
     }
   end
 end
