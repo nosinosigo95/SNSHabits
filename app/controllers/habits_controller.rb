@@ -115,8 +115,9 @@ class HabitsController < ApplicationController
       related_habits.each do |related_habit|
         related_habit.updated_at = Time.zone.now
       end
+    else
+      RelatedHabit.create(old_habit_id: old_habit_id, now_habit_id: now_habit.id)
     end
-    RelatedHabit.create(old_habit_id: old_habit_id, now_habit_id: now_habit.id)
   end
 
   def set_habit
