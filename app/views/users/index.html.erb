@@ -12,7 +12,7 @@
   </div>
   <% @users.each do |user| %>
       <div class="card">
-        <p><%= image_tag get_user_icon(user) %></p>
+        <p><%= image_tag get_user_icon(user), class: "index-user-icon" %></p>
         <p class="card-item">ユーザー名:</p>
         <p class="card-content"><%= link_to user.name, user_path(user.id) %></p>
         <p class="card-item">自己紹介</p>
