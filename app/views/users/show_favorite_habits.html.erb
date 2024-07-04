@@ -1,6 +1,11 @@
 <%= content_for(:page_title, "アカウントページ") %>
 <%= render 'shared/users/user_info', user: @user %>
-
+<div class="top-pagination">
+  <%= paginate @habits %>
+</div>
 <div class="search-result">
   <%= render 'shared/users/habit_card', habits: @habits %>
+</div>
+<div class="bottom-pagination">
+  <%= paginate @habits %>
 </div>
